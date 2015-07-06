@@ -1,0 +1,513 @@
+{
+  "children": [
+    {
+      "attributes": {
+        "file": "assertions/Asserter.sol"
+      },
+      "name": "Import"
+    },
+    {
+      "attributes": {
+        "name": "WrapsInternal"
+      },
+      "children": [
+        {
+          "attributes": {
+            "const": true,
+            "name": "mult",
+            "public": true
+          },
+          "children": [
+            {
+              "children": [
+                {
+                  "attributes": {
+                    "name": "a"
+                  },
+                  "children": [
+                    {
+                      "attributes": {
+                        "name": "int"
+                      },
+                      "name": "ElementaryTypeName"
+                    },
+                    {
+                      "attributes": {
+                        "name": "b"
+                      },
+                      "children": [
+                        {
+                          "attributes": {
+                            "name": "int"
+                          },
+                          "name": "ElementaryTypeName"
+                        }
+                      ],
+                      "name": "VariableDeclaration"
+                    },
+                    {
+                      "children": [
+                        {
+                          "attributes": {
+                            "name": "prod"
+                          },
+                          "children": [
+                            {
+                              "attributes": {
+                                "name": "int"
+                              },
+                              "name": "ElementaryTypeName"
+                            }
+                          ],
+                          "name": "VariableDeclaration"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "attributes": {
+                                    "operator": "=",
+                                    "type": "int256"
+                                  },
+                                  "children": [
+                                    {
+                                      "attributes": {
+                                        "type": "int256",
+                                        "value": "prod"
+                                      },
+                                      "name": "Identifier"
+                                    },
+                                    {
+                                      "attributes": {
+                                        "type": "int256",
+                                        "type_conversion": "0"
+                                      },
+                                      "children": [
+                                        {
+                                          "attributes": {
+                                            "type": "function (int256,int256) returns (int256)",
+                                            "value": "_mult"
+                                          },
+                                          "name": "Identifier"
+                                        },
+                                        {
+                                          "attributes": {
+                                            "type": "int256",
+                                            "value": "a"
+                                          },
+                                          "name": "Identifier"
+                                        },
+                                        {
+                                          "attributes": {
+                                            "type": "int256",
+                                            "value": "b"
+                                          },
+                                          "name": "Identifier"
+                                        }
+                                      ],
+                                      "name": "FunctionCall"
+                                    }
+                                  ],
+                                  "name": "Assignment"
+                                }
+                              ],
+                              "name": "ExpressionStatement"
+                            }
+                          ],
+                          "name": "Block"
+                        }
+                      ],
+                      "name": "ParameterList"
+                    },
+                    {
+                      "attributes": {
+                        "const": true,
+                        "name": "_mult",
+                        "public": false
+                      },
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "attributes": {
+                                "name": "a"
+                              },
+                              "children": [
+                                {
+                                  "attributes": {
+                                    "name": "int"
+                                  },
+                                  "name": "ElementaryTypeName"
+                                },
+                                {
+                                  "attributes": {
+                                    "name": "b"
+                                  },
+                                  "children": [
+                                    {
+                                      "attributes": {
+                                        "name": "int"
+                                      },
+                                      "name": "ElementaryTypeName"
+                                    }
+                                  ],
+                                  "name": "VariableDeclaration"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "attributes": {
+                                        "name": ""
+                                      },
+                                      "children": [
+                                        {
+                                          "attributes": {
+                                            "name": "int"
+                                          },
+                                          "name": "ElementaryTypeName"
+                                        }
+                                      ],
+                                      "name": "VariableDeclaration"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "attributes": {
+                                                "operator": "*",
+                                                "type": "int256"
+                                              },
+                                              "children": [
+                                                {
+                                                  "attributes": {
+                                                    "type": "int256",
+                                                    "value": "a"
+                                                  },
+                                                  "name": "Identifier"
+                                                },
+                                                {
+                                                  "attributes": {
+                                                    "type": "int256",
+                                                    "value": "b"
+                                                  },
+                                                  "name": "Identifier"
+                                                }
+                                              ],
+                                              "name": "BinaryOperation"
+                                            }
+                                          ],
+                                          "name": "Return"
+                                        }
+                                      ],
+                                      "name": "Block"
+                                    }
+                                  ],
+                                  "name": "ParameterList"
+                                }
+                              ],
+                              "name": "VariableDeclaration"
+                            },
+                            {
+                              "attributes": {
+                                "name": "WrapsInternalTest"
+                              },
+                              "children": [
+                                {
+                                  "attributes": {
+                                    "type": "type(contract Asserter)",
+                                    "value": "Asserter"
+                                  },
+                                  "name": "Identifier"
+                                },
+                                {
+                                  "attributes": {
+                                    "name": "A"
+                                  },
+                                  "children": [
+                                    {
+                                      "attributes": {
+                                        "name": "int"
+                                      },
+                                      "name": "ElementaryTypeName"
+                                    },
+                                    {
+                                      "attributes": {
+                                        "string": "null",
+                                        "type": "int_const 10",
+                                        "value": "10"
+                                      },
+                                      "name": "Literal"
+                                    },
+                                    {
+                                      "attributes": {
+                                        "name": "B"
+                                      },
+                                      "children": [
+                                        {
+                                          "attributes": {
+                                            "name": "int"
+                                          },
+                                          "name": "ElementaryTypeName"
+                                        },
+                                        {
+                                          "attributes": {
+                                            "string": "null",
+                                            "type": "int_const 20",
+                                            "value": "20"
+                                          },
+                                          "name": "Literal"
+                                        },
+                                        {
+                                          "attributes": {
+                                            "name": "PROD"
+                                          },
+                                          "children": [
+                                            {
+                                              "attributes": {
+                                                "name": "int"
+                                              },
+                                              "name": "ElementaryTypeName"
+                                            },
+                                            {
+                                              "attributes": {
+                                                "string": "null",
+                                                "type": "int_const 200",
+                                                "value": "200"
+                                              },
+                                              "name": "Literal"
+                                            },
+                                            {
+                                              "attributes": {
+                                                "name": "testee"
+                                              },
+                                              "children": [
+                                                {
+                                                  "attributes": {
+                                                    "name": "WrapsInternal"
+                                                  },
+                                                  "name": "UserDefinedTypeName"
+                                                },
+                                                {
+                                                  "attributes": {
+                                                    "const": false,
+                                                    "name": "WrapsInternalTest",
+                                                    "public": true
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "children": [],
+                                                      "name": "ParameterList"
+                                                    },
+                                                    {
+                                                      "children": [],
+                                                      "name": "ParameterList"
+                                                    },
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "attributes": {
+                                                                "operator": "=",
+                                                                "type": "contract WrapsInternal"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "attributes": {
+                                                                    "type": "contract WrapsInternal",
+                                                                    "value": "testee"
+                                                                  },
+                                                                  "name": "Identifier"
+                                                                },
+                                                                {
+                                                                  "attributes": {
+                                                                    "type": "contract WrapsInternal",
+                                                                    "type_conversion": "0"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "attributes": {
+                                                                        "type": "function () returns (contract WrapsInternal)"
+                                                                      },
+                                                                      "children": [
+                                                                        {
+                                                                          "attributes": {
+                                                                            "type": "type(contract WrapsInternal)",
+                                                                            "value": "WrapsInternal"
+                                                                          },
+                                                                          "name": "Identifier"
+                                                                        }
+                                                                      ],
+                                                                      "name": "NewExpression"
+                                                                    }
+                                                                  ],
+                                                                  "name": "FunctionCall"
+                                                                }
+                                                              ],
+                                                              "name": "Assignment"
+                                                            }
+                                                          ],
+                                                          "name": "ExpressionStatement"
+                                                        }
+                                                      ],
+                                                      "name": "Block"
+                                                    }
+                                                  ],
+                                                  "name": "Function"
+                                                },
+                                                {
+                                                  "attributes": {
+                                                    "const": false,
+                                                    "name": "testMult",
+                                                    "public": true
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "children": [],
+                                                      "name": "ParameterList"
+                                                    },
+                                                    {
+                                                      "children": [],
+                                                      "name": "ParameterList"
+                                                    },
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "attributes": {
+                                                                "name": "prod"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "attributes": {
+                                                                    "type": "int256",
+                                                                    "type_conversion": "0"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "attributes": {
+                                                                        "member_name": "mult",
+                                                                        "type": "function (int256,int256) returns (int256)"
+                                                                      },
+                                                                      "children": [
+                                                                        {
+                                                                          "attributes": {
+                                                                            "type": "contract WrapsInternal",
+                                                                            "value": "testee"
+                                                                          },
+                                                                          "name": "Identifier"
+                                                                        }
+                                                                      ],
+                                                                      "name": "MemberAccess"
+                                                                    },
+                                                                    {
+                                                                      "attributes": {
+                                                                        "type": "int256",
+                                                                        "value": "A"
+                                                                      },
+                                                                      "name": "Identifier"
+                                                                    },
+                                                                    {
+                                                                      "attributes": {
+                                                                        "type": "int256",
+                                                                        "value": "B"
+                                                                      },
+                                                                      "name": "Identifier"
+                                                                    }
+                                                                  ],
+                                                                  "name": "FunctionCall"
+                                                                }
+                                                              ],
+                                                              "name": "VariableDeclaration"
+                                                            },
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "attributes": {
+                                                                    "type": "bool",
+                                                                    "type_conversion": "0"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "attributes": {
+                                                                        "type": "function (int256,int256,bytes32) returns (bool)",
+                                                                        "value": "assertIntsEqual"
+                                                                      },
+                                                                      "name": "Identifier"
+                                                                    },
+                                                                    {
+                                                                      "attributes": {
+                                                                        "type": "int256",
+                                                                        "value": "prod"
+                                                                      },
+                                                                      "name": "Identifier"
+                                                                    },
+                                                                    {
+                                                                      "attributes": {
+                                                                        "type": "int256",
+                                                                        "value": "PROD"
+                                                                      },
+                                                                      "name": "Identifier"
+                                                                    },
+                                                                    {
+                                                                      "attributes": {
+                                                                        "string": "null",
+                                                                        "type": "bytes27",
+                                                                        "value": "Did not multiply correctly."
+                                                                      },
+                                                                      "name": "Literal"
+                                                                    }
+                                                                  ],
+                                                                  "name": "FunctionCall"
+                                                                }
+                                                              ],
+                                                              "name": "ExpressionStatement"
+                                                            }
+                                                          ],
+                                                          "name": "VariableDefinition"
+                                                        }
+                                                      ],
+                                                      "name": "Block"
+                                                    }
+                                                  ],
+                                                  "name": "Function"
+                                                }
+                                              ],
+                                              "name": "VariableDeclaration"
+                                            }
+                                          ],
+                                          "name": "VariableDeclaration"
+                                        }
+                                      ],
+                                      "name": "VariableDeclaration"
+                                    }
+                                  ],
+                                  "name": "VariableDeclaration"
+                                }
+                              ],
+                              "name": "Contract"
+                            }
+                          ],
+                          "name": "ParameterList"
+                        }
+                      ],
+                      "name": "Function"
+                    }
+                  ],
+                  "name": "VariableDeclaration"
+                }
+              ],
+              "name": "ParameterList"
+            }
+          ],
+          "name": "Function"
+        }
+      ],
+      "name": "Contract"
+    }
+  ],
+  "name": "root"
+}

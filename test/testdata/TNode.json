@@ -1,0 +1,321 @@
+{
+  "attributes": {
+    "name": "WrapsInternalTest"
+  },
+  "children": [
+    {
+      "attributes": {
+        "type": "type(contract Asserter)",
+        "value": "Asserter"
+      },
+      "name": "Identifier",
+      "visits": 1
+    },
+    {
+      "attributes": {
+        "name": "A"
+      },
+      "children": [
+        {
+          "attributes": {
+            "name": "int"
+          },
+          "name": "ElementaryTypeName",
+          "visits": 1
+        },
+        {
+          "attributes": {
+            "string": "null",
+            "type": "int_const 10",
+            "value": "10"
+          },
+          "name": "Literal",
+          "visits": 1
+        },
+        {
+          "attributes": {
+            "name": "B"
+          },
+          "children": [
+            {
+              "attributes": {
+                "name": "int"
+              },
+              "name": "ElementaryTypeName",
+              "visits": 1
+            },
+            {
+              "attributes": {
+                "string": "null",
+                "type": "int_const 20",
+                "value": "20"
+              },
+              "name": "Literal",
+              "visits": 1
+            },
+            {
+              "attributes": {
+                "name": "PROD"
+              },
+              "children": [
+                {
+                  "attributes": {
+                    "name": "int"
+                  },
+                  "name": "ElementaryTypeName",
+                  "visits": 1
+                },
+                {
+                  "attributes": {
+                    "string": "null",
+                    "type": "int_const 200",
+                    "value": "200"
+                  },
+                  "name": "Literal",
+                  "visits": 1
+                },
+                {
+                  "attributes": {
+                    "name": "testee"
+                  },
+                  "children": [
+                    {
+                      "attributes": {
+                        "name": "WrapsInternal"
+                      },
+                      "name": "UserDefinedTypeName",
+                      "visits": 1
+                    },
+                    {
+                      "attributes": {
+                        "const": false,
+                        "name": "WrapsInternalTest",
+                        "public": true
+                      },
+                      "children": [
+                        {
+                          "children": [],
+                          "name": "ParameterList",
+                          "visits": 1
+                        },
+                        {
+                          "children": [],
+                          "name": "ParameterList",
+                          "visits": 1
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "attributes": {
+                                    "operator": "=",
+                                    "type": "contract WrapsInternal"
+                                  },
+                                  "children": [
+                                    {
+                                      "attributes": {
+                                        "type": "contract WrapsInternal",
+                                        "value": "testee"
+                                      },
+                                      "name": "Identifier",
+                                      "visits": 1
+                                    },
+                                    {
+                                      "attributes": {
+                                        "type": "contract WrapsInternal",
+                                        "type_conversion": "0"
+                                      },
+                                      "children": [
+                                        {
+                                          "attributes": {
+                                            "type": "function () returns (contract WrapsInternal)"
+                                          },
+                                          "children": [
+                                            {
+                                              "attributes": {
+                                                "type": "type(contract WrapsInternal)",
+                                                "value": "WrapsInternal"
+                                              },
+                                              "name": "Identifier",
+                                              "visits": 1
+                                            }
+                                          ],
+                                          "name": "NewExpression",
+                                          "visits": 1
+                                        }
+                                      ],
+                                      "name": "FunctionCall",
+                                      "visits": 1
+                                    }
+                                  ],
+                                  "name": "Assignment",
+                                  "visits": 1
+                                }
+                              ],
+                              "name": "ExpressionStatement",
+                              "visits": 1
+                            }
+                          ],
+                          "name": "Block",
+                          "visits": 1
+                        }
+                      ],
+                      "name": "Function",
+                      "visits": 1
+                    },
+                    {
+                      "attributes": {
+                        "const": false,
+                        "name": "testMult",
+                        "public": true
+                      },
+                      "children": [
+                        {
+                          "children": [],
+                          "name": "ParameterList",
+                          "visits": 1
+                        },
+                        {
+                          "children": [],
+                          "name": "ParameterList",
+                          "visits": 1
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "attributes": {
+                                    "name": "prod"
+                                  },
+                                  "children": [
+                                    {
+                                      "attributes": {
+                                        "type": "int256",
+                                        "type_conversion": "0"
+                                      },
+                                      "children": [
+                                        {
+                                          "attributes": {
+                                            "member_name": "mult",
+                                            "type": "function (int256,int256) returns (int256)"
+                                          },
+                                          "children": [
+                                            {
+                                              "attributes": {
+                                                "type": "contract WrapsInternal",
+                                                "value": "testee"
+                                              },
+                                              "name": "Identifier",
+                                              "visits": 1
+                                            }
+                                          ],
+                                          "name": "MemberAccess",
+                                          "visits": 1
+                                        },
+                                        {
+                                          "attributes": {
+                                            "type": "int256",
+                                            "value": "A"
+                                          },
+                                          "name": "Identifier",
+                                          "visits": 1
+                                        },
+                                        {
+                                          "attributes": {
+                                            "type": "int256",
+                                            "value": "B"
+                                          },
+                                          "name": "Identifier",
+                                          "visits": 1
+                                        }
+                                      ],
+                                      "name": "FunctionCall",
+                                      "visits": 1
+                                    }
+                                  ],
+                                  "name": "VariableDeclaration",
+                                  "visits": 1
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "attributes": {
+                                        "type": "bool",
+                                        "type_conversion": "0"
+                                      },
+                                      "children": [
+                                        {
+                                          "attributes": {
+                                            "type": "function (int256,int256,bytes32) returns (bool)",
+                                            "value": "assertIntsEqual"
+                                          },
+                                          "name": "Identifier",
+                                          "visits": 1
+                                        },
+                                        {
+                                          "attributes": {
+                                            "type": "int256",
+                                            "value": "prod"
+                                          },
+                                          "name": "Identifier",
+                                          "visits": 1
+                                        },
+                                        {
+                                          "attributes": {
+                                            "type": "int256",
+                                            "value": "PROD"
+                                          },
+                                          "name": "Identifier",
+                                          "visits": 1
+                                        },
+                                        {
+                                          "attributes": {
+                                            "string": "null",
+                                            "type": "bytes27",
+                                            "value": "Did not multiply correctly."
+                                          },
+                                          "name": "Literal",
+                                          "visits": 1
+                                        }
+                                      ],
+                                      "name": "FunctionCall",
+                                      "visits": 1
+                                    }
+                                  ],
+                                  "name": "ExpressionStatement",
+                                  "visits": 1
+                                }
+                              ],
+                              "name": "VariableDefinition",
+                              "visits": 1
+                            }
+                          ],
+                          "name": "Block",
+                          "visits": 1
+                        }
+                      ],
+                      "name": "Function",
+                      "visits": 1
+                    }
+                  ],
+                  "name": "VariableDeclaration",
+                  "visits": 1
+                }
+              ],
+              "name": "VariableDeclaration",
+              "visits": 1
+            }
+          ],
+          "name": "VariableDeclaration",
+          "visits": 1
+        }
+      ],
+      "name": "VariableDeclaration",
+      "visits": 1
+    }
+  ],
+  "name": "Contract",
+  "visits": 1
+}
