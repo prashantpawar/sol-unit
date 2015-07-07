@@ -23,7 +23,7 @@ main();
 function main() {
     renderLogo();
     program
-        .version('0.1.4')
+        .version('0.1.5')
         .usage('[options] <file ...>')
         .option("-c, --coverage", "Calculate coverage.", "false")
         .option("-d, --debugMessages", "Print debugging info.", "false")

@@ -1,0 +1,121 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@2.10.1
+3 info using node@v0.12.4
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec { raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/home/andreas/WebstormProjects/solUnit',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /home/andreas/.npm/s-unit/0.1.4/package.tgz not in flight; packing
+9 verbose tar pack [ '/home/andreas/.npm/s-unit/0.1.4/package.tgz',
+9 verbose tar pack   '/home/andreas/WebstormProjects/solUnit' ]
+10 verbose tarball /home/andreas/.npm/s-unit/0.1.4/package.tgz
+11 verbose folder /home/andreas/WebstormProjects/solUnit
+12 info prepublish s-unit@0.1.4
+13 verbose addLocalTarball adding from inside cache /home/andreas/.npm/s-unit/0.1.4/package.tgz
+14 silly cache afterAdd s-unit@0.1.4
+15 verbose afterAdd /home/andreas/.npm/s-unit/0.1.4/package/package.json not in flight; writing
+16 verbose afterAdd /home/andreas/.npm/s-unit/0.1.4/package/package.json written
+17 silly publish { name: 's-unit',
+17 silly publish   version: '0.1.4',
+17 silly publish   namespace: 'eris',
+17 silly publish   description: 'Unit testing framework for Solidity contracts for eris-db.',
+17 silly publish   main: './index.js',
+17 silly publish   directories: { lib: './lib' },
+17 silly publish   scripts: { test: 'mocha' },
+17 silly publish   bin: { sunit: 'bin/sunit.js' },
+17 silly publish   dependencies:
+17 silly publish    { async: '^1.3.0',
+17 silly publish      commander: '^2.8.1',
+17 silly publish      'deep-equal': '^1.0.0',
+17 silly publish      'eris-contracts': '^0.10.3',
+17 silly publish      'eris-db': '^0.10.12',
+17 silly publish      'fs-extra': '^0.20.1',
+17 silly publish      fuzzy: '^0.1.0',
+17 silly publish      web3: '^0.7.1',
+17 silly publish      winston: '^1.0.1' },
+17 silly publish   devDependencies:
+17 silly publish    { del: '^1.2.0',
+17 silly publish      gulp: '^3.9.0',
+17 silly publish      'gulp-clean': '^0.3.1',
+17 silly publish      'gulp-util': '^3.0.6' },
+17 silly publish   repository:
+17 silly publish    { type: 'git',
+17 silly publish      url: 'git+https://github.com/androlo/solUnit.git' },
+17 silly publish   homepage: 'https://github.com/androlo/solUnit',
+17 silly publish   bugs: { url: 'https://github.com/androlo/solUnit/issues' },
+17 silly publish   keywords:
+17 silly publish    [ 'eris',
+17 silly publish      'ipfs',
+17 silly publish      'javascript',
+17 silly publish      'node.js',
+17 silly publish      'unit testing',
+17 silly publish      'testing' ],
+17 silly publish   author: { name: 'AndreasEris' },
+17 silly publish   authors:
+17 silly publish    [ { name: 'Andreas Olofsson',
+17 silly publish        email: 'andreas@erisindustries.com',
+17 silly publish        url: '' } ],
+17 silly publish   preferGlobal: true,
+17 silly publish   license: 'LGPL-3.0',
+17 silly publish   readme: '# solUnit\n\n**Disclaimer: Do not download and use. This is not a production ready library. When it is done, it will be announced.** \n\n2015-07-06: Switched over to our new client. Right now everything seems fine, just got to update the dependencies, which includes the eris-db server, the eris-db.js javascript and the eris-contracts.js which is web3 solidity contracts refitted for eris-db/tendermint. ETA this month (july 2015)**\n\nRunning and using this libary is difficult. It is alpha software, and it uses an alpha client to test code written in a language (Solidity) that is still under heavy development.\n\n## Introduction\n\nUnit testing framework for solidity contracts. It runs unit tests and does basic coverage analysis. It uses local solidity compiler (solc) to compile, and the eris-db/tendermint server for carrying out the tests (via its javascript bindings and utilities). \n\nIt used to be based on Ethereum, but switching to our client broke Ethereum compatibility (naturally). This will likely be fixed, hopefully in time for release. Whether or not I will maintain compatibility depends largely on how stable their client and javascript API will be. Technically there\'s nothing standing in the way.\n\nThe name of this library is solUnit, because sUnit is the Smalltalk unit testing framework. Given that sunit or sUnit is easier to write, and that there is no chance of confusion since nobody has used (or unit-tested) smalltalk since the 90s, those aliases are used instead. The node package is called s-unit, which is again just an alias.\n\n## Installing\n\nOnly tested on linux (Ubuntu 14.XY).\n\n`npm install s-unit`\n\nRequires cpp-ethereum (latest dev) to function. At the very least it needs the solidity compiler. Instructions for installing can be found here: `https://github.com/ethereum/cpp-ethereum/wiki`. If you\'re unfamiliar with cpp-ethereum, solidity, or ethereum in general, or are uncomfortable pushing it on latest dev then this tool is not useful.\n\nWhen Ethereum has been downloaded and installed, check that you are able to run `solc --version` from some directory (doesn\'t matter which).\n\n**NOTE: You need to keep cpp-ethereum up to date. Always make sure you\'re on latest dev.**\n\n## Getting started\n\nEasiest is to start looking at the examples in `contracts/src`.\n\nThe executable is \'sunit\' and allows the following flags:\n\n```\n    -h, --help           output usage information\n    -V, --version        output the version number\n    -c, --coverage       Calculate coverage. Default: is \'false\'\n    -d, --debugMessages  Get debugging messages. Default: is \'false\'\n    -r, --rpcUrl         Url to blockchain client. Default is: \'http://localhost:1337\'\n```\n\nIf you install it globally you should get sunit on your path. Try `$ sunit -V` and it should print the version.\n\nYou can also run it via \n\n## Test contract format\n\nThe constraints for a unit testing contract right now (0.1.x) are these:\n\n1. Test-contracts must use the same name as the test target but end with `Test`. If you want to test a contract named `Arrays`, name the test-contract `ArraysTest`. If you want to test a contract named `Coin`, name the test-contract `CoinTest`, and so on.\n\n2. Test function names must start with `test`, e.g. `function testAddTwoInts()`, and they must be public. There is no limit on the number of test-functions that can be in each test-contract.\n\n3. The test-contract needs a test event: `event TestEvent(address indexed fId, bool indexed result, uint indexed error, bytes32 message);`. It is used by the framework to validate that a test did indeed pass. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol` (comes with the library). Its assertion methods has a proper test event already set up which will fire automatically when an assertion is made. \n\nNOTE: If none of the existing assertions fit then it is always possible to extend, or to simply calculate the result in the test-function then use `assertTrue` or `assertFalse`.\n\n4. If you want to do coverage analysis, the target contract field must be named `testee`. See example below.\n\n5. Currently, only one assertion/test-event per test method is allowed, and only one `testee` per test contract.\n\n**Example of a simple storage value test with coverage enabled**\n\n```\nimport "assertions/Asserter.sol";\n\ncontract Demo {\n    \n    uint public x = 0;\n    \n    function setX(uint _x){\n        x = _x;\n    }\n}\n\n// Test contract named DemoTest as per (1).\ncontract DemoTest is Asserter {\n\n    uint constant TEST_VAL = 55;\n\n    // We name this contract \'testee\' so that we may do coverage analysis.\n    // \n    Demo testee = new Demo();\n    \n    // Test method starts with \'test\' and will thus be recognized by solUnit (2).\n    function testSetX(){\n        \n        testee.setX(TEST_VAL);\n        var x = testee.x();\n        // Use assert method from Asserter contract (3). It will automatically fire of the test event.\n        assertUintsEqual(x, TEST_VAL, "Values not equal");\n    }\n    \n}\n```\n\nPlenty more in the `contracts/src` folder. It\'s actually not that hard once solc and eris-db are properly set up. All test contracts looks pretty much the same - a target named \'testee\' and a few methods that begin with \'test\' with an assertion in it.\n\n### Build constraints\n\n- The `.binary` and `.abi` files for the test contracts must be available in the working directory. Don\'t need to have the sources there.\n\n- For coverage, the `.ast` file of the test contract, and `.abi` file of the "testee" must be in the working directory as well. \n\nThe easiest way to get it to work is to just compile everything with `--binary file --json-abi file --ast-json file` before running sunit in that folder. It will have all the needed files in there (and then some).\n\nThere\'s a contract build automation script in the gulpfile. It will be more advanced and more standardized with time (and actually use streams...). What it does is basically to copy app sources and external sources (includes) into a temp folder, compile it, move the built files into a build folder and clear the temp. The goal is to eventually have a sane solidity contract build task that can be chained with a unit testing task, so that all the contract stuff can be integrated with the rest of the code. \n\n\n## TestEvent and assertions\n\n`TestEvent` is what the framework listens too. It is set up to run test functions, track their names and signatures, then listen to `TestEvent` data from the contract in question. Not having a test event won\'t break the contract code, but the framework won\'t be able to tell whether or not the tests succeed. Right now it\'ll basically just run forever, but adding timeouts is a high priority TODO.\n\n`event TestEvent(address indexed fId, bool indexed result, uint indexed error, bytes32 message);`\n\nThe `fId` param is the function id (`msg.sig`) which is passed along to identify the method being called. For technical reasons it uses the `address` type.   \n\nThe `result` param is the result of the test. Basically if the assertion succeeded or failed. It\'s always a boolean.\n\nThe `error` param is **not used** right now, but will be used for error/exception handling by allowing error codes to be sent.\n\nThe `message` param is used to log a message. This is normally used if the assertion fails. It must be less then 32 bytes.\n\nIf the contract extends `Asserter`, it will inherit `TestEvent`, and can also use the assert methods which will automatically trigger the test event. Otherwise you can just roll your own. \n\n**Example of a bare-bones test contract**\n \n```\ncontract Something(){\n    \n    int public something;\n    \n    function setSomething(int _something){\n        something = _something;\n    }\n}\n\ncontract SomethingTest {\n\n    event TestEvent(address indexed fId, bool indexed result, uint indexed error, bytes32 message);\n    \n    Something testee = new Something();\n    \n    function testSomething(){\n        int someValue = 5; \n        testee.setSomething(someValue);\n        var intOrSomeSuch = testee.something();\n        var result = (intOrSomeSuch == someValue);\n        if(result){\n            TestEvent(msg.sig, true, 0, "");\n        } else {\n            TestEvent(msg.sig, false, 0, "Something is wrong.");\n        }\n    }\n\n}\n```\n\n## Examples\n\nThe contracts folder comes with a couple of different examples.\n\n## Tests\n\nCut out most of the tests with the update, as they were ethereum-oriented. Will add new tests gradually. Basic coverage should be done before release.\n\n## Library structure\n\nThe framework uses blockchain-client events to do the tests. It uses the afore-mentioned Solidity `TestEvent` to get confirmation from contract methods. To check when the test contracts are deployed it uses a hacky and un-reliable method, but that will be improved when eris-db/tendermint allows it. Basically it listens for new blocks being committed, and checks if there are new transactions in those blocks.\n\nThe `SolUnit` class is where everything is coordinated. It deploys the test contracts and publish the results via events. It implements nodes EventEmitter. It also relays some events from dependencies like the `TestRunner` and `Analyzer` (coverage tool).\n\nThe `TestRunner` takes a test contract, finds all test methods in it and run those. It also sets up a listener for solidity events, and use those events to determine if tests succeed or fail, and when all the tests has finished. It is normally instantiated and managed by a `SolUnit` object.\n\nThe `Analyzer` uses a test contract AST and its targets ABI to determine how many of the methods has been called. It does not look for hidden methods, or how they are called from the public ones, but that will be added later.\n\nIn the diagram, the executable would gather tests and set things up, then `SolUnit` would deal with the contract execution section. It defers method execution to the `TestRunner`. The `Analyzer` is not part of this diagram. It is optional, and would run as part of the reporting events to provide additional data. It does not affect the general execution cycle.\n\nPresentation of test data is not part of the diagram either. `SolUnit` does no presentation of its own - it only passes the needed data in the events. The way it works with the command-line tool is it listens to all the events and prints them using a special (winston) logger.\n\n![sol_unit_diag.png](resources/docs/sol_unit_diag.png "SolUnit structure")',
+17 silly publish   readmeFilename: 'README.md',
+17 silly publish   gitHead: '3285d84b45674a1712a4774b5a51a10d2f6556ec',
+17 silly publish   _id: 's-unit@0.1.4',
+17 silly publish   _shasum: '862e3d6a863a00c5b6870c34cb2ab92f4aac5c4b',
+17 silly publish   _from: '.' }
+18 verbose getPublishConfig undefined
+19 silly mapToRegistry name s-unit
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/s-unit
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading /home/andreas/.npm/s-unit/0.1.4/package.tgz
+25 verbose request uri https://registry.npmjs.org/s-unit
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 17:19:23
+28 verbose request using bearer token for auth
+29 verbose request id 03e01b5b9a7dfc85
+30 http request PUT https://registry.npmjs.org/s-unit
+31 http 403 https://registry.npmjs.org/s-unit
+32 verbose headers { 'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=60',
+32 verbose headers   'content-length': '95',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   date: 'Tue, 07 Jul 2015 15:19:22 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-ams4131-AMS',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1436282361.224269,VS0,VE1337' }
+33 verbose request invalidating /home/andreas/.npm/registry.npmjs.org/s-unit on PUT
+34 error publish Failed PUT 403
+35 verbose stack Error: "You cannot publish over the previously published version 0.1.4." : s-unit
+35 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:247:14)
+35 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:170:14)
+35 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:368:22)
+35 verbose stack     at Request.emit (events.js:110:17)
+35 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1219:14)
+35 verbose stack     at Request.emit (events.js:129:20)
+35 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1167:12)
+35 verbose stack     at IncomingMessage.emit (events.js:129:20)
+35 verbose stack     at _stream_readable.js:908:16
+35 verbose stack     at process._tickCallback (node.js:355:11)
+36 verbose statusCode 403
+37 verbose pkgid s-unit
+38 verbose cwd /home/andreas/WebstormProjects/solUnit
+39 error Linux 3.16.0-23-generic
+40 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+41 error node v0.12.4
+42 error npm  v2.10.1
+43 error code E403
+44 error "You cannot publish over the previously published version 0.1.4." : s-unit
+45 error If you need help, you may report this error at:
+45 error     <https://github.com/npm/npm/issues>
+46 verbose exit [ 1, true ]
