@@ -30,11 +30,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/androlo/sol-unit"
+    "url": "https://github.com/androlo/solUnit"
   },
-  "homepage": "https://github.com/androlo/sol-unit",
+  "homepage": "https://github.com/androlo/solUnit",
   "bugs": {
-    "url": "https://github.com/androlo/sol-unit/issues"
+    "url": "https://github.com/androlo/solUnit/issues"
   },
   "keywords": [
     "eris",
