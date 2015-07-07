@@ -1,8 +1,8 @@
 {
-  "name": "sol-unit",
-  "version": "0.1.0",
+  "name": "s-unit",
+  "version": "0.1.1",
   "namespace": "eris",
-  "description": "Unit testing framework for Solidity.",
+  "description": "Unit testing framework for Solidity contracts for eris-db.",
   "main": "./index.js",
   "directories": {
     "lib": "./lib"
@@ -11,7 +11,7 @@
     "test": "mocha"
   },
   "bin": {
-    "sunit": "bin/main.js"
+    "sunit": "bin/sunit.js"
   },
   "dependencies": {
     "async": "^1.3.0",
