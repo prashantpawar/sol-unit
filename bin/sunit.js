@@ -5,6 +5,7 @@
  */
 var program = require('commander');
 var fs = require('fs-extra');
+var fuzzy = require('fuzzy');
 var path = require('path');
 var test = require('./../lib/test_runner');
 var logger = require('../lib/logger');
@@ -61,9 +62,29 @@ function main() {
                 log.error("Could not find .binary or .ast files for '" + file + "' in the current directory");
             }
         }
+        if (tests.length === 0){
+            var files = fs.readdirSync(cwd);
+            log.error("No valid tests were found.");
+            var matches = [];
+            for(var i = 0; i < program.args.length; i++){
+                var results = fuzzy.filter(program.args[i], files);
+                var m = results.map(function(el) { return el.string; });
+                matches = matches.concat(m);
+            }
+            matches = filterSuggestions(matches);
+            if(matches.length > 0){
+                var rString = "";
+                for(var i = 0; i < matches.length; i++) {
+                    rString += matches[i] + " ";
+                }
+                if(results.length > 0) {
+                    console.log("Did you mean any of these: " + rString);
+                }
+            }
+            process.exit(-3);
+        }
     } else {
         var filesInDir = fs.readdirSync(cwd);
-
 
         for (var i = 0; i < filesInDir.length; i++) {
             var file = filesInDir[i];
@@ -77,11 +98,10 @@ function main() {
             }
             tests.push(name);
         }
-    }
-
-    if (tests.length === 0) {
-        log.error("No tests found. Aborting.");
-        process.exit(-3);
+        if(tests.length === 0) {
+            log.error("No tests found.");
+            process.exit(-3);
+        }
     }
 
     log.debug("Tests found: ", tests);
@@ -145,6 +165,31 @@ function suiteDone(stats) {
     process.exit(total - successful);
 }
 
+function filterSuggestions(names){
+    var newNames = [];
+    for(var i = 0; i < names.length; i++) {
+        newNames.push(path.parse(names[i]).name);
+    }
+    newNames = unique(newNames);
+    var tests = [];
+    for(i = 0; i < newNames.length; i++){
+        var name = newNames[i];
+        if(name.length > 4 && name.slice(-4) === "Test"){
+            tests.push(name);
+        }
+    }
+    return tests;
+
+    function unique(arr) {
+        var seen = {};
+        return arr.filter(function(e) {
+            if (seen[e])
+                return;
+            seen[e] = true;
+            return e;
+        })
+    }
+}
 
 function renderLogo() {
     console.log(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ");

@@ -12,11 +12,11 @@ Unit testing framework for solidity contracts. It runs unit tests and does basic
 
 It used to be based on Ethereum, but switching to our client broke Ethereum compatibility (naturally). This will likely be fixed, hopefully in time for release. Whether or not I will maintain compatibility depends largely on how stable their client and javascript API will be. Technically there's nothing standing in the way.
 
-The name of this library is solUnit, because sUnit is the Smalltalk unit testing framework. Given that sunit or sUnit is easier to write, and that there is no chance of confusion since nobody has used (or unit-tested) smalltalk since the 90s, the aliases sunit/sUnit is used instead. The node package is called s-unit, which is again just an alias.
+The name of this library is solUnit, because sUnit is the Smalltalk unit testing framework. Given that sunit or sUnit is easier to write, and that there is no chance of confusion since nobody has used (or unit-tested) smalltalk since the 90s, those aliases are used instead. The node package is called s-unit, which is again just an alias.
 
 ## Installing
 
-Only tested on linux (Ubuntu 14.XY). 
+Only tested on linux (Ubuntu 14.XY).
 
 `npm install s-unit`
 
@@ -110,7 +110,9 @@ There's a contract build automation script in the gulpfile. It will be more adva
 
 ## TestEvent and assertions
 
-`TestEvent` is what the framework listens too. It is set up to run test functions, track their names and signatures, then listen to `TestEvent` data from the contract in question. Not having a test event won't break the contract code, but the framework won't be able to tell whether or not the tests succeed. Right now it'll basically just run forever, but adding timeouts is a high priority TODO. 
+`TestEvent` is what the framework listens too. It is set up to run test functions, track their names and signatures, then listen to `TestEvent` data from the contract in question. Not having a test event won't break the contract code, but the framework won't be able to tell whether or not the tests succeed. Right now it'll basically just run forever, but adding timeouts is a high priority TODO.
+
+`event TestEvent(address indexed fId, bool indexed result, uint indexed error, bytes32 message);`
 
 The `fId` param is the function id (`msg.sig`) which is passed along to identify the method being called. For technical reasons it uses the `address` type.   
 
