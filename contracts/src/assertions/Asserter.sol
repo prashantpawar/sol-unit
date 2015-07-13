@@ -18,39 +18,50 @@ contract Asserter {
         }
     }
 
-    // ************************************** string (bytes32) **************************************
+    // ************************************** bytes32 **************************************
 
-    /// @dev Assert that the two strings A and B are equal.
-    /// @param A The first string.
-    /// @param B The second string.
+    /// @dev Assert that the two bytes32 A and B are equal.
+    /// @param A The first bytes(32).
+    /// @param B The second bytes(32).
     /// @param msg The message to display if the assertion fails.
     function assertBytes32Equal(bytes32 A, bytes32 B, bytes32 message) internal constant returns (bool result){
         result = (A == B);
         report(result, message);
     }
 
-    /// @dev Assert that the two strings A and B are not equal.
-    /// @param A The first string.
-    /// @param B The second string.
+    /// @dev Assert that the two bytes32 A and B are not equal.
+    /// @param A The first bytes(32).
+    /// @param B The second bytes(32).
     /// @param msg The message to display if the assertion fails.
     function assertBytes32NotEqual(bytes32 A, bytes32 B, bytes32 message) internal constant returns (bool result) {
         result = (A != B);
         report(result, message);
     }
 
-    /// @dev Assert that the string 'str' is empty.
-    /// @param str The string.
+    /// @dev Assert that the bytes32 'bts' is zero.
+    /// @param bts the bytes(32).
     /// @param msg The message to display if the assertion fails.
-    function assertBytes32Empty(bytes32 str, bytes32 message) internal constant returns (bool result){
-        result = (str == "");
+    function assertBytes32IsZero(bytes32 bts, bytes32 message) internal constant returns (bool result){
+        result = (bts == 0);
         report(result, message);
     }
 
-    /// @dev Assert that the string 'str' is not empty.
-    /// @param str The string.
+    /// @dev Assert that the bytes32 'bts' is not zero.
+    /// @param str The bytes(32).
     /// @param msg The message to display if the assertion fails.
-    function assertBytes32NotEmpty(bytes32 str, bytes32 message) internal constant returns (bool result){
-        result = (str != "");
+    function assertBytes32NotEmpty(bytes32 bts, bytes32 message) internal constant returns (bool result){
+        result = (bts != 0);
+        report(result, message);
+    }
+
+    // ************************************** string **************************************
+
+    /// @dev Assert that the two strings A and B are equal.
+    /// @param A The first string.
+    /// @param B The second string.
+    /// @param msg The message to display if the assertion fails.
+    function assertBytes32Equal(string A, string B, bytes32 message) internal constant returns (bool result){
+        result = (A == B);
         report(result, message);
     }
 

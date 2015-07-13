@@ -32,7 +32,7 @@ contract BasicTypes {
 
 contract BasicTypesTest is Asserter {
 
-    bytes32 constant bytes32Out = "test";
+    bytes32 constant bytes32Out = 0x111111;
     int constant intOut = -1234;
     uint constant uintOut = 1234;
     bool constant boolOut = true;

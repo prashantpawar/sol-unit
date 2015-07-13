@@ -1,0 +1,11 @@
+{
+  "paths": [
+    "contracts/src/*.sol",
+    "contracts/src/assertions/Asserter.sol"
+  ],
+  "root": "./contracts",
+  "sourceDir": "src",
+  "buildDir": "build",
+  "docsDir": "docs",
+  "compilerFlags": "--optimize 1 --binary file --json-abi file --ast-json file --natspec-dev file"
+}

@@ -1,6 +1,6 @@
 {
   "name": "s-unit",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "namespace": "eris",
   "description": "Unit testing framework for Solidity contracts for eris-db.",
   "main": "./index.js",
@@ -28,15 +28,18 @@
     "del": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-clean": "^0.3.1",
-    "gulp-util": "^3.0.6"
+    "gulp-debug": "^2.0.1",
+    "gulp-smake": "^0.1.0",
+    "gulp-util": "^3.0.6",
+    "through2": "^2.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/androlo/solUnit"
+    "url": "https://github.com/androlo/sol-unit"
   },
-  "homepage": "https://github.com/androlo/solUnit",
+  "homepage": "https://github.com/androlo/sol-unit",
   "bugs": {
-    "url": "https://github.com/androlo/solUnit/issues"
+    "url": "https://github.com/androlo/sol-unit/issues"
   },
   "keywords": [
     "eris",
@@ -51,7 +54,7 @@
     {
       "name": "Andreas Olofsson",
       "email": "andreas@erisindustries.com",
-      "url": ""
+      "url": "http://erisindustries.com"
     }
   ],
   "preferGlobal": true,

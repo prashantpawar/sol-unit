@@ -1,143 +1,72 @@
 var gulp = require('gulp');
+var gDebug = require('gulp-debug');
+var gUtil = require('gulp-util');
 var path = require('path');
+var del = require('del');
 var fs = require('fs-extra');
-var cp = require('child_process');
+var gsm = require('gulp-smake');
 var os = require('os');
 
-// TODO Standardize this eventually.
-gulp.task('build-contracts', function (done) {
+var options = require('./contracts.json');
+var exports = {};
 
-    var globals = {
-        root: "./contracts",
-        srcDir: "./contracts/src",
-        includes: ["./contracts/include"],
-        buildDir: "./contracts/build"
-    };
+var buildDir = path.join(options.root, options.buildDir);
+var docsDir = path.join(options.root, options.docsDir);
 
-    var exports = {};
+// Just some debugging info. Enable if the SOL_UNIT_BUILD_DEBUG envar is set.
+var debugMode = true; // process.env.SOL_UNIT_BUILD_DEBUG;
+var dbg;
+if(debugMode){
+    dbg = gDebug;
+} else {
+    dbg = gUtil.noop;
+}
 
-    var solc = "solc";
-    var osName = os.platform();
-    if (osName.indexOf('win') === 0) {
-        solc = solc + '.exe';
-    }
+// TODO start separating tasks into different files.
 
-    preBuild();
-
-    function preBuild() {
-        // Make sure solc exists on path.
-        run(solc + ' --version', null, function (error) {
-            if (error) {
-                console.log("solc error: " + error);
-                process.exit(-1);
-            }
-
-            try {
-                var tmp = path.join(os.tmpDir(), "_soltemp");
-
-                fs.emptyDirSync(tmp);
-
-                fs.copySync(globals.srcDir, tmp);
-                // Copy includes into root, with subfolders and all.
-                if (globals.includes) {
-                    for (var i = 0; i < globals.includes.length; i++) {
-                        fs.copySync(globals.includes[i], tmp);
-                    }
-                }
-
-                exports.tmpDir = tmp;
-            } catch (error) {
-                console.log("pre-build error: " + error);
-                process.exit(-1);
-            }
-            build();
-        });
-    }
-
-    function build() {
-        var args = "--optimize 1 --binary file --json-abi file --ast-json file --input-file";
-        var sources = [];
-        // Cheating by just adding all within a dir.
-        addAllSources(sources, "");
-        addAllSources(sources, "assertions");
-
-        var buildDir = globals.buildDir;
-        fs.removeSync(buildDir);
-        fs.mkdirpSync(buildDir);
-        exports.sources = sources;
-
-        for (var i = 0; i < sources.length; i++) {
-            args += ' ' + sources[i];
-        }
-
-        var cmd = solc + ' ' + args;
-        console.log(cmd);
-        run(cmd, {cwd: exports.tmpDir}, function (error) {
-
-            if (error) {
-                console.log("build error: " + error);
-                fs.removeSync(exports.tmpDir);
-                process.exit(-2);
-            }
-            postBuild();
-        })
-    }
-
-    function postBuild() {
-        var sources = exports.sources;
-        for (var i = 0; i < sources.length; i++) {
-            var sName = sources[i];
-            var name = path.basename(sName).slice(0, -4);
-            var bin = name + ".binary";
-            var abi = name + ".abi";
-            var ast = name + ".ast";
-            // TODO This it temporary since -o (output dir) flag is not added to Solc yet, and we want to build from the source dir.
-            var binPath = path.join(exports.tmpDir, bin);
-            var abiPath = path.join(exports.tmpDir, abi);
-            var astPath = path.join(exports.tmpDir, ast);
-            if (name.length >= 4 && name.slice(-4) === "Test") {
-                console.log("Moving: " + name);
-                fs.renameSync(binPath, path.join(globals.buildDir, bin));
-                fs.renameSync(abiPath, path.join(globals.buildDir, abi));
-                fs.renameSync(astPath, path.join(globals.buildDir, ast));
-                // Move abi file for testee as well, for coverage tests.
-                var tAbiName = name.slice(0, -4) + ".abi";
-                fs.renameSync(path.join(exports.tmpDir, tAbiName), path.join(globals.buildDir, tAbiName));
-            }
-        }
-        fs.removeSync(exports.tmpDir);
-        done();
-    }
-
-    function run(cmd, options, callback) {
-        var exec = cp.exec;
-        var opts = options || {};
-        exec(cmd, opts, function (error, stdout) {
-            callback(error, stdout);
-        });
-    }
-
-    function addAllSources(sources, subdir) {
-        var pt = path.join(exports.tmpDir, subdir);
-        console.log(pt);
-        var filesInDir = fs.readdirSync(pt);
-        console.log(filesInDir);
-        for (var i = 0; i < filesInDir.length; i++) {
-            var file = filesInDir[i];
-            if (file.indexOf(".sol") !== -1) {
-                var fp;
-                if (!subdir) {
-                    fp = file;
-                } else {
-                    fp = path.join(subdir, file);
-                }
-                sources.push(fp);
-            }
-        }
-    }
-
-    function addSource(sources, file) {
-        sources.push(file);
-    }
-
+// Removes the build folder.
+gulp.task('contracts-clean', function(cb) {
+    del([buildDir, docsDir], cb);
 });
+
+// Used to set up the project for building.
+gulp.task('contracts-init-build', function (cb) {
+    del([buildDir, docsDir], cb);
+});
+
+// Writes the complete source tree to a temp folder. This is also where external source dependencies
+// would be fetched and set up if needed.
+gulp.task('contracts-pre-build', ['contracts-init-build'], function(){
+    // Create an empty folder in temp to use as temporary root when building.
+    var temp = path.join(os.tmpdir(), "sol-unit");
+    fs.emptyDirSync(temp);
+    // Modify the source folder in the object, so that it uses the new temp folder.
+    exports.base = temp;
+    // Create the path to the root source folder.
+    var base = path.join(options.root, options.sourceDir);
+    return gulp.src(options.paths, {base: base})
+        .pipe(dbg())
+        .pipe(gulp.dest(temp));
+});
+
+// Compiles the contracts. This is also where external code dependencies would be set up and built if needed.
+gulp.task('contracts-build', ['contracts-pre-build'], function () {
+        return gulp.src(exports.base + '/**/*')
+            .pipe(dbg())
+            .pipe(gsm.build(options, exports));
+});
+
+// Any cleanup of the build directory is put here.
+gulp.task('contracts-post-build', ['contracts-build'], function(cb){
+    del([path.join(buildDir,'Asserter.*'), path.join(docsDir,'Asserter.*')], cb);
+});
+
+// Build the contracts project.
+gulp.task('build-contracts', ['contracts-post-build']);
+
+// Gather up all sources in a temp folder. This is useful if a project needs the
+// sources from this project but not the compiled files.
+gulp.task('export-contracts', ['contracts-pre-build']);
+
+// Default is to build the contracts.
+gulp.task('default', ['build-contracts']);

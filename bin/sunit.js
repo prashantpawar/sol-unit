@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * @fileOverview: solUnit command line tool.
+ * @fileOverview: sol-unit command line tool.
  * @author: Andreas Olofsson (andreas@erisindustries.com)
  */
 var program = require('commander');

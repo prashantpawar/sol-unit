@@ -179,4 +179,4 @@ In the diagram, the executable would gather tests and set things up, then `SolUn
 
 Presentation of test data is not part of the diagram either. `SolUnit` does no presentation of its own - it only passes the needed data in the events. The way it works with the command-line tool is it listens to all the events and prints them using a special (winston) logger.
 
-![sol_unit_diag.png](resources/docs/sol_unit_diag.png "SolUnit structure")
+![sol_unit_diag.png](https://github.com/androlo/sol-unit/blob/master/resources/docs/sol_unit_diag.png "SolUnit structure")
