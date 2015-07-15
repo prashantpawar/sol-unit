@@ -9,10 +9,13 @@ var fuzzy = require('fuzzy');
 var path = require('path');
 var test = require('./../lib/test_runner');
 var logger = require('../lib/logger');
-var SolUnit = require('../lib/sol_unit');
+var SolUnit = require('../lib/s_unit');
 var presenter = require('./log_presenter');
 
 var log = logger.globalLogger();
+var pj = require('../package.json');
+
+var CURRENT_VERSION = '0.1.8';
 
 // Run
 main();
@@ -22,20 +25,23 @@ main();
  */
 function main() {
     renderLogo();
+
     program
-        .version('0.1.5')
-        .usage('[options] <file ...>')
-        .option("-c, --coverage", "Calculate coverage.", "false")
-        .option("-d, --debugMessages", "Print debugging info.", "false")
-        .option("-r, --rpcUrl", "Url to blockchain client.", "http://localhost:1337")
+        .version(CURRENT_VERSION)
+        .usage('[options] <test ...>')
+        .option("-c, --coverage", "Calculate coverage. [default=false]")
+        .option("-m, --debug", "Print debugging info. [default=false]")
+        .option("-r, --url <url>", "Url to blockchain client. [default='http://localhost:1337/rpc']", "http://localhost:1337/rpc")
+        .option("-d, --dir <dir>", "Directory in which to do the tests. [default=current directory]", process.cwd())
         .parse(process.argv);
 
-    if (program.debugMessages) {
+    if (!!program["debug"]) {
         logger.setConsoleLevel('debug');
     }
 
+    var baseDir = program.dir;
+
     var tests = [];
-    var cwd = process.cwd();
     if(program.args.length > 0 ){
         for (var i = 0; i < program.args.length; i++ ){
             var file = program.args[i];
@@ -44,13 +50,13 @@ function main() {
             }
             try {
                 var bin = file + ".binary";
-                var binPath = path.join(cwd, bin);
+                var binPath = path.join(baseDir, bin);
                 var fStats = fs.lstatSync(binPath);
                 if (!fStats.isFile()) {
                     log.error(bin + " exists but is not a proper file.");
                 } else {
                     var abi = file + ".abi";
-                    var abiPath = path.join(cwd, bin);
+                    var abiPath = path.join(baseDir, abi);
                     var f2Stats = fs.lstatSync(abiPath);
                     if (!f2Stats.isFile()) {
                         log.error(abi + " exists but is not a proper file.");
@@ -59,11 +65,11 @@ function main() {
                     }
                 }
             } catch (error) {
-                log.error("Could not find .binary or .ast files for '" + file + "' in the current directory");
+                log.error("Could not find .binary or .abi files for '" + file + "' in: " + baseDir);
             }
         }
         if (tests.length === 0){
-            var files = fs.readdirSync(cwd);
+            var files = fs.readdirSync(baseDir);
             log.error("No valid tests were found.");
             var matches = [];
             for(var i = 0; i < program.args.length; i++){
@@ -84,7 +90,7 @@ function main() {
             process.exit(-3);
         }
     } else {
-        var filesInDir = fs.readdirSync(cwd);
+        var filesInDir = fs.readdirSync(baseDir);
 
         for (var i = 0; i < filesInDir.length; i++) {
             var file = filesInDir[i];
@@ -106,13 +112,13 @@ function main() {
 
     log.debug("Tests found: ", tests);
 
-    var url = program.rpcUrl;
-
+    var url = program.url;
     var doCoverage = program.coverage;
+
     // TODO presenter
     var sUnit = new SolUnit();
 
-    // Set the callbacks up. We don't need to listen to all events.
+    // Set the callbacks up.
     sUnit.on('suiteStarted', suiteStarted);
     sUnit.on('contractStarted', contractStarted);
     sUnit.on('methodsStarted', methodsStarted);
@@ -120,7 +126,7 @@ function main() {
     sUnit.on('contractDone', contractDone);
     sUnit.on('suiteDone', suiteDone);
 
-    sUnit.start(tests, url, doCoverage);
+    sUnit.start(tests, baseDir, url, doCoverage);
 
 }
 

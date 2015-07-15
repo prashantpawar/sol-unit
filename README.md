@@ -1,14 +1,12 @@
 # solUnit
 
-**Disclaimer: Do not download and use. This is not a production ready library. When it is done, it will be announced.** 
+**Disclaimer: Do not download and use. This is not a production ready library. When it is done, it will be announced. ETA this month (july 2015)**
 
-2015-07-06: Switched over to our new client. Right now everything seems fine, just got to update the dependencies, which includes the eris-db server, the eris-db.js javascript and the eris-contracts.js which is web3 solidity contracts refitted for eris-db/tendermint. ETA this month (july 2015)**
-
-Running and using this libary is difficult. It is alpha software, and it uses an alpha client to test code written in a language (Solidity) that is still under heavy development.
+**Disclaimer: Running and using this libary is difficult. It is alpha software, and it uses an alpha client to test code written in a language (Solidity) that is still under heavy development.**
 
 ## Introduction
 
-Unit testing framework for solidity contracts. It runs unit tests and does basic coverage analysis. It uses local solidity compiler (solc) to compile, and the eris-db/tendermint server for carrying out the tests (via its javascript bindings and utilities). 
+Unit testing framework for solidity contracts. It runs unit tests and does basic coverage analysis. It uses the eris-db/tendermint server for carrying out the tests (via its javascript bindings and utilities). 
 
 It used to be based on Ethereum, but switching to our client broke Ethereum compatibility (naturally). This will likely be fixed, hopefully in time for release. Whether or not I will maintain compatibility depends largely on how stable their client and javascript API will be. Technically there's nothing standing in the way.
 
@@ -20,45 +18,129 @@ Only tested on linux (Ubuntu 14.XY).
 
 `npm install s-unit`
 
-Requires cpp-ethereum (latest dev) to function. At the very least it needs the solidity compiler. Instructions for installing can be found here: `https://github.com/ethereum/cpp-ethereum/wiki`. If you're unfamiliar with cpp-ethereum, solidity, or ethereum in general, or are uncomfortable pushing it on latest dev then this tool is not useful.
+Use the `--global` flag to get the `sunit` command-line version.
 
-When Ethereum has been downloaded and installed, check that you are able to run `solc --version` from some directory (doesn't matter which).
+You need an `eris-db` server running in order to do tests, and it needs to run a chain that uses the files provided in `./resources/defaultdb`. The easiest way to use this library as of now is by copying that folder somewhere, cd into that directory and run `eris-db .`, then keep that process running while working on the code/tests. That will use the same chain for every test you run, but unit tests really shouldn't depend on the current state of the chain.  
 
-**NOTE: You need to keep cpp-ethereum up to date. Always make sure you're on latest dev.**
+**Note (2015-07-14): As the eris-cli tool improves, it will be easier and easier to use. It will soon have commands for setting up standard (throw-away) test-chains that are compatible with this library. Stay tuned...**  
 
-## Getting started
+## Usage
 
-Easiest is to start looking at the examples in `contracts/src`.
+You either run it from the terminal or from javascript.
 
-The executable is 'sunit' and allows the following flags:
+### Terminal
+
+The executable name is `sunit`. If you install it globally you should get it on your path. Try `$ sunit -V` and it should print the version.
+
 
 ```
-    -h, --help           output usage information
-    -V, --version        output the version number
-    -c, --coverage       Calculate coverage. Default: is 'false'
-    -d, --debugMessages  Get debugging messages. Default: is 'false'
-    -r, --rpcUrl         Url to blockchain client. Default is: 'http://localhost:1337'
+$ sunit --help
+
+  Usage: sunit [options] <test ...>
+
+  Options:
+
+    -h, --help       output usage information
+    -V, --version    output the version number
+    -c, --coverage   Calculate coverage. [default=false]
+    -m, --debug      Print debugging info. [default=false]
+    -r, --url <url>  Url to blockchain client. [default='http://localhost:1337/rpc']
+    -d, --dir <dir>  Directory in which to do the tests. [default=current directory]
 ```
 
-If you install it globally you should get sunit on your path. Try `$ sunit -V` and it should print the version.
+Example: `$ sunit -c ArrayTest CoinTest `
 
-You can also run it via 
+Test names are the test contract names. They should always end in `Test` (no extension). 
 
-## Test contract format
+### Running from javascript
+
+The base class is `SUnit`.
+
+```
+var SUnit = require('s-unit');
+
+var tests = ['CoinTest', 'BallotTest', ... ];
+var baseDir = './tests';
+var erisdbURL = 'http://localhost:1337/rpc';
+var doCoverage = true;
+
+sUnit.on('suiteStarted', function(){ console.log("Starting tests!"); });
+sUnit.on('suiteDone', function(){ console.log("Done!"); });
+
+sUnit.start(tests, baseDir, erisdbURL, doCoverage);
+```
+
+- The first param of the start method, `tests`, is an array of tests to run.
+
+- The second param, `baseDir`, is the directory where the compiled solidity files are.
+
+- The third param, `erisdbURL`, is the URL to the eris-db rpc
+
+- The fourth param, `doCoverage`, is whether or not coverage analysis should be done.
+
+#### Events
+
+`SUnit` uses events. It extends nodes `EventEmitter`, and the events you may listen to are these:
+
+##### Suite started
+
+id: `'suiteStarted'` - The suite has started. 
+ 
+callback params: `tests` - array of test names. Keep in mind these may not be the same as you entered, because some may not have existed or you could have skipped the names so that it found all tests in the directory. This is the list of tests (test contracts) that was actually found.
+
+##### Suite done
+ 
+id: `'suiteDone'` - The suite is done. 
+ 
+callback params: `stats` - collection of stats for all test contracts.
+ 
+##### Contracts started
+ 
+id: `'contractStarted'` - A new test contract is starting. 
+
+callback params: `error`, `testName` - the test name.
+ 
+##### Contracts done
+
+id: `'contractDone'` - A contract is done. 
+
+callback params: `error`
+
+##### Methods started
+
+id: `'methodsStarted'` - The test methods in the current contract are being run.
+
+callback params: `funcs` - A list of all the test functions that was discovered in the current contract, and will be run.
+
+##### Methods done
+
+id: `'methodsDone'` - The methods are done and the results (or errors) are in. 
+
+callback params: `error`, `stats` - the test results.
+
+**NOTE: The final stats object is still a WIP. It will contain a lot more useful information about each test.** 
+
+![sol_unit_diag.png](https://github.com/androlo/sol-unit/blob/master/resources/docs/sol_unit_diag.png "SolUnit structure")
+
+## Writing tests
+
+The easiest way to start writing unit-test contracts is to look at the examples in `contracts/src`.
+
+### Test contract format
 
 The constraints for a unit testing contract right now (0.1.x) are these:
 
-1. Test-contracts must use the same name as the test target but end with `Test`. If you want to test a contract named `Arrays`, name the test-contract `ArraysTest`. If you want to test a contract named `Coin`, name the test-contract `CoinTest`, and so on.
+- Test-contracts must use the same name as the test target but end with `Test`. If you want to test a contract named `Arrays`, name the test-contract `ArraysTest`. If you want to test a contract named `Coin`, name the test-contract `CoinTest`, and so on.
 
-2. Test function names must start with `test`, e.g. `function testAddTwoInts()`, and they must be public. There is no limit on the number of test-functions that can be in each test-contract.
+- Test function names must start with `test`, e.g. `function testAddTwoInts()`, and they must be public. There is no limit on the number of test-functions that can be in each test-contract.
 
-3. The test-contract needs a test event: `event TestEvent(address indexed fId, bool indexed result, uint indexed error, bytes32 message);`. It is used by the framework to validate that a test did indeed pass. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol` (comes with the library). Its assertion methods has a proper test event already set up which will fire automatically when an assertion is made. 
+- The test-contract needs a test event: `event TestEvent(address indexed fId, bool indexed result, uint indexed error, bytes32 message);`. It is used by the framework to validate that a test did indeed pass. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol` (comes with the library). Its assertion methods has a proper test event already set up which will fire automatically when an assertion is made. 
 
-NOTE: If none of the existing assertions fit then it is always possible to extend, or to simply calculate the result in the test-function then use `assertTrue` or `assertFalse`.
+NOTE: If none of the existing assertions fit then it is always possible to extend the Asserter.sol contract or to calculate the result in the test-function and use `assertTrue` or `assertFalse`.
 
-4. If you want to do coverage analysis, the target contract field must be named `testee`. See example below.
+- If you want to do coverage analysis, the target contract field must be named `testee`. See example below.
 
-5. Currently, only one assertion/test-event per test method is allowed, and only one `testee` per test contract.
+- Currently, only one assertion/test-event per test method is allowed, and only one `testee` per test contract.
 
 **Example of a simple storage value test with coverage enabled**
 
@@ -80,37 +162,41 @@ contract DemoTest is Asserter {
     uint constant TEST_VAL = 55;
 
     // We name this contract 'testee' so that we may do coverage analysis.
-    // 
     Demo testee = new Demo();
     
     // Test method starts with 'test' and will thus be recognized by solUnit (2).
     function testSetX(){
-        
         testee.setX(TEST_VAL);
+        // Public accessor for 'x'.
         var x = testee.x();
-        // Use assert method from Asserter contract (3). It will automatically fire of the test event.
-        assertUintsEqual(x, TEST_VAL, "Values not equal");
+        // Use assert method from Asserter contract (3). It will automatically fire the test event.
+        assertUintsEqual(x, TEST_VAL, "Values are not equal");
     }
     
 }
 ```
 
-Plenty more in the `contracts/src` folder. It's actually not that hard once solc and eris-db are properly set up. All test contracts looks pretty much the same - a target named 'testee' and a few methods that begin with 'test' with an assertion in it.
+There is plenty more in the `contracts/src` folder. It's actually not that hard once eris-db and a system for compiling Solidity is properly set up. All test contracts looks pretty much the same - a target named 'testee' and a few methods that begin with 'test' and has an assertion in it.
 
 ### Build constraints
 
-- The `.binary` and `.abi` files for the test contracts must be available in the working directory. Don't need to have the sources there.
+These are the rules for compiling.
+
+- The `.binary` and `.abi` files for the test contracts must be available in the working directory (it doesn't need the source files).
 
 - For coverage, the `.ast` file of the test contract, and `.abi` file of the "testee" must be in the working directory as well. 
 
-The easiest way to get it to work is to just compile everything with `--binary file --json-abi file --ast-json file` before running sunit in that folder. It will have all the needed files in there (and then some).
+The easiest way possible is to just compile everything with `--binary file --json-abi file --ast-json file`. That will give you all the needed files (and a number of non-needed ones as well).
 
-There's a contract build automation script in the gulpfile. It will be more advanced and more standardized with time (and actually use streams...). What it does is basically to copy app sources and external sources (includes) into a temp folder, compile it, move the built files into a build folder and clear the temp. The goal is to eventually have a sane solidity contract build task that can be chained with a unit testing task, so that all the contract stuff can be integrated with the rest of the code. 
+#### Tips on building solidity projects
 
+There's a contract build automation script in the gulpfile that uses my [gulp-smake](https://github.com/androlo/gulp-smake) tool to automate building. It will be more advanced and more standardized with time. What it does is it copies all the sources into a temporary folder, compiles them, moves the compiled files into a build folder and then finishes up by removing the temp. The reason it uses temp is because later it might want to pull in source files from other projects to use when building, and those should not be persisted in the base source folder. Also, their sources will be added to a folder inside the temporary root folder with the same name/id as the project, so if I pull in the s-unit assertions library, and its source folder only contains the file `Asserter.sol`, it would end up in the temporary source folder as `temp_sources/assertions/Asserter.sol`. This will make dependency management a lot easier.  
 
-## TestEvent and assertions
+The goal with all of this is to eventually have a good solidity contract build task that can be chained with a unit testing task so that all the building and testing of contracts can be integrated with the rest.
 
-`TestEvent` is what the framework listens too. It is set up to run test functions, track their names and signatures, then listen to `TestEvent` data from the contract in question. Not having a test event won't break the contract code, but the framework won't be able to tell whether or not the tests succeed. Right now it'll basically just run forever, but adding timeouts is a high priority TODO.
+### TestEvent and assertions
+
+`TestEvent` is what the framework listens too. It will run test functions and then listen to `TestEvent` data from the contract in question. Not having a test event won't break the contract code, but the framework won't be able to tell whether or not the tests succeed.
 
 `event TestEvent(address indexed fId, bool indexed result, uint indexed error, bytes32 message);`
 
@@ -163,20 +249,19 @@ The contracts folder comes with a couple of different examples.
 
 ## Tests
 
-Cut out most of the tests with the update, as they were ethereum-oriented. Will add new tests gradually. Basic coverage should be done before release.
+Cut out most of the tests with the update, as they were centered around Ethereum. Will add new tests gradually. Basic coverage should be done before release.
 
 ## Library structure
 
-The framework uses blockchain-client events to do the tests. It uses the afore-mentioned Solidity `TestEvent` to get confirmation from contract methods. To check when the test contracts are deployed it uses a hacky and un-reliable method, but that will be improved when eris-db/tendermint allows it. Basically it listens for new blocks being committed, and checks if there are new transactions in those blocks.
+The framework uses blockchain-client events to do the tests. It uses the afore-mentioned Solidity `TestEvent` to get confirmation from contract methods.
 
-The `SolUnit` class is where everything is coordinated. It deploys the test contracts and publish the results via events. It implements nodes EventEmitter. It also relays some events from dependencies like the `TestRunner` and `Analyzer` (coverage tool).
+The `SUnit` class is where everything is coordinated. It deploys the test contracts and publish the results via events. It implements nodes EventEmitter. It also relays some events from dependencies like the `TestRunner` and `Analyzer` (coverage tool).
 
-The `TestRunner` takes a test contract, finds all test methods in it and run those. It also sets up a listener for solidity events, and use those events to determine if tests succeed or fail, and when all the tests has finished. It is normally instantiated and managed by a `SolUnit` object.
+The `TestRunner` takes a test contract, finds all test methods in it and run those. It also sets up a listener for solidity events and usees those events to determine if a test was successful or not, and when all the tests has finished. It is normally instantiated and managed by a `SUnit` object.
 
-The `Analyzer` uses a test contract AST and its targets ABI to determine how many of the methods has been called. It does not look for hidden methods, or how they are called from the public ones, but that will be added later.
+The `Analyzer` uses a test contract AST and its targets ABI to determine how many of the methods has been called. It does not look for hidden methods, or how they are called from the public ones, but that might be added later.
 
-In the diagram, the executable would gather tests and set things up, then `SolUnit` would deal with the contract execution section. It defers method execution to the `TestRunner`. The `Analyzer` is not part of this diagram. It is optional, and would run as part of the reporting events to provide additional data. It does not affect the general execution cycle.
+In the state machine diagram, the executable would gather tests and set things up, then `SUnit` would deal with the contract execution section. The `Analyzer` is not part of this diagram because it has no effect on the general program structure (it's just a synchronous post-processing step).
 
-Presentation of test data is not part of the diagram either. `SolUnit` does no presentation of its own - it only passes the needed data in the events. The way it works with the command-line tool is it listens to all the events and prints them using a special (winston) logger.
+Presentation of test data is not part of the diagram either. `SUnit` does no presentation of its own - it only passes the data back through the events. The way reporting works with the command-line tool is it listens to all the SUnit events and prints the reported data using a special test-logger.
 
-![sol_unit_diag.png](https://github.com/androlo/sol-unit/blob/master/resources/docs/sol_unit_diag.png "SolUnit structure")

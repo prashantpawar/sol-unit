@@ -1,65 +1,44 @@
+/*
+ *    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *   |                      _   _         _  _                   |
+ *   |                     | | | |       (_)| |                  |
+ *   |                 ___ | | | | _ __   _ | |_                 |
+ *   |                / __|| | | || '_ \ | || __|                |
+ *   |                \__ \| |_| || | | || || |_                 |
+ *   |                |___/ \___/ |_| |_||_| \__|                |
+ *   |                                                           |
+ *   |                    By: Andreas Olofsson                   |
+ *   |            e-mail: andreas@erisindustries.com             |
+ *   |                                                           |
+ *   *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+ *
+ *
+ *
+ * Some of the tasks uses sub-tasks that are defined in other files.
+ * Those files can all be found inside the 'gulp-tasks' directory.
+ *
+ */
+
 var gulp = require('gulp');
-var gDebug = require('gulp-debug');
-var gUtil = require('gulp-util');
-var path = require('path');
-var del = require('del');
-var fs = require('fs-extra');
-var gsm = require('gulp-smake');
-var os = require('os');
+var replace = require('gulp-replace');
 
-var options = require('./contracts.json');
-var exports = {};
+require('require-dir')('./gulp-tasks');
 
-var buildDir = path.join(options.root, options.buildDir);
-var docsDir = path.join(options.root, options.docsDir);
+var version = require('./lib/version.json');
 
-// Just some debugging info. Enable if the SOL_UNIT_BUILD_DEBUG envar is set.
-var debugMode = true; // process.env.SOL_UNIT_BUILD_DEBUG;
-var dbg;
-if(debugMode){
-    dbg = gDebug;
-} else {
-    dbg = gUtil.noop;
-}
+// ********************** version **********************
 
-// TODO start separating tasks into different files.
+gulp.task('version-bump', function(){
+    gulp.src(['./package.json'])
+        .pipe(replace(/"version":\s*"\d+(\.\d+){2}"/, '"version": "'+ version.version + '"'))
+        .pipe(gulp.dest('./'));
+    gulp.src(['./bin/sunit.js'])
+        .pipe(replace(/CURRENT_VERSION\s*=\s*"\d+(\.\d+){2}"/, "CURRENT_VERSION = '" + version.version + "'"))
+        .pipe(gulp.dest('./bin/'));
 
-// Removes the build folder.
-gulp.task('contracts-clean', function(cb) {
-    del([buildDir, docsDir], cb);
 });
 
-// Used to set up the project for building.
-gulp.task('contracts-init-build', function (cb) {
-    del([buildDir, docsDir], cb);
-});
-
-// Writes the complete source tree to a temp folder. This is also where external source dependencies
-// would be fetched and set up if needed.
-gulp.task('contracts-pre-build', ['contracts-init-build'], function(){
-    // Create an empty folder in temp to use as temporary root when building.
-    var temp = path.join(os.tmpdir(), "sol-unit");
-    fs.emptyDirSync(temp);
-    // Modify the source folder in the object, so that it uses the new temp folder.
-    exports.base = temp;
-    // Create the path to the root source folder.
-    var base = path.join(options.root, options.sourceDir);
-    return gulp.src(options.paths, {base: base})
-        .pipe(dbg())
-        .pipe(gulp.dest(temp));
-});
-
-// Compiles the contracts. This is also where external code dependencies would be set up and built if needed.
-gulp.task('contracts-build', ['contracts-pre-build'], function () {
-        return gulp.src(exports.base + '/**/*')
-            .pipe(dbg())
-            .pipe(gsm.build(options, exports));
-});
-
-// Any cleanup of the build directory is put here.
-gulp.task('contracts-post-build', ['contracts-build'], function(cb){
-    del([path.join(buildDir,'Asserter.*'), path.join(docsDir,'Asserter.*')], cb);
-});
+// ********************** contracts **********************
 
 // Build the contracts project.
 gulp.task('build-contracts', ['contracts-post-build']);

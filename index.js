@@ -6,4 +6,4 @@
  */
 'use strict';
 
-module.exports = require('./lib/sol_unit');
+module.exports = require('./lib/s_unit');
