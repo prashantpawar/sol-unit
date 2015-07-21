@@ -1,7 +1,11 @@
 var logger = require('../lib/logger');
 var testLog = logger.testLogger();
 
-exports.presentSuiteStarted = function (tests) {
+exports.presentSuiteStarted = function (error, tests) {
+    if(error){
+        console.log("Eris-db error, aborting: " + error.message);
+        return;
+    }
     testLog.info("Running tests for: ", tests.length === 1 ? tests[0] : tests);
 };
 

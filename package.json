@@ -1,6 +1,6 @@
 {
   "name": "s-unit",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "namespace": "eris",
   "description": "Unit testing framework for Solidity contracts for eris-db.",
   "main": "./index.js",

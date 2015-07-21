@@ -125,13 +125,15 @@ function main() {
     sUnit.on('methodsDone', methodsDone);
     sUnit.on('contractDone', contractDone);
     sUnit.on('suiteDone', suiteDone);
-
     sUnit.start(tests, baseDir, url, doCoverage);
 
 }
 
-function suiteStarted(tests) {
-    presenter.presentSuiteStarted(tests);
+function suiteStarted(error, tests) {
+    presenter.presentSuiteStarted(error, tests);
+    if(error){
+        process.exit(-4);
+    }
 }
 
 function contractStarted(error, name) {

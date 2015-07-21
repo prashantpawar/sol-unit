@@ -86,7 +86,7 @@ sUnit.start(tests, baseDir, erisdbURL, doCoverage);
 
 id: `'suiteStarted'` - The suite has started. 
  
-callback params: `tests` - array of test names. Keep in mind these may not be the same as you entered, because some may not have existed or you could have skipped the names so that it found all tests in the directory. This is the list of tests (test contracts) that was actually found.
+callback params: `error`, `tests` - array of test names. Keep in mind these may not be the same as you entered, because some may not have existed or you could have skipped the names so that it found all tests in the directory. This is the list of tests (test contracts) that was actually found.
 
 ##### Suite done
  
