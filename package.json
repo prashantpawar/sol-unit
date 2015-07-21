@@ -18,7 +18,7 @@
     "commander": "^2.8.1",
     "deep-equal": "^1.0.0",
     "eris-contracts": "^0.10.3",
-    "eris-db": "^0.10.12",
+    "eris-db": "^0.11.0",
     "fs-extra": "^0.20.1",
     "fuzzy": "^0.1.0",
     "web3": "^0.7.1",

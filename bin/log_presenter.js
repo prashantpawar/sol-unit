@@ -79,12 +79,12 @@ function presentCoverage(coverage) {
         covered += coverage[i].covered ? 1 : 0;
     }
     // Percentage.
-    var p = (covered / coverage.length) * 100;
+    var p = (covered / coverage.length)*100;
 
     testLog.info("Coverage report:");
     if (p < 55) {
         testLog.fail("Coverage: %d %", p.toFixed(2));
-    } else if (coverage.percent < 90) {
+    } else if (p < 90) {
         testLog.moderate("Coverage: %d %", p.toFixed(2));
     } else {
         testLog.success("Coverage: %d %", p.toFixed(2));

@@ -355,9 +355,14 @@ var mockEventSigError = {
     }
 };
 
+var MockSub = function(){
+  this.stop = function(){}
+};
+
 var MockContract = function () {
 
-    this.TestEvent = function (callback) {
+    this.TestEvent = function (startCallback, callback) {
+        startCallback(null, new MockSub);
         callback(null, mockEvent);
     };
 
@@ -397,7 +402,8 @@ var MockContractNoTestFuncsError = function () {
 
 var MockContractSigError = function () {
 
-    this.TestEvent = function (callback) {
+    this.TestEvent = function (startCallback, callback) {
+        startCallback(null, new MockSub);
         callback(null, mockEventSigError);
     };
 
@@ -412,9 +418,12 @@ var MockContractSigError = function () {
 };
 
 var MockContractSolidityError = function () {
-    this.TestEvent = function (callback) {
+
+    this.TestEvent = function (startCallback, callback) {
+        startCallback(null, new MockSub);
         callback(new Error('Mock error'));
     };
+
     this.testMock = function () {
     };
 
@@ -426,7 +435,8 @@ var MockContractSolidityError = function () {
 
 var MockMegaContract = function () {
     var calls = 0;
-    this.TestEvent = function (callback) {
+    this.TestEvent = function (startCallback, callback) {
+        startCallback(null, new MockSub);
         for (var i = 0; i < 15; i++) {
             callback(null, mockMegaEvents[i]);
         }
