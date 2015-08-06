@@ -7,7 +7,7 @@ contract Asserter {
     /// @param result Whether or not the assertion holds. The result is always a boolean.
     /// @param error Errors can be reported here. 0 means normal execution.
     /// @param message A message to write if the assertion fails. NOTE: must be <= 32 chars.
-    event TestEvent(address indexed fId, bool indexed result, uint indexed error, bytes32 message);
+    event TestEvent(address indexed fId, bool indexed result, uint error, bytes32 indexed message);
 
     /// @dev used internally to trigger the event.
     function report(bool result, bytes32 message) internal constant {

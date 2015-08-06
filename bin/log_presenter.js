@@ -43,13 +43,19 @@ exports.presentMethodsDone = function (error, contractName, stats) {
             results.successful++;
             testLog.success(ti + "PASSED");
         } else {
-            if (testResult.error) {
-                testLog.fail(ti + "FAILED: " + testResult.error);
+            if (testResult.errors.length > 0) {
+                testLog.fail(ti + "FAILED:");
+                for(var j = 0; j < testResult.errors.length; j++){
+                    testLog.fail("Error: " + (testResult.errors[i] || "(no message)"));
+                }
             } else {
-                testLog.fail(ti + "FAILED: " + testResult.message || "(no message)");
+                testLog.fail(ti + "FAILED:");
+                for(var j = 0; j < testResult.messages.length; j++){
+                    testLog.fail("Error: " + (testResult.messages[j] || "(no message)"));
+                }
             }
         }
-        r = r && testResult;
+        r = r && testResult.result;
     }
     if (r) {
         testLog.success("*** All tests PASSED ***\n")
