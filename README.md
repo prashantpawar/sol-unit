@@ -141,11 +141,11 @@ The easiest way to start writing unit-testing contracts is to look at the exampl
 
 The rules for a unit testing contract right now (0.2.x) are these:
 
-- Test-contracts must use the same name as the test target but end with `Test`. If you want to test a contract named `Arrays`, name the test-contract `ArraysTest`. If you want to test a contract named `Coin`, name the test-contract `CoinTest`, and so on.
+1. Test-contracts must use the same name as the test target but end with `Test`. If you want to test a contract named `Arrays`, name the test-contract `ArraysTest`. If you want to test a contract named `Coin`, name the test-contract `CoinTest`, and so on.
 
-- Test function names must start with `test`, e.g. `function testAddTwoInts()`, and they must be public. There is no limit on the number of test-functions that can be in each test-contract.
+2. Test function names must start with `test`, e.g. `function testAddTwoInts()`, and they must be public. There is no limit on the number of test-functions that can be in each test-contract.
 
-- The test-contract may use a test event: `event TestEvent(address indexed fId, bool indexed result, uint error, bytes32 indexed message);`. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol` (comes with the library). Its assertion methods has a proper test event already set up which will fire automatically when an assertion is made. There is no limit on the number of assertions in a test method.
+3. The test-contract may use a test event: `event TestEvent(address indexed fId, bool indexed result, uint error, bytes32 indexed message);`. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol` (comes with the library). Its assertion methods has a proper test event already set up which will fire automatically when an assertion is made. There is no limit on the number of assertions in a test method.
 
 NOTE: If none of the existing assertions would fit, then it is always possible to extend the Asserter.sol contract or to calculate the result in the test-function and use `assertTrue` or `assertFalse`.
 
