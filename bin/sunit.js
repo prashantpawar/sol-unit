@@ -12,10 +12,9 @@ var logger = require('../lib/logger');
 var SolUnit = require('../lib/s_unit');
 var presenter = require('./log_presenter');
 
-var log = logger.globalLogger();
-var pj = require('../package.json');
+var log;
 
-var CURRENT_VERSION = '0.1.8';
+var CURRENT_VERSION = '0.2.0';
 
 // Run
 main();
@@ -30,14 +29,16 @@ function main() {
         .version(CURRENT_VERSION)
         .usage('[options] <test ...>')
         .option("-c, --coverage", "Calculate coverage. [default=false]")
-        .option("-m, --debug", "Print debugging info. [default=false]")
+        .option("-m, --debugMessages", "Print debugging information. [default=false]")
         .option("-r, --url <url>", "Url to blockchain client. [default='http://localhost:1337/rpc']", "http://localhost:1337/rpc")
         .option("-d, --dir <dir>", "Directory in which to do the tests. [default=current directory]", process.cwd())
         .parse(process.argv);
 
-    if (!!program["debug"]) {
+    if(program.debugMessages) {
         logger.setConsoleLevel('debug');
     }
+
+    log = logger.globalLogger();
 
     var baseDir = program.dir;
 

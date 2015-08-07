@@ -1,0 +1,2196 @@
+
+{
+	"children" : 
+	[
+		
+		{
+			"attributes" : 
+			{
+				"file" : "assertions/Asserter.sol"
+			},
+			"name" : "Import"
+		},
+		
+		{
+			"attributes" : 
+			{
+				"name" : "Structs"
+			},
+			"children" : 
+			[
+				
+				{
+					"attributes" : 
+					{
+						"name" : "S"
+					},
+					"children" : 
+					[
+						
+						{
+							"attributes" : 
+							{
+								"name" : "x"
+							},
+							"children" : 
+							[
+								
+								{
+									"attributes" : 
+									{
+										"name" : "uint"
+									},
+									"name" : "ElementaryTypeName"
+								},
+								
+								{
+									"attributes" : 
+									{
+										"name" : "y"
+									},
+									"children" : 
+									[
+										
+										{
+											"attributes" : 
+											{
+												"name" : "uint"
+											},
+											"name" : "ElementaryTypeName"
+										},
+										
+										{
+											"attributes" : 
+											{
+												"name" : "t"
+											},
+											"children" : 
+											[
+												
+												{
+													"attributes" : 
+													{
+														"name" : "T"
+													},
+													"name" : "UserDefinedTypeName"
+												}
+											],
+											"name" : "VariableDeclaration"
+										},
+										
+										{
+											"attributes" : 
+											{
+												"name" : "T"
+											},
+											"children" : 
+											[
+												
+												{
+													"attributes" : 
+													{
+														"name" : "a"
+													},
+													"children" : 
+													[
+														
+														{
+															"attributes" : 
+															{
+																"name" : "uint"
+															},
+															"name" : "ElementaryTypeName"
+														},
+														
+														{
+															"attributes" : 
+															{
+																"name" : "b"
+															},
+															"children" : 
+															[
+																
+																{
+																	"attributes" : 
+																	{
+																		"name" : "uint"
+																	},
+																	"name" : "ElementaryTypeName"
+																}
+															],
+															"name" : "VariableDeclaration"
+														},
+														
+														{
+															"attributes" : 
+															{
+																"name" : "strct"
+															},
+															"children" : 
+															[
+																
+																{
+																	"attributes" : 
+																	{
+																		"name" : "S"
+																	},
+																	"name" : "UserDefinedTypeName"
+																},
+																
+																{
+																	"attributes" : 
+																	{
+																		"const" : false,
+																		"name" : "Structs",
+																		"public" : true
+																	},
+																	"children" : 
+																	[
+																		
+																		{
+																			"children" : 
+																			[
+																				
+																				{
+																					"attributes" : 
+																					{
+																						"name" : "a"
+																					},
+																					"children" : 
+																					[
+																						
+																						{
+																							"attributes" : 
+																							{
+																								"name" : "uint"
+																							},
+																							"name" : "ElementaryTypeName"
+																						},
+																						
+																						{
+																							"attributes" : 
+																							{
+																								"name" : "b"
+																							},
+																							"children" : 
+																							[
+																								
+																								{
+																									"attributes" : 
+																									{
+																										"name" : "uint"
+																									},
+																									"name" : "ElementaryTypeName"
+																								},
+																								
+																								{
+																									"attributes" : 
+																									{
+																										"name" : "x"
+																									},
+																									"children" : 
+																									[
+																										
+																										{
+																											"attributes" : 
+																											{
+																												"name" : "uint"
+																											},
+																											"name" : "ElementaryTypeName"
+																										},
+																										
+																										{
+																											"attributes" : 
+																											{
+																												"name" : "y"
+																											},
+																											"children" : 
+																											[
+																												
+																												{
+																													"attributes" : 
+																													{
+																														"name" : "uint"
+																													},
+																													"name" : "ElementaryTypeName"
+																												}
+																											],
+																											"name" : "VariableDeclaration"
+																										},
+																										
+																										{
+																											"children" : [],
+																											"name" : "ParameterList"
+																										},
+																										
+																										{
+																											"children" : 
+																											[
+																												
+																												{
+																													"children" : 
+																													[
+																														
+																														{
+																															"attributes" : 
+																															{
+																																"name" : "newStruct"
+																															},
+																															"children" : 
+																															[
+																																
+																																{
+																																	"attributes" : 
+																																	{
+																																		"type" : "struct S memory",
+																																		"type_conversion" : "0"
+																																	},
+																																	"children" : 
+																																	[
+																																		
+																																		{
+																																			"attributes" : 
+																																			{
+																																				"type" : "type(struct S storage pointer)",
+																																				"value" : "S"
+																																			},
+																																			"name" : "Identifier"
+																																		},
+																																		
+																																		{
+																																			"attributes" : 
+																																			{
+																																				"type" : "uint256",
+																																				"value" : "x"
+																																			},
+																																			"name" : "Identifier"
+																																		},
+																																		
+																																		{
+																																			"attributes" : 
+																																			{
+																																				"type" : "uint256",
+																																				"value" : "y"
+																																			},
+																																			"name" : "Identifier"
+																																		},
+																																		
+																																		{
+																																			"attributes" : 
+																																			{
+																																				"type" : "struct T memory",
+																																				"type_conversion" : "0"
+																																			},
+																																			"children" : 
+																																			[
+																																				
+																																				{
+																																					"attributes" : 
+																																					{
+																																						"type" : "type(struct T storage pointer)",
+																																						"value" : "T"
+																																					},
+																																					"name" : "Identifier"
+																																				},
+																																				
+																																				{
+																																					"attributes" : 
+																																					{
+																																						"type" : "uint256",
+																																						"value" : "a"
+																																					},
+																																					"name" : "Identifier"
+																																				},
+																																				
+																																				{
+																																					"attributes" : 
+																																					{
+																																						"type" : "uint256",
+																																						"value" : "b"
+																																					},
+																																					"name" : "Identifier"
+																																				}
+																																			],
+																																			"name" : "FunctionCall"
+																																		}
+																																	],
+																																	"name" : "FunctionCall"
+																																}
+																															],
+																															"name" : "VariableDeclaration"
+																														},
+																														
+																														{
+																															"children" : 
+																															[
+																																
+																																{
+																																	"attributes" : 
+																																	{
+																																		"operator" : "=",
+																																		"type" : "struct S storage ref"
+																																	},
+																																	"children" : 
+																																	[
+																																		
+																																		{
+																																			"attributes" : 
+																																			{
+																																				"type" : "struct S storage ref",
+																																				"value" : "strct"
+																																			},
+																																			"name" : "Identifier"
+																																		},
+																																		
+																																		{
+																																			"attributes" : 
+																																			{
+																																				"type" : "struct S memory",
+																																				"value" : "newStruct"
+																																			},
+																																			"name" : "Identifier"
+																																		}
+																																	],
+																																	"name" : "Assignment"
+																																}
+																															],
+																															"name" : "ExpressionStatement"
+																														}
+																													],
+																													"name" : "VariableDefinition"
+																												}
+																											],
+																											"name" : "Block"
+																										},
+																										
+																										{
+																											"attributes" : 
+																											{
+																												"const" : false,
+																												"name" : "setStructA",
+																												"public" : true
+																											},
+																											"children" : 
+																											[
+																												
+																												{
+																													"children" : 
+																													[
+																														
+																														{
+																															"attributes" : 
+																															{
+																																"name" : "a"
+																															},
+																															"children" : 
+																															[
+																																
+																																{
+																																	"attributes" : 
+																																	{
+																																		"name" : "uint"
+																																	},
+																																	"name" : "ElementaryTypeName"
+																																}
+																															],
+																															"name" : "VariableDeclaration"
+																														},
+																														
+																														{
+																															"children" : [],
+																															"name" : "ParameterList"
+																														},
+																														
+																														{
+																															"children" : 
+																															[
+																																
+																																{
+																																	"children" : 
+																																	[
+																																		
+																																		{
+																																			"attributes" : 
+																																			{
+																																				"operator" : "=",
+																																				"type" : "uint256"
+																																			},
+																																			"children" : 
+																																			[
+																																				
+																																				{
+																																					"attributes" : 
+																																					{
+																																						"member_name" : "a",
+																																						"type" : "uint256"
+																																					},
+																																					"children" : 
+																																					[
+																																						
+																																						{
+																																							"attributes" : 
+																																							{
+																																								"member_name" : "t",
+																																								"type" : "struct T storage ref"
+																																							},
+																																							"children" : 
+																																							[
+																																								
+																																								{
+																																									"attributes" : 
+																																									{
+																																										"type" : "struct S storage ref",
+																																										"value" : "strct"
+																																									},
+																																									"name" : "Identifier"
+																																								}
+																																							],
+																																							"name" : "MemberAccess"
+																																						}
+																																					],
+																																					"name" : "MemberAccess"
+																																				},
+																																				
+																																				{
+																																					"attributes" : 
+																																					{
+																																						"type" : "uint256",
+																																						"value" : "a"
+																																					},
+																																					"name" : "Identifier"
+																																				}
+																																			],
+																																			"name" : "Assignment"
+																																		}
+																																	],
+																																	"name" : "ExpressionStatement"
+																																}
+																															],
+																															"name" : "Block"
+																														}
+																													],
+																													"name" : "ParameterList"
+																												},
+																												
+																												{
+																													"attributes" : 
+																													{
+																														"const" : true,
+																														"name" : "getStructA",
+																														"public" : true
+																													},
+																													"children" : 
+																													[
+																														
+																														{
+																															"children" : [],
+																															"name" : "ParameterList"
+																														},
+																														
+																														{
+																															"children" : 
+																															[
+																																
+																																{
+																																	"attributes" : 
+																																	{
+																																		"name" : "a"
+																																	},
+																																	"children" : 
+																																	[
+																																		
+																																		{
+																																			"attributes" : 
+																																			{
+																																				"name" : "uint"
+																																			},
+																																			"name" : "ElementaryTypeName"
+																																		}
+																																	],
+																																	"name" : "VariableDeclaration"
+																																},
+																																
+																																{
+																																	"children" : 
+																																	[
+																																		
+																																		{
+																																			"children" : 
+																																			[
+																																				
+																																				{
+																																					"attributes" : 
+																																					{
+																																						"member_name" : "a",
+																																						"type" : "uint256"
+																																					},
+																																					"children" : 
+																																					[
+																																						
+																																						{
+																																							"attributes" : 
+																																							{
+																																								"member_name" : "t",
+																																								"type" : "struct T storage ref"
+																																							},
+																																							"children" : 
+																																							[
+																																								
+																																								{
+																																									"attributes" : 
+																																									{
+																																										"type" : "struct S storage ref",
+																																										"value" : "strct"
+																																									},
+																																									"name" : "Identifier"
+																																								}
+																																							],
+																																							"name" : "MemberAccess"
+																																						}
+																																					],
+																																					"name" : "MemberAccess"
+																																				}
+																																			],
+																																			"name" : "Return"
+																																		}
+																																	],
+																																	"name" : "Block"
+																																}
+																															],
+																															"name" : "ParameterList"
+																														},
+																														
+																														{
+																															"attributes" : 
+																															{
+																																"const" : false,
+																																"name" : "setStructB",
+																																"public" : true
+																															},
+																															"children" : 
+																															[
+																																
+																																{
+																																	"children" : 
+																																	[
+																																		
+																																		{
+																																			"attributes" : 
+																																			{
+																																				"name" : "b"
+																																			},
+																																			"children" : 
+																																			[
+																																				
+																																				{
+																																					"attributes" : 
+																																					{
+																																						"name" : "uint"
+																																					},
+																																					"name" : "ElementaryTypeName"
+																																				}
+																																			],
+																																			"name" : "VariableDeclaration"
+																																		},
+																																		
+																																		{
+																																			"children" : [],
+																																			"name" : "ParameterList"
+																																		},
+																																		
+																																		{
+																																			"children" : 
+																																			[
+																																				
+																																				{
+																																					"children" : 
+																																					[
+																																						
+																																						{
+																																							"attributes" : 
+																																							{
+																																								"operator" : "=",
+																																								"type" : "uint256"
+																																							},
+																																							"children" : 
+																																							[
+																																								
+																																								{
+																																									"attributes" : 
+																																									{
+																																										"member_name" : "b",
+																																										"type" : "uint256"
+																																									},
+																																									"children" : 
+																																									[
+																																										
+																																										{
+																																											"attributes" : 
+																																											{
+																																												"member_name" : "t",
+																																												"type" : "struct T storage ref"
+																																											},
+																																											"children" : 
+																																											[
+																																												
+																																												{
+																																													"attributes" : 
+																																													{
+																																														"type" : "struct S storage ref",
+																																														"value" : "strct"
+																																													},
+																																													"name" : "Identifier"
+																																												}
+																																											],
+																																											"name" : "MemberAccess"
+																																										}
+																																									],
+																																									"name" : "MemberAccess"
+																																								},
+																																								
+																																								{
+																																									"attributes" : 
+																																									{
+																																										"type" : "uint256",
+																																										"value" : "b"
+																																									},
+																																									"name" : "Identifier"
+																																								}
+																																							],
+																																							"name" : "Assignment"
+																																						}
+																																					],
+																																					"name" : "ExpressionStatement"
+																																				}
+																																			],
+																																			"name" : "Block"
+																																		}
+																																	],
+																																	"name" : "ParameterList"
+																																},
+																																
+																																{
+																																	"attributes" : 
+																																	{
+																																		"const" : true,
+																																		"name" : "getStructB",
+																																		"public" : true
+																																	},
+																																	"children" : 
+																																	[
+																																		
+																																		{
+																																			"children" : [],
+																																			"name" : "ParameterList"
+																																		},
+																																		
+																																		{
+																																			"children" : 
+																																			[
+																																				
+																																				{
+																																					"attributes" : 
+																																					{
+																																						"name" : "b"
+																																					},
+																																					"children" : 
+																																					[
+																																						
+																																						{
+																																							"attributes" : 
+																																							{
+																																								"name" : "uint"
+																																							},
+																																							"name" : "ElementaryTypeName"
+																																						}
+																																					],
+																																					"name" : "VariableDeclaration"
+																																				},
+																																				
+																																				{
+																																					"children" : 
+																																					[
+																																						
+																																						{
+																																							"children" : 
+																																							[
+																																								
+																																								{
+																																									"attributes" : 
+																																									{
+																																										"member_name" : "b",
+																																										"type" : "uint256"
+																																									},
+																																									"children" : 
+																																									[
+																																										
+																																										{
+																																											"attributes" : 
+																																											{
+																																												"member_name" : "t",
+																																												"type" : "struct T storage ref"
+																																											},
+																																											"children" : 
+																																											[
+																																												
+																																												{
+																																													"attributes" : 
+																																													{
+																																														"type" : "struct S storage ref",
+																																														"value" : "strct"
+																																													},
+																																													"name" : "Identifier"
+																																												}
+																																											],
+																																											"name" : "MemberAccess"
+																																										}
+																																									],
+																																									"name" : "MemberAccess"
+																																								}
+																																							],
+																																							"name" : "Return"
+																																						}
+																																					],
+																																					"name" : "Block"
+																																				}
+																																			],
+																																			"name" : "ParameterList"
+																																		},
+																																		
+																																		{
+																																			"attributes" : 
+																																			{
+																																				"const" : false,
+																																				"name" : "setStructX",
+																																				"public" : true
+																																			},
+																																			"children" : 
+																																			[
+																																				
+																																				{
+																																					"children" : 
+																																					[
+																																						
+																																						{
+																																							"attributes" : 
+																																							{
+																																								"name" : "x"
+																																							},
+																																							"children" : 
+																																							[
+																																								
+																																								{
+																																									"attributes" : 
+																																									{
+																																										"name" : "uint"
+																																									},
+																																									"name" : "ElementaryTypeName"
+																																								}
+																																							],
+																																							"name" : "VariableDeclaration"
+																																						},
+																																						
+																																						{
+																																							"children" : [],
+																																							"name" : "ParameterList"
+																																						},
+																																						
+																																						{
+																																							"children" : 
+																																							[
+																																								
+																																								{
+																																									"children" : 
+																																									[
+																																										
+																																										{
+																																											"attributes" : 
+																																											{
+																																												"operator" : "=",
+																																												"type" : "uint256"
+																																											},
+																																											"children" : 
+																																											[
+																																												
+																																												{
+																																													"attributes" : 
+																																													{
+																																														"member_name" : "x",
+																																														"type" : "uint256"
+																																													},
+																																													"children" : 
+																																													[
+																																														
+																																														{
+																																															"attributes" : 
+																																															{
+																																																"type" : "struct S storage ref",
+																																																"value" : "strct"
+																																															},
+																																															"name" : "Identifier"
+																																														}
+																																													],
+																																													"name" : "MemberAccess"
+																																												},
+																																												
+																																												{
+																																													"attributes" : 
+																																													{
+																																														"type" : "uint256",
+																																														"value" : "x"
+																																													},
+																																													"name" : "Identifier"
+																																												}
+																																											],
+																																											"name" : "Assignment"
+																																										}
+																																									],
+																																									"name" : "ExpressionStatement"
+																																								}
+																																							],
+																																							"name" : "Block"
+																																						}
+																																					],
+																																					"name" : "ParameterList"
+																																				},
+																																				
+																																				{
+																																					"attributes" : 
+																																					{
+																																						"const" : true,
+																																						"name" : "getStructX",
+																																						"public" : true
+																																					},
+																																					"children" : 
+																																					[
+																																						
+																																						{
+																																							"children" : [],
+																																							"name" : "ParameterList"
+																																						},
+																																						
+																																						{
+																																							"children" : 
+																																							[
+																																								
+																																								{
+																																									"attributes" : 
+																																									{
+																																										"name" : "x"
+																																									},
+																																									"children" : 
+																																									[
+																																										
+																																										{
+																																											"attributes" : 
+																																											{
+																																												"name" : "uint"
+																																											},
+																																											"name" : "ElementaryTypeName"
+																																										}
+																																									],
+																																									"name" : "VariableDeclaration"
+																																								},
+																																								
+																																								{
+																																									"children" : 
+																																									[
+																																										
+																																										{
+																																											"children" : 
+																																											[
+																																												
+																																												{
+																																													"attributes" : 
+																																													{
+																																														"member_name" : "x",
+																																														"type" : "uint256"
+																																													},
+																																													"children" : 
+																																													[
+																																														
+																																														{
+																																															"attributes" : 
+																																															{
+																																																"type" : "struct S storage ref",
+																																																"value" : "strct"
+																																															},
+																																															"name" : "Identifier"
+																																														}
+																																													],
+																																													"name" : "MemberAccess"
+																																												}
+																																											],
+																																											"name" : "Return"
+																																										}
+																																									],
+																																									"name" : "Block"
+																																								}
+																																							],
+																																							"name" : "ParameterList"
+																																						},
+																																						
+																																						{
+																																							"attributes" : 
+																																							{
+																																								"const" : false,
+																																								"name" : "setStructY",
+																																								"public" : true
+																																							},
+																																							"children" : 
+																																							[
+																																								
+																																								{
+																																									"children" : 
+																																									[
+																																										
+																																										{
+																																											"attributes" : 
+																																											{
+																																												"name" : "y"
+																																											},
+																																											"children" : 
+																																											[
+																																												
+																																												{
+																																													"attributes" : 
+																																													{
+																																														"name" : "uint"
+																																													},
+																																													"name" : "ElementaryTypeName"
+																																												}
+																																											],
+																																											"name" : "VariableDeclaration"
+																																										},
+																																										
+																																										{
+																																											"children" : [],
+																																											"name" : "ParameterList"
+																																										},
+																																										
+																																										{
+																																											"children" : 
+																																											[
+																																												
+																																												{
+																																													"children" : 
+																																													[
+																																														
+																																														{
+																																															"attributes" : 
+																																															{
+																																																"operator" : "=",
+																																																"type" : "uint256"
+																																															},
+																																															"children" : 
+																																															[
+																																																
+																																																{
+																																																	"attributes" : 
+																																																	{
+																																																		"member_name" : "y",
+																																																		"type" : "uint256"
+																																																	},
+																																																	"children" : 
+																																																	[
+																																																		
+																																																		{
+																																																			"attributes" : 
+																																																			{
+																																																				"type" : "struct S storage ref",
+																																																				"value" : "strct"
+																																																			},
+																																																			"name" : "Identifier"
+																																																		}
+																																																	],
+																																																	"name" : "MemberAccess"
+																																																},
+																																																
+																																																{
+																																																	"attributes" : 
+																																																	{
+																																																		"type" : "uint256",
+																																																		"value" : "y"
+																																																	},
+																																																	"name" : "Identifier"
+																																																}
+																																															],
+																																															"name" : "Assignment"
+																																														}
+																																													],
+																																													"name" : "ExpressionStatement"
+																																												}
+																																											],
+																																											"name" : "Block"
+																																										}
+																																									],
+																																									"name" : "ParameterList"
+																																								},
+																																								
+																																								{
+																																									"attributes" : 
+																																									{
+																																										"const" : true,
+																																										"name" : "getStructY",
+																																										"public" : true
+																																									},
+																																									"children" : 
+																																									[
+																																										
+																																										{
+																																											"children" : [],
+																																											"name" : "ParameterList"
+																																										},
+																																										
+																																										{
+																																											"children" : 
+																																											[
+																																												
+																																												{
+																																													"attributes" : 
+																																													{
+																																														"name" : "y"
+																																													},
+																																													"children" : 
+																																													[
+																																														
+																																														{
+																																															"attributes" : 
+																																															{
+																																																"name" : "uint"
+																																															},
+																																															"name" : "ElementaryTypeName"
+																																														}
+																																													],
+																																													"name" : "VariableDeclaration"
+																																												},
+																																												
+																																												{
+																																													"children" : 
+																																													[
+																																														
+																																														{
+																																															"children" : 
+																																															[
+																																																
+																																																{
+																																																	"attributes" : 
+																																																	{
+																																																		"member_name" : "y",
+																																																		"type" : "uint256"
+																																																	},
+																																																	"children" : 
+																																																	[
+																																																		
+																																																		{
+																																																			"attributes" : 
+																																																			{
+																																																				"type" : "struct S storage ref",
+																																																				"value" : "strct"
+																																																			},
+																																																			"name" : "Identifier"
+																																																		}
+																																																	],
+																																																	"name" : "MemberAccess"
+																																																}
+																																															],
+																																															"name" : "Return"
+																																														}
+																																													],
+																																													"name" : "Block"
+																																												}
+																																											],
+																																											"name" : "ParameterList"
+																																										}
+																																									],
+																																									"name" : "Function"
+																																								},
+																																								
+																																								{
+																																									"attributes" : 
+																																									{
+																																										"name" : "StructsTest"
+																																									},
+																																									"children" : 
+																																									[
+																																										
+																																										{
+																																											"attributes" : 
+																																											{
+																																												"type" : "type(contract Asserter)",
+																																												"value" : "Asserter"
+																																											},
+																																											"name" : "Identifier"
+																																										},
+																																										
+																																										{
+																																											"attributes" : 
+																																											{
+																																												"name" : "A"
+																																											},
+																																											"children" : 
+																																											[
+																																												
+																																												{
+																																													"attributes" : 
+																																													{
+																																														"name" : "uint"
+																																													},
+																																													"name" : "ElementaryTypeName"
+																																												},
+																																												
+																																												{
+																																													"attributes" : 
+																																													{
+																																														"string" : "null",
+																																														"type" : "int_const 1",
+																																														"value" : "1"
+																																													},
+																																													"name" : "Literal"
+																																												},
+																																												
+																																												{
+																																													"attributes" : 
+																																													{
+																																														"name" : "B"
+																																													},
+																																													"children" : 
+																																													[
+																																														
+																																														{
+																																															"attributes" : 
+																																															{
+																																																"name" : "uint"
+																																															},
+																																															"name" : "ElementaryTypeName"
+																																														},
+																																														
+																																														{
+																																															"attributes" : 
+																																															{
+																																																"string" : "null",
+																																																"type" : "int_const 2",
+																																																"value" : "2"
+																																															},
+																																															"name" : "Literal"
+																																														},
+																																														
+																																														{
+																																															"attributes" : 
+																																															{
+																																																"name" : "X"
+																																															},
+																																															"children" : 
+																																															[
+																																																
+																																																{
+																																																	"attributes" : 
+																																																	{
+																																																		"name" : "uint"
+																																																	},
+																																																	"name" : "ElementaryTypeName"
+																																																},
+																																																
+																																																{
+																																																	"attributes" : 
+																																																	{
+																																																		"string" : "null",
+																																																		"type" : "int_const 3",
+																																																		"value" : "3"
+																																																	},
+																																																	"name" : "Literal"
+																																																},
+																																																
+																																																{
+																																																	"attributes" : 
+																																																	{
+																																																		"name" : "Y"
+																																																	},
+																																																	"children" : 
+																																																	[
+																																																		
+																																																		{
+																																																			"attributes" : 
+																																																			{
+																																																				"name" : "uint"
+																																																			},
+																																																			"name" : "ElementaryTypeName"
+																																																		},
+																																																		
+																																																		{
+																																																			"attributes" : 
+																																																			{
+																																																				"string" : "null",
+																																																				"type" : "int_const 4",
+																																																				"value" : "4"
+																																																			},
+																																																			"name" : "Literal"
+																																																		},
+																																																		
+																																																		{
+																																																			"attributes" : 
+																																																			{
+																																																				"name" : "testee"
+																																																			},
+																																																			"children" : 
+																																																			[
+																																																				
+																																																				{
+																																																					"attributes" : 
+																																																					{
+																																																						"name" : "Structs"
+																																																					},
+																																																					"name" : "UserDefinedTypeName"
+																																																				},
+																																																				
+																																																				{
+																																																					"attributes" : 
+																																																					{
+																																																						"const" : false,
+																																																						"name" : "StructsTest",
+																																																						"public" : true
+																																																					},
+																																																					"children" : 
+																																																					[
+																																																						
+																																																						{
+																																																							"children" : [],
+																																																							"name" : "ParameterList"
+																																																						},
+																																																						
+																																																						{
+																																																							"children" : [],
+																																																							"name" : "ParameterList"
+																																																						},
+																																																						
+																																																						{
+																																																							"children" : 
+																																																							[
+																																																								
+																																																								{
+																																																									"children" : 
+																																																									[
+																																																										
+																																																										{
+																																																											"attributes" : 
+																																																											{
+																																																												"operator" : "=",
+																																																												"type" : "contract Structs"
+																																																											},
+																																																											"children" : 
+																																																											[
+																																																												
+																																																												{
+																																																													"attributes" : 
+																																																													{
+																																																														"type" : "contract Structs",
+																																																														"value" : "testee"
+																																																													},
+																																																													"name" : "Identifier"
+																																																												},
+																																																												
+																																																												{
+																																																													"attributes" : 
+																																																													{
+																																																														"type" : "contract Structs",
+																																																														"type_conversion" : "0"
+																																																													},
+																																																													"children" : 
+																																																													[
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"type" : "function (uint256,uint256,uint256,uint256) returns (contract Structs)"
+																																																															},
+																																																															"children" : 
+																																																															[
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"type" : "type(contract Structs)",
+																																																																		"value" : "Structs"
+																																																																	},
+																																																																	"name" : "Identifier"
+																																																																}
+																																																															],
+																																																															"name" : "NewExpression"
+																																																														},
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"string" : "null",
+																																																																"type" : "int_const 0",
+																																																																"value" : "0"
+																																																															},
+																																																															"name" : "Literal"
+																																																														},
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"string" : "null",
+																																																																"type" : "int_const 0",
+																																																																"value" : "0"
+																																																															},
+																																																															"name" : "Literal"
+																																																														},
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"string" : "null",
+																																																																"type" : "int_const 0",
+																																																																"value" : "0"
+																																																															},
+																																																															"name" : "Literal"
+																																																														},
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"string" : "null",
+																																																																"type" : "int_const 0",
+																																																																"value" : "0"
+																																																															},
+																																																															"name" : "Literal"
+																																																														}
+																																																													],
+																																																													"name" : "FunctionCall"
+																																																												}
+																																																											],
+																																																											"name" : "Assignment"
+																																																										}
+																																																									],
+																																																									"name" : "ExpressionStatement"
+																																																								}
+																																																							],
+																																																							"name" : "Block"
+																																																						}
+																																																					],
+																																																					"name" : "Function"
+																																																				},
+																																																				
+																																																				{
+																																																					"attributes" : 
+																																																					{
+																																																						"const" : false,
+																																																						"name" : "testSetStructA",
+																																																						"public" : true
+																																																					},
+																																																					"children" : 
+																																																					[
+																																																						
+																																																						{
+																																																							"children" : [],
+																																																							"name" : "ParameterList"
+																																																						},
+																																																						
+																																																						{
+																																																							"children" : [],
+																																																							"name" : "ParameterList"
+																																																						},
+																																																						
+																																																						{
+																																																							"children" : 
+																																																							[
+																																																								
+																																																								{
+																																																									"children" : 
+																																																									[
+																																																										
+																																																										{
+																																																											"attributes" : 
+																																																											{
+																																																												"type" : "void",
+																																																												"type_conversion" : "0"
+																																																											},
+																																																											"children" : 
+																																																											[
+																																																												
+																																																												{
+																																																													"attributes" : 
+																																																													{
+																																																														"member_name" : "setStructA",
+																																																														"type" : "function (uint256) returns ()"
+																																																													},
+																																																													"children" : 
+																																																													[
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"type" : "contract Structs",
+																																																																"value" : "testee"
+																																																															},
+																																																															"name" : "Identifier"
+																																																														}
+																																																													],
+																																																													"name" : "MemberAccess"
+																																																												},
+																																																												
+																																																												{
+																																																													"attributes" : 
+																																																													{
+																																																														"type" : "uint256",
+																																																														"value" : "A"
+																																																													},
+																																																													"name" : "Identifier"
+																																																												}
+																																																											],
+																																																											"name" : "FunctionCall"
+																																																										}
+																																																									],
+																																																									"name" : "ExpressionStatement"
+																																																								},
+																																																								
+																																																								{
+																																																									"children" : 
+																																																									[
+																																																										
+																																																										{
+																																																											"attributes" : 
+																																																											{
+																																																												"name" : "a"
+																																																											},
+																																																											"children" : 
+																																																											[
+																																																												
+																																																												{
+																																																													"attributes" : 
+																																																													{
+																																																														"type" : "uint256",
+																																																														"type_conversion" : "0"
+																																																													},
+																																																													"children" : 
+																																																													[
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"member_name" : "getStructA",
+																																																																"type" : "function () returns (uint256)"
+																																																															},
+																																																															"children" : 
+																																																															[
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"type" : "contract Structs",
+																																																																		"value" : "testee"
+																																																																	},
+																																																																	"name" : "Identifier"
+																																																																}
+																																																															],
+																																																															"name" : "MemberAccess"
+																																																														}
+																																																													],
+																																																													"name" : "FunctionCall"
+																																																												}
+																																																											],
+																																																											"name" : "VariableDeclaration"
+																																																										},
+																																																										
+																																																										{
+																																																											"children" : 
+																																																											[
+																																																												
+																																																												{
+																																																													"attributes" : 
+																																																													{
+																																																														"type" : "bool",
+																																																														"type_conversion" : "0"
+																																																													},
+																																																													"children" : 
+																																																													[
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"type" : "function (uint256,uint256,bytes32) returns (bool)",
+																																																																"value" : "assertUintsEqual"
+																																																															},
+																																																															"name" : "Identifier"
+																																																														},
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"type" : "uint256",
+																																																																"value" : "a"
+																																																															},
+																																																															"name" : "Identifier"
+																																																														},
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"type" : "uint256",
+																																																																"value" : "A"
+																																																															},
+																																																															"name" : "Identifier"
+																																																														},
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"string" : "null",
+																																																																"type" : "literal_string \"Did not get correct 'a'.\"",
+																																																																"value" : "Did not get correct 'a'."
+																																																															},
+																																																															"name" : "Literal"
+																																																														}
+																																																													],
+																																																													"name" : "FunctionCall"
+																																																												}
+																																																											],
+																																																											"name" : "ExpressionStatement"
+																																																										}
+																																																									],
+																																																									"name" : "VariableDefinition"
+																																																								}
+																																																							],
+																																																							"name" : "Block"
+																																																						},
+																																																						
+																																																						{
+																																																							"attributes" : 
+																																																							{
+																																																								"const" : false,
+																																																								"name" : "testSetStructB",
+																																																								"public" : true
+																																																							},
+																																																							"children" : 
+																																																							[
+																																																								
+																																																								{
+																																																									"children" : [],
+																																																									"name" : "ParameterList"
+																																																								},
+																																																								
+																																																								{
+																																																									"children" : [],
+																																																									"name" : "ParameterList"
+																																																								},
+																																																								
+																																																								{
+																																																									"children" : 
+																																																									[
+																																																										
+																																																										{
+																																																											"children" : 
+																																																											[
+																																																												
+																																																												{
+																																																													"attributes" : 
+																																																													{
+																																																														"type" : "void",
+																																																														"type_conversion" : "0"
+																																																													},
+																																																													"children" : 
+																																																													[
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"member_name" : "setStructB",
+																																																																"type" : "function (uint256) returns ()"
+																																																															},
+																																																															"children" : 
+																																																															[
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"type" : "contract Structs",
+																																																																		"value" : "testee"
+																																																																	},
+																																																																	"name" : "Identifier"
+																																																																}
+																																																															],
+																																																															"name" : "MemberAccess"
+																																																														},
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"type" : "uint256",
+																																																																"value" : "B"
+																																																															},
+																																																															"name" : "Identifier"
+																																																														}
+																																																													],
+																																																													"name" : "FunctionCall"
+																																																												}
+																																																											],
+																																																											"name" : "ExpressionStatement"
+																																																										},
+																																																										
+																																																										{
+																																																											"children" : 
+																																																											[
+																																																												
+																																																												{
+																																																													"attributes" : 
+																																																													{
+																																																														"name" : "b"
+																																																													},
+																																																													"children" : 
+																																																													[
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"type" : "uint256",
+																																																																"type_conversion" : "0"
+																																																															},
+																																																															"children" : 
+																																																															[
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"member_name" : "getStructB",
+																																																																		"type" : "function () returns (uint256)"
+																																																																	},
+																																																																	"children" : 
+																																																																	[
+																																																																		
+																																																																		{
+																																																																			"attributes" : 
+																																																																			{
+																																																																				"type" : "contract Structs",
+																																																																				"value" : "testee"
+																																																																			},
+																																																																			"name" : "Identifier"
+																																																																		}
+																																																																	],
+																																																																	"name" : "MemberAccess"
+																																																																}
+																																																															],
+																																																															"name" : "FunctionCall"
+																																																														}
+																																																													],
+																																																													"name" : "VariableDeclaration"
+																																																												},
+																																																												
+																																																												{
+																																																													"children" : 
+																																																													[
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"type" : "bool",
+																																																																"type_conversion" : "0"
+																																																															},
+																																																															"children" : 
+																																																															[
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"type" : "function (uint256,uint256,bytes32) returns (bool)",
+																																																																		"value" : "assertUintsEqual"
+																																																																	},
+																																																																	"name" : "Identifier"
+																																																																},
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"type" : "uint256",
+																																																																		"value" : "b"
+																																																																	},
+																																																																	"name" : "Identifier"
+																																																																},
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"type" : "uint256",
+																																																																		"value" : "B"
+																																																																	},
+																																																																	"name" : "Identifier"
+																																																																},
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"string" : "null",
+																																																																		"type" : "literal_string \"Did not get correct 'b'.\"",
+																																																																		"value" : "Did not get correct 'b'."
+																																																																	},
+																																																																	"name" : "Literal"
+																																																																}
+																																																															],
+																																																															"name" : "FunctionCall"
+																																																														}
+																																																													],
+																																																													"name" : "ExpressionStatement"
+																																																												}
+																																																											],
+																																																											"name" : "VariableDefinition"
+																																																										}
+																																																									],
+																																																									"name" : "Block"
+																																																								},
+																																																								
+																																																								{
+																																																									"attributes" : 
+																																																									{
+																																																										"const" : false,
+																																																										"name" : "testSetStructX",
+																																																										"public" : true
+																																																									},
+																																																									"children" : 
+																																																									[
+																																																										
+																																																										{
+																																																											"children" : [],
+																																																											"name" : "ParameterList"
+																																																										},
+																																																										
+																																																										{
+																																																											"children" : [],
+																																																											"name" : "ParameterList"
+																																																										},
+																																																										
+																																																										{
+																																																											"children" : 
+																																																											[
+																																																												
+																																																												{
+																																																													"children" : 
+																																																													[
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"type" : "void",
+																																																																"type_conversion" : "0"
+																																																															},
+																																																															"children" : 
+																																																															[
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"member_name" : "setStructX",
+																																																																		"type" : "function (uint256) returns ()"
+																																																																	},
+																																																																	"children" : 
+																																																																	[
+																																																																		
+																																																																		{
+																																																																			"attributes" : 
+																																																																			{
+																																																																				"type" : "contract Structs",
+																																																																				"value" : "testee"
+																																																																			},
+																																																																			"name" : "Identifier"
+																																																																		}
+																																																																	],
+																																																																	"name" : "MemberAccess"
+																																																																},
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"type" : "uint256",
+																																																																		"value" : "X"
+																																																																	},
+																																																																	"name" : "Identifier"
+																																																																}
+																																																															],
+																																																															"name" : "FunctionCall"
+																																																														}
+																																																													],
+																																																													"name" : "ExpressionStatement"
+																																																												},
+																																																												
+																																																												{
+																																																													"children" : 
+																																																													[
+																																																														
+																																																														{
+																																																															"attributes" : 
+																																																															{
+																																																																"name" : "x"
+																																																															},
+																																																															"children" : 
+																																																															[
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"type" : "uint256",
+																																																																		"type_conversion" : "0"
+																																																																	},
+																																																																	"children" : 
+																																																																	[
+																																																																		
+																																																																		{
+																																																																			"attributes" : 
+																																																																			{
+																																																																				"member_name" : "getStructX",
+																																																																				"type" : "function () returns (uint256)"
+																																																																			},
+																																																																			"children" : 
+																																																																			[
+																																																																				
+																																																																				{
+																																																																					"attributes" : 
+																																																																					{
+																																																																						"type" : "contract Structs",
+																																																																						"value" : "testee"
+																																																																					},
+																																																																					"name" : "Identifier"
+																																																																				}
+																																																																			],
+																																																																			"name" : "MemberAccess"
+																																																																		}
+																																																																	],
+																																																																	"name" : "FunctionCall"
+																																																																}
+																																																															],
+																																																															"name" : "VariableDeclaration"
+																																																														},
+																																																														
+																																																														{
+																																																															"children" : 
+																																																															[
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"type" : "bool",
+																																																																		"type_conversion" : "0"
+																																																																	},
+																																																																	"children" : 
+																																																																	[
+																																																																		
+																																																																		{
+																																																																			"attributes" : 
+																																																																			{
+																																																																				"type" : "function (uint256,uint256,bytes32) returns (bool)",
+																																																																				"value" : "assertUintsEqual"
+																																																																			},
+																																																																			"name" : "Identifier"
+																																																																		},
+																																																																		
+																																																																		{
+																																																																			"attributes" : 
+																																																																			{
+																																																																				"type" : "uint256",
+																																																																				"value" : "x"
+																																																																			},
+																																																																			"name" : "Identifier"
+																																																																		},
+																																																																		
+																																																																		{
+																																																																			"attributes" : 
+																																																																			{
+																																																																				"type" : "uint256",
+																																																																				"value" : "X"
+																																																																			},
+																																																																			"name" : "Identifier"
+																																																																		},
+																																																																		
+																																																																		{
+																																																																			"attributes" : 
+																																																																			{
+																																																																				"string" : "null",
+																																																																				"type" : "literal_string \"Did not get correct 'x'.\"",
+																																																																				"value" : "Did not get correct 'x'."
+																																																																			},
+																																																																			"name" : "Literal"
+																																																																		}
+																																																																	],
+																																																																	"name" : "FunctionCall"
+																																																																}
+																																																															],
+																																																															"name" : "ExpressionStatement"
+																																																														}
+																																																													],
+																																																													"name" : "VariableDefinition"
+																																																												}
+																																																											],
+																																																											"name" : "Block"
+																																																										},
+																																																										
+																																																										{
+																																																											"attributes" : 
+																																																											{
+																																																												"const" : false,
+																																																												"name" : "testSetStructY",
+																																																												"public" : true
+																																																											},
+																																																											"children" : 
+																																																											[
+																																																												
+																																																												{
+																																																													"children" : [],
+																																																													"name" : "ParameterList"
+																																																												},
+																																																												
+																																																												{
+																																																													"children" : [],
+																																																													"name" : "ParameterList"
+																																																												},
+																																																												
+																																																												{
+																																																													"children" : 
+																																																													[
+																																																														
+																																																														{
+																																																															"children" : 
+																																																															[
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"type" : "void",
+																																																																		"type_conversion" : "0"
+																																																																	},
+																																																																	"children" : 
+																																																																	[
+																																																																		
+																																																																		{
+																																																																			"attributes" : 
+																																																																			{
+																																																																				"member_name" : "setStructY",
+																																																																				"type" : "function (uint256) returns ()"
+																																																																			},
+																																																																			"children" : 
+																																																																			[
+																																																																				
+																																																																				{
+																																																																					"attributes" : 
+																																																																					{
+																																																																						"type" : "contract Structs",
+																																																																						"value" : "testee"
+																																																																					},
+																																																																					"name" : "Identifier"
+																																																																				}
+																																																																			],
+																																																																			"name" : "MemberAccess"
+																																																																		},
+																																																																		
+																																																																		{
+																																																																			"attributes" : 
+																																																																			{
+																																																																				"type" : "uint256",
+																																																																				"value" : "Y"
+																																																																			},
+																																																																			"name" : "Identifier"
+																																																																		}
+																																																																	],
+																																																																	"name" : "FunctionCall"
+																																																																}
+																																																															],
+																																																															"name" : "ExpressionStatement"
+																																																														},
+																																																														
+																																																														{
+																																																															"children" : 
+																																																															[
+																																																																
+																																																																{
+																																																																	"attributes" : 
+																																																																	{
+																																																																		"name" : "y"
+																																																																	},
+																																																																	"children" : 
+																																																																	[
+																																																																		
+																																																																		{
+																																																																			"attributes" : 
+																																																																			{
+																																																																				"type" : "uint256",
+																																																																				"type_conversion" : "0"
+																																																																			},
+																																																																			"children" : 
+																																																																			[
+																																																																				
+																																																																				{
+																																																																					"attributes" : 
+																																																																					{
+																																																																						"member_name" : "getStructY",
+																																																																						"type" : "function () returns (uint256)"
+																																																																					},
+																																																																					"children" : 
+																																																																					[
+																																																																						
+																																																																						{
+																																																																							"attributes" : 
+																																																																							{
+																																																																								"type" : "contract Structs",
+																																																																								"value" : "testee"
+																																																																							},
+																																																																							"name" : "Identifier"
+																																																																						}
+																																																																					],
+																																																																					"name" : "MemberAccess"
+																																																																				}
+																																																																			],
+																																																																			"name" : "FunctionCall"
+																																																																		}
+																																																																	],
+																																																																	"name" : "VariableDeclaration"
+																																																																},
+																																																																
+																																																																{
+																																																																	"children" : 
+																																																																	[
+																																																																		
+																																																																		{
+																																																																			"attributes" : 
+																																																																			{
+																																																																				"type" : "bool",
+																																																																				"type_conversion" : "0"
+																																																																			},
+																																																																			"children" : 
+																																																																			[
+																																																																				
+																																																																				{
+																																																																					"attributes" : 
+																																																																					{
+																																																																						"type" : "function (uint256,uint256,bytes32) returns (bool)",
+																																																																						"value" : "assertUintsEqual"
+																																																																					},
+																																																																					"name" : "Identifier"
+																																																																				},
+																																																																				
+																																																																				{
+																																																																					"attributes" : 
+																																																																					{
+																																																																						"type" : "uint256",
+																																																																						"value" : "y"
+																																																																					},
+																																																																					"name" : "Identifier"
+																																																																				},
+																																																																				
+																																																																				{
+																																																																					"attributes" : 
+																																																																					{
+																																																																						"type" : "uint256",
+																																																																						"value" : "Y"
+																																																																					},
+																																																																					"name" : "Identifier"
+																																																																				},
+																																																																				
+																																																																				{
+																																																																					"attributes" : 
+																																																																					{
+																																																																						"string" : "null",
+																																																																						"type" : "literal_string \"Did not get correct 'y'.\"",
+																																																																						"value" : "Did not get correct 'y'."
+																																																																					},
+																																																																					"name" : "Literal"
+																																																																				}
+																																																																			],
+																																																																			"name" : "FunctionCall"
+																																																																		}
+																																																																	],
+																																																																	"name" : "ExpressionStatement"
+																																																																}
+																																																															],
+																																																															"name" : "VariableDefinition"
+																																																														}
+																																																													],
+																																																													"name" : "Block"
+																																																												}
+																																																											],
+																																																											"name" : "Function"
+																																																										}
+																																																									],
+																																																									"name" : "Function"
+																																																								}
+																																																							],
+																																																							"name" : "Function"
+																																																						}
+																																																					],
+																																																					"name" : "Function"
+																																																				}
+																																																			],
+																																																			"name" : "VariableDeclaration"
+																																																		}
+																																																	],
+																																																	"name" : "VariableDeclaration"
+																																																}
+																																															],
+																																															"name" : "VariableDeclaration"
+																																														}
+																																													],
+																																													"name" : "VariableDeclaration"
+																																												}
+																																											],
+																																											"name" : "VariableDeclaration"
+																																										}
+																																									],
+																																									"name" : "Contract"
+																																								}
+																																							],
+																																							"name" : "Function"
+																																						}
+																																					],
+																																					"name" : "Function"
+																																				}
+																																			],
+																																			"name" : "Function"
+																																		}
+																																	],
+																																	"name" : "Function"
+																																}
+																															],
+																															"name" : "Function"
+																														}
+																													],
+																													"name" : "Function"
+																												}
+																											],
+																											"name" : "Function"
+																										}
+																									],
+																									"name" : "VariableDeclaration"
+																								}
+																							],
+																							"name" : "VariableDeclaration"
+																						}
+																					],
+																					"name" : "VariableDeclaration"
+																				}
+																			],
+																			"name" : "ParameterList"
+																		}
+																	],
+																	"name" : "Function"
+																}
+															],
+															"name" : "VariableDeclaration"
+														}
+													],
+													"name" : "VariableDeclaration"
+												}
+											],
+											"name" : "Struct"
+										}
+									],
+									"name" : "VariableDeclaration"
+								}
+							],
+							"name" : "VariableDeclaration"
+						}
+					],
+					"name" : "Struct"
+				}
+			],
+			"name" : "Contract"
+		}
+	],
+	"name" : "root"
+}

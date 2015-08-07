@@ -1,0 +1,1656 @@
+{
+  "children": [
+    {
+      "attributes": {
+        "file": "assertions/Asserter.sol"
+      },
+      "name": "Import"
+    },
+    {
+      "attributes": {
+        "name": "Array"
+      },
+      "children": [
+        {
+          "attributes": {
+            "name": "array"
+          },
+          "children": [
+            {
+              "attributes": {
+                "name": "int"
+              },
+              "name": "ElementaryTypeName"
+            },
+            {
+              "attributes": {
+                "string": "null",
+                "type": "int_const 5",
+                "value": "5"
+              },
+              "name": "Literal"
+            },
+            {
+              "attributes": {
+                "name": "dynArray"
+              },
+              "children": [
+                {
+                  "attributes": {
+                    "name": "int"
+                  },
+                  "name": "ElementaryTypeName"
+                },
+                {
+                  "attributes": {
+                    "const": false,
+                    "name": "Array",
+                    "public": true
+                  },
+                  "children": [
+                    {
+                      "children": [],
+                      "name": "ParameterList"
+                    },
+                    {
+                      "children": [],
+                      "name": "ParameterList"
+                    },
+                    {
+                      "children": [],
+                      "name": "Block"
+                    }
+                  ],
+                  "name": "Function"
+                },
+                {
+                  "attributes": {
+                    "const": false,
+                    "name": "setElement",
+                    "public": true
+                  },
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "attributes": {
+                            "name": "index"
+                          },
+                          "children": [
+                            {
+                              "attributes": {
+                                "name": "uint"
+                              },
+                              "name": "ElementaryTypeName"
+                            },
+                            {
+                              "attributes": {
+                                "name": "val"
+                              },
+                              "children": [
+                                {
+                                  "attributes": {
+                                    "name": "int"
+                                  },
+                                  "name": "ElementaryTypeName"
+                                }
+                              ],
+                              "name": "VariableDeclaration"
+                            },
+                            {
+                              "children": [],
+                              "name": "ParameterList"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "attributes": {
+                                        "operator": "=",
+                                        "type": "int256"
+                                      },
+                                      "children": [
+                                        {
+                                          "attributes": {
+                                            "type": "int256"
+                                          },
+                                          "children": [
+                                            {
+                                              "attributes": {
+                                                "type": "int256[5] storage ref",
+                                                "value": "array"
+                                              },
+                                              "name": "Identifier"
+                                            },
+                                            {
+                                              "attributes": {
+                                                "type": "uint256",
+                                                "value": "index"
+                                              },
+                                              "name": "Identifier"
+                                            }
+                                          ],
+                                          "name": "IndexAccess"
+                                        },
+                                        {
+                                          "attributes": {
+                                            "type": "int256",
+                                            "value": "val"
+                                          },
+                                          "name": "Identifier"
+                                        }
+                                      ],
+                                      "name": "Assignment"
+                                    }
+                                  ],
+                                  "name": "ExpressionStatement"
+                                }
+                              ],
+                              "name": "Block"
+                            }
+                          ],
+                          "name": "VariableDeclaration"
+                        },
+                        {
+                          "attributes": {
+                            "const": false,
+                            "name": "push",
+                            "public": true
+                          },
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "attributes": {
+                                    "name": "val"
+                                  },
+                                  "children": [
+                                    {
+                                      "attributes": {
+                                        "name": "int"
+                                      },
+                                      "name": "ElementaryTypeName"
+                                    }
+                                  ],
+                                  "name": "VariableDeclaration"
+                                },
+                                {
+                                  "children": [],
+                                  "name": "ParameterList"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "attributes": {
+                                            "name": "len"
+                                          },
+                                          "children": [
+                                            {
+                                              "attributes": {
+                                                "member_name": "length",
+                                                "type": "uint256"
+                                              },
+                                              "children": [
+                                                {
+                                                  "attributes": {
+                                                    "type": "int256[] storage ref",
+                                                    "value": "dynArray"
+                                                  },
+                                                  "name": "Identifier"
+                                                }
+                                              ],
+                                              "name": "MemberAccess"
+                                            }
+                                          ],
+                                          "name": "VariableDeclaration"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "attributes": {
+                                                "operator": "+=",
+                                                "type": "uint256"
+                                              },
+                                              "children": [
+                                                {
+                                                  "attributes": {
+                                                    "member_name": "length",
+                                                    "type": "uint256"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "attributes": {
+                                                        "type": "int256[] storage ref",
+                                                        "value": "dynArray"
+                                                      },
+                                                      "name": "Identifier"
+                                                    }
+                                                  ],
+                                                  "name": "MemberAccess"
+                                                },
+                                                {
+                                                  "attributes": {
+                                                    "string": "null",
+                                                    "type": "int_const 1",
+                                                    "value": "1"
+                                                  },
+                                                  "name": "Literal"
+                                                }
+                                              ],
+                                              "name": "Assignment"
+                                            }
+                                          ],
+                                          "name": "ExpressionStatement"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "attributes": {
+                                                "operator": "=",
+                                                "type": "int256"
+                                              },
+                                              "children": [
+                                                {
+                                                  "attributes": {
+                                                    "type": "int256"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "attributes": {
+                                                        "type": "int256[] storage ref",
+                                                        "value": "dynArray"
+                                                      },
+                                                      "name": "Identifier"
+                                                    },
+                                                    {
+                                                      "attributes": {
+                                                        "type": "uint256",
+                                                        "value": "len"
+                                                      },
+                                                      "name": "Identifier"
+                                                    }
+                                                  ],
+                                                  "name": "IndexAccess"
+                                                },
+                                                {
+                                                  "attributes": {
+                                                    "type": "int256",
+                                                    "value": "val"
+                                                  },
+                                                  "name": "Identifier"
+                                                }
+                                              ],
+                                              "name": "Assignment"
+                                            }
+                                          ],
+                                          "name": "ExpressionStatement"
+                                        }
+                                      ],
+                                      "name": "VariableDefinition"
+                                    }
+                                  ],
+                                  "name": "Block"
+                                },
+                                {
+                                  "attributes": {
+                                    "const": false,
+                                    "name": "pop",
+                                    "public": true
+                                  },
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "name": "ParameterList"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "attributes": {
+                                            "name": "val"
+                                          },
+                                          "children": [
+                                            {
+                                              "attributes": {
+                                                "name": "int"
+                                              },
+                                              "name": "ElementaryTypeName"
+                                            }
+                                          ],
+                                          "name": "VariableDeclaration"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "attributes": {
+                                                    "name": "len"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "attributes": {
+                                                        "member_name": "length",
+                                                        "type": "uint256"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "attributes": {
+                                                            "type": "int256[] storage ref",
+                                                            "value": "dynArray"
+                                                          },
+                                                          "name": "Identifier"
+                                                        }
+                                                      ],
+                                                      "name": "MemberAccess"
+                                                    }
+                                                  ],
+                                                  "name": "VariableDeclaration"
+                                                },
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "attributes": {
+                                                        "operator": "=",
+                                                        "type": "int256"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "attributes": {
+                                                            "type": "int256",
+                                                            "value": "val"
+                                                          },
+                                                          "name": "Identifier"
+                                                        },
+                                                        {
+                                                          "attributes": {
+                                                            "type": "int256"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "attributes": {
+                                                                "type": "int256[] storage ref",
+                                                                "value": "dynArray"
+                                                              },
+                                                              "name": "Identifier"
+                                                            },
+                                                            {
+                                                              "attributes": {
+                                                                "operator": "-",
+                                                                "type": "uint256"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "attributes": {
+                                                                    "type": "uint256",
+                                                                    "value": "len"
+                                                                  },
+                                                                  "name": "Identifier"
+                                                                },
+                                                                {
+                                                                  "attributes": {
+                                                                    "string": "null",
+                                                                    "type": "int_const 1",
+                                                                    "value": "1"
+                                                                  },
+                                                                  "name": "Literal"
+                                                                }
+                                                              ],
+                                                              "name": "BinaryOperation"
+                                                            }
+                                                          ],
+                                                          "name": "IndexAccess"
+                                                        }
+                                                      ],
+                                                      "name": "Assignment"
+                                                    }
+                                                  ],
+                                                  "name": "ExpressionStatement"
+                                                },
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "attributes": {
+                                                        "operator": "-=",
+                                                        "type": "uint256"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "attributes": {
+                                                            "member_name": "length",
+                                                            "type": "uint256"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "attributes": {
+                                                                "type": "int256[] storage ref",
+                                                                "value": "dynArray"
+                                                              },
+                                                              "name": "Identifier"
+                                                            }
+                                                          ],
+                                                          "name": "MemberAccess"
+                                                        },
+                                                        {
+                                                          "attributes": {
+                                                            "string": "null",
+                                                            "type": "int_const 1",
+                                                            "value": "1"
+                                                          },
+                                                          "name": "Literal"
+                                                        }
+                                                      ],
+                                                      "name": "Assignment"
+                                                    }
+                                                  ],
+                                                  "name": "ExpressionStatement"
+                                                }
+                                              ],
+                                              "name": "VariableDefinition"
+                                            }
+                                          ],
+                                          "name": "Block"
+                                        },
+                                        {
+                                          "attributes": {
+                                            "const": false,
+                                            "name": "dynArrayLen",
+                                            "public": true
+                                          },
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "name": "ParameterList"
+                                            },
+                                            {
+                                              "children": [
+                                                {
+                                                  "attributes": {
+                                                    "name": "length"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "attributes": {
+                                                        "name": "uint"
+                                                      },
+                                                      "name": "ElementaryTypeName"
+                                                    }
+                                                  ],
+                                                  "name": "VariableDeclaration"
+                                                },
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "attributes": {
+                                                            "operator": "=",
+                                                            "type": "uint256"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "attributes": {
+                                                                "type": "uint256",
+                                                                "value": "length"
+                                                              },
+                                                              "name": "Identifier"
+                                                            },
+                                                            {
+                                                              "attributes": {
+                                                                "member_name": "length",
+                                                                "type": "uint256"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "attributes": {
+                                                                    "type": "int256[] storage ref",
+                                                                    "value": "dynArray"
+                                                                  },
+                                                                  "name": "Identifier"
+                                                                }
+                                                              ],
+                                                              "name": "MemberAccess"
+                                                            }
+                                                          ],
+                                                          "name": "Assignment"
+                                                        }
+                                                      ],
+                                                      "name": "ExpressionStatement"
+                                                    }
+                                                  ],
+                                                  "name": "Block"
+                                                }
+                                              ],
+                                              "name": "ParameterList"
+                                            },
+                                            {
+                                              "attributes": {
+                                                "const": false,
+                                                "name": "resetDynArray",
+                                                "public": true
+                                              },
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "name": "ParameterList"
+                                                },
+                                                {
+                                                  "children": [],
+                                                  "name": "ParameterList"
+                                                },
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "attributes": {
+                                                            "operator": "=",
+                                                            "type": "uint256"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "attributes": {
+                                                                "member_name": "length",
+                                                                "type": "uint256"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "attributes": {
+                                                                    "type": "int256[] storage ref",
+                                                                    "value": "dynArray"
+                                                                  },
+                                                                  "name": "Identifier"
+                                                                }
+                                                              ],
+                                                              "name": "MemberAccess"
+                                                            },
+                                                            {
+                                                              "attributes": {
+                                                                "string": "null",
+                                                                "type": "int_const 0",
+                                                                "value": "0"
+                                                              },
+                                                              "name": "Literal"
+                                                            }
+                                                          ],
+                                                          "name": "Assignment"
+                                                        }
+                                                      ],
+                                                      "name": "ExpressionStatement"
+                                                    }
+                                                  ],
+                                                  "name": "Block"
+                                                }
+                                              ],
+                                              "name": "Function"
+                                            }
+                                          ],
+                                          "name": "Function"
+                                        },
+                                        {
+                                          "attributes": {
+                                            "name": "ArrayTest"
+                                          },
+                                          "children": [
+                                            {
+                                              "attributes": {
+                                                "type": "type(contract Asserter)",
+                                                "value": "Asserter"
+                                              },
+                                              "name": "Identifier"
+                                            },
+                                            {
+                                              "attributes": {
+                                                "name": "ARR_0"
+                                              },
+                                              "children": [
+                                                {
+                                                  "attributes": {
+                                                    "name": "int"
+                                                  },
+                                                  "name": "ElementaryTypeName"
+                                                },
+                                                {
+                                                  "attributes": {
+                                                    "string": "null",
+                                                    "type": "int_const 1",
+                                                    "value": "1"
+                                                  },
+                                                  "name": "Literal"
+                                                },
+                                                {
+                                                  "attributes": {
+                                                    "name": "PUSH_1"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "attributes": {
+                                                        "name": "int"
+                                                      },
+                                                      "name": "ElementaryTypeName"
+                                                    },
+                                                    {
+                                                      "attributes": {
+                                                        "string": "null",
+                                                        "type": "int_const 5",
+                                                        "value": "5"
+                                                      },
+                                                      "name": "Literal"
+                                                    },
+                                                    {
+                                                      "attributes": {
+                                                        "name": "PUSH_2"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "attributes": {
+                                                            "name": "int"
+                                                          },
+                                                          "name": "ElementaryTypeName"
+                                                        },
+                                                        {
+                                                          "attributes": {
+                                                            "string": "null",
+                                                            "type": "int_const 10",
+                                                            "value": "10"
+                                                          },
+                                                          "name": "Literal"
+                                                        },
+                                                        {
+                                                          "attributes": {
+                                                            "name": "PUSH_3"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "attributes": {
+                                                                "name": "int"
+                                                              },
+                                                              "name": "ElementaryTypeName"
+                                                            },
+                                                            {
+                                                              "attributes": {
+                                                                "string": "null",
+                                                                "type": "int_const 15",
+                                                                "value": "15"
+                                                              },
+                                                              "name": "Literal"
+                                                            },
+                                                            {
+                                                              "attributes": {
+                                                                "name": "PUSH_4"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "attributes": {
+                                                                    "name": "int"
+                                                                  },
+                                                                  "name": "ElementaryTypeName"
+                                                                },
+                                                                {
+                                                                  "attributes": {
+                                                                    "string": "null",
+                                                                    "type": "int_const 20",
+                                                                    "value": "20"
+                                                                  },
+                                                                  "name": "Literal"
+                                                                },
+                                                                {
+                                                                  "attributes": {
+                                                                    "name": "PUSH_5"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "attributes": {
+                                                                        "name": "int"
+                                                                      },
+                                                                      "name": "ElementaryTypeName"
+                                                                    },
+                                                                    {
+                                                                      "attributes": {
+                                                                        "string": "null",
+                                                                        "type": "int_const 25",
+                                                                        "value": "25"
+                                                                      },
+                                                                      "name": "Literal"
+                                                                    },
+                                                                    {
+                                                                      "attributes": {
+                                                                        "name": "LEN"
+                                                                      },
+                                                                      "children": [
+                                                                        {
+                                                                          "attributes": {
+                                                                            "name": "uint"
+                                                                          },
+                                                                          "name": "ElementaryTypeName"
+                                                                        },
+                                                                        {
+                                                                          "attributes": {
+                                                                            "string": "null",
+                                                                            "type": "int_const 3",
+                                                                            "value": "3"
+                                                                          },
+                                                                          "name": "Literal"
+                                                                        },
+                                                                        {
+                                                                          "attributes": {
+                                                                            "name": "testee"
+                                                                          },
+                                                                          "children": [
+                                                                            {
+                                                                              "attributes": {
+                                                                                "name": "Array"
+                                                                              },
+                                                                              "name": "UserDefinedTypeName"
+                                                                            },
+                                                                            {
+                                                                              "attributes": {
+                                                                                "type": "contract Array",
+                                                                                "type_conversion": "0"
+                                                                              },
+                                                                              "children": [
+                                                                                {
+                                                                                  "attributes": {
+                                                                                    "type": "function () returns (contract Array)"
+                                                                                  },
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "attributes": {
+                                                                                        "type": "type(contract Array)",
+                                                                                        "value": "Array"
+                                                                                      },
+                                                                                      "name": "Identifier"
+                                                                                    }
+                                                                                  ],
+                                                                                  "name": "NewExpression"
+                                                                                }
+                                                                              ],
+                                                                              "name": "FunctionCall"
+                                                                            },
+                                                                            {
+                                                                              "attributes": {
+                                                                                "const": false,
+                                                                                "name": "testSetArray0",
+                                                                                "public": true
+                                                                              },
+                                                                              "children": [
+                                                                                {
+                                                                                  "children": [],
+                                                                                  "name": "ParameterList"
+                                                                                },
+                                                                                {
+                                                                                  "children": [],
+                                                                                  "name": "ParameterList"
+                                                                                },
+                                                                                {
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "attributes": {
+                                                                                            "type": "void",
+                                                                                            "type_conversion": "0"
+                                                                                          },
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "attributes": {
+                                                                                                "member_name": "setElement",
+                                                                                                "type": "function (uint256,int256) returns ()"
+                                                                                              },
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "type": "contract Array",
+                                                                                                    "value": "testee"
+                                                                                                  },
+                                                                                                  "name": "Identifier"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "MemberAccess"
+                                                                                            },
+                                                                                            {
+                                                                                              "attributes": {
+                                                                                                "string": "null",
+                                                                                                "type": "int_const 0",
+                                                                                                "value": "0"
+                                                                                              },
+                                                                                              "name": "Literal"
+                                                                                            },
+                                                                                            {
+                                                                                              "attributes": {
+                                                                                                "type": "int256",
+                                                                                                "value": "ARR_0"
+                                                                                              },
+                                                                                              "name": "Identifier"
+                                                                                            }
+                                                                                          ],
+                                                                                          "name": "FunctionCall"
+                                                                                        }
+                                                                                      ],
+                                                                                      "name": "ExpressionStatement"
+                                                                                    },
+                                                                                    {
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "attributes": {
+                                                                                            "name": "arr0"
+                                                                                          },
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "attributes": {
+                                                                                                "type": "int256",
+                                                                                                "type_conversion": "0"
+                                                                                              },
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "member_name": "array",
+                                                                                                    "type": "function (uint256) returns (int256)"
+                                                                                                  },
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "type": "contract Array",
+                                                                                                        "value": "testee"
+                                                                                                      },
+                                                                                                      "name": "Identifier"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "MemberAccess"
+                                                                                                },
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "string": "null",
+                                                                                                    "type": "int_const 0",
+                                                                                                    "value": "0"
+                                                                                                  },
+                                                                                                  "name": "Literal"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "FunctionCall"
+                                                                                            }
+                                                                                          ],
+                                                                                          "name": "VariableDeclaration"
+                                                                                        },
+                                                                                        {
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "attributes": {
+                                                                                                "type": "bool",
+                                                                                                "type_conversion": "0"
+                                                                                              },
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "type": "function (int256,int256,bytes32) returns (bool)",
+                                                                                                    "value": "assertIntsEqual"
+                                                                                                  },
+                                                                                                  "name": "Identifier"
+                                                                                                },
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "type": "int256",
+                                                                                                    "value": "arr0"
+                                                                                                  },
+                                                                                                  "name": "Identifier"
+                                                                                                },
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "type": "int256",
+                                                                                                    "value": "ARR_0"
+                                                                                                  },
+                                                                                                  "name": "Identifier"
+                                                                                                },
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "string": "null",
+                                                                                                    "type": "literal_string \"array[0] does not match.\"",
+                                                                                                    "value": "array[0] does not match."
+                                                                                                  },
+                                                                                                  "name": "Literal"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "FunctionCall"
+                                                                                            }
+                                                                                          ],
+                                                                                          "name": "ExpressionStatement"
+                                                                                        }
+                                                                                      ],
+                                                                                      "name": "VariableDefinition"
+                                                                                    }
+                                                                                  ],
+                                                                                  "name": "Block"
+                                                                                },
+                                                                                {
+                                                                                  "attributes": {
+                                                                                    "const": false,
+                                                                                    "name": "testPush",
+                                                                                    "public": true
+                                                                                  },
+                                                                                  "children": [
+                                                                                    {
+                                                                                      "children": [],
+                                                                                      "name": "ParameterList"
+                                                                                    },
+                                                                                    {
+                                                                                      "children": [],
+                                                                                      "name": "ParameterList"
+                                                                                    },
+                                                                                    {
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "attributes": {
+                                                                                                "type": "void",
+                                                                                                "type_conversion": "0"
+                                                                                              },
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "member_name": "push",
+                                                                                                    "type": "function (int256) returns ()"
+                                                                                                  },
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "type": "contract Array",
+                                                                                                        "value": "testee"
+                                                                                                      },
+                                                                                                      "name": "Identifier"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "MemberAccess"
+                                                                                                },
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "type": "int256",
+                                                                                                    "value": "PUSH_1"
+                                                                                                  },
+                                                                                                  "name": "Identifier"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "FunctionCall"
+                                                                                            }
+                                                                                          ],
+                                                                                          "name": "ExpressionStatement"
+                                                                                        },
+                                                                                        {
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "attributes": {
+                                                                                                "type": "void",
+                                                                                                "type_conversion": "0"
+                                                                                              },
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "member_name": "push",
+                                                                                                    "type": "function (int256) returns ()"
+                                                                                                  },
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "type": "contract Array",
+                                                                                                        "value": "testee"
+                                                                                                      },
+                                                                                                      "name": "Identifier"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "MemberAccess"
+                                                                                                },
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "type": "int256",
+                                                                                                    "value": "PUSH_2"
+                                                                                                  },
+                                                                                                  "name": "Identifier"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "FunctionCall"
+                                                                                            }
+                                                                                          ],
+                                                                                          "name": "ExpressionStatement"
+                                                                                        },
+                                                                                        {
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "attributes": {
+                                                                                                "type": "void",
+                                                                                                "type_conversion": "0"
+                                                                                              },
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "member_name": "push",
+                                                                                                    "type": "function (int256) returns ()"
+                                                                                                  },
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "type": "contract Array",
+                                                                                                        "value": "testee"
+                                                                                                      },
+                                                                                                      "name": "Identifier"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "MemberAccess"
+                                                                                                },
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "type": "int256",
+                                                                                                    "value": "PUSH_3"
+                                                                                                  },
+                                                                                                  "name": "Identifier"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "FunctionCall"
+                                                                                            }
+                                                                                          ],
+                                                                                          "name": "ExpressionStatement"
+                                                                                        },
+                                                                                        {
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "attributes": {
+                                                                                                "name": "len"
+                                                                                              },
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "type": "uint256",
+                                                                                                    "type_conversion": "0"
+                                                                                                  },
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "member_name": "dynArrayLen",
+                                                                                                        "type": "function () returns (uint256)"
+                                                                                                      },
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "type": "contract Array",
+                                                                                                            "value": "testee"
+                                                                                                          },
+                                                                                                          "name": "Identifier"
+                                                                                                        }
+                                                                                                      ],
+                                                                                                      "name": "MemberAccess"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "FunctionCall"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "VariableDeclaration"
+                                                                                            },
+                                                                                            {
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "type": "bool",
+                                                                                                    "type_conversion": "0"
+                                                                                                  },
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "type": "function (uint256,uint256,bytes32) returns (bool)",
+                                                                                                        "value": "assertUintsEqual"
+                                                                                                      },
+                                                                                                      "name": "Identifier"
+                                                                                                    },
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "type": "uint256",
+                                                                                                        "value": "len"
+                                                                                                      },
+                                                                                                      "name": "Identifier"
+                                                                                                    },
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "string": "null",
+                                                                                                        "type": "int_const 65465",
+                                                                                                        "value": "65465"
+                                                                                                      },
+                                                                                                      "name": "Literal"
+                                                                                                    },
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "string": "null",
+                                                                                                        "type": "literal_string \"length does not match.\"",
+                                                                                                        "value": "length does not match."
+                                                                                                      },
+                                                                                                      "name": "Literal"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "FunctionCall"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "ExpressionStatement"
+                                                                                            }
+                                                                                          ],
+                                                                                          "name": "VariableDefinition"
+                                                                                        }
+                                                                                      ],
+                                                                                      "name": "Block"
+                                                                                    },
+                                                                                    {
+                                                                                      "attributes": {
+                                                                                        "const": false,
+                                                                                        "name": "testPop",
+                                                                                        "public": true
+                                                                                      },
+                                                                                      "children": [
+                                                                                        {
+                                                                                          "children": [],
+                                                                                          "name": "ParameterList"
+                                                                                        },
+                                                                                        {
+                                                                                          "children": [],
+                                                                                          "name": "ParameterList"
+                                                                                        },
+                                                                                        {
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "type": "void",
+                                                                                                    "type_conversion": "0"
+                                                                                                  },
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "member_name": "push",
+                                                                                                        "type": "function (int256) returns ()"
+                                                                                                      },
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "type": "contract Array",
+                                                                                                            "value": "testee"
+                                                                                                          },
+                                                                                                          "name": "Identifier"
+                                                                                                        }
+                                                                                                      ],
+                                                                                                      "name": "MemberAccess"
+                                                                                                    },
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "type": "int256",
+                                                                                                        "value": "PUSH_4"
+                                                                                                      },
+                                                                                                      "name": "Identifier"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "FunctionCall"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "ExpressionStatement"
+                                                                                            },
+                                                                                            {
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "attributes": {
+                                                                                                    "name": "pop"
+                                                                                                  },
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "type": "int256",
+                                                                                                        "type_conversion": "0"
+                                                                                                      },
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "member_name": "pop",
+                                                                                                            "type": "function () returns (int256)"
+                                                                                                          },
+                                                                                                          "children": [
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "type": "contract Array",
+                                                                                                                "value": "testee"
+                                                                                                              },
+                                                                                                              "name": "Identifier"
+                                                                                                            }
+                                                                                                          ],
+                                                                                                          "name": "MemberAccess"
+                                                                                                        }
+                                                                                                      ],
+                                                                                                      "name": "FunctionCall"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "VariableDeclaration"
+                                                                                                },
+                                                                                                {
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "type": "bool",
+                                                                                                        "type_conversion": "0"
+                                                                                                      },
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "type": "function (int256,int256,bytes32) returns (bool)",
+                                                                                                            "value": "assertIntsEqual"
+                                                                                                          },
+                                                                                                          "name": "Identifier"
+                                                                                                        },
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "type": "int256",
+                                                                                                            "value": "pop"
+                                                                                                          },
+                                                                                                          "name": "Identifier"
+                                                                                                        },
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "type": "int256",
+                                                                                                            "value": "PUSH_4"
+                                                                                                          },
+                                                                                                          "name": "Identifier"
+                                                                                                        },
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "string": "null",
+                                                                                                            "type": "literal_string \"pop does not match.\"",
+                                                                                                            "value": "pop does not match."
+                                                                                                          },
+                                                                                                          "name": "Literal"
+                                                                                                        }
+                                                                                                      ],
+                                                                                                      "name": "FunctionCall"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "ExpressionStatement"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "VariableDefinition"
+                                                                                            }
+                                                                                          ],
+                                                                                          "name": "Block"
+                                                                                        },
+                                                                                        {
+                                                                                          "attributes": {
+                                                                                            "const": false,
+                                                                                            "name": "testResetDynArray",
+                                                                                            "public": true
+                                                                                          },
+                                                                                          "children": [
+                                                                                            {
+                                                                                              "children": [],
+                                                                                              "name": "ParameterList"
+                                                                                            },
+                                                                                            {
+                                                                                              "children": [],
+                                                                                              "name": "ParameterList"
+                                                                                            },
+                                                                                            {
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "type": "void",
+                                                                                                        "type_conversion": "0"
+                                                                                                      },
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "member_name": "resetDynArray",
+                                                                                                            "type": "function () returns ()"
+                                                                                                          },
+                                                                                                          "children": [
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "type": "contract Array",
+                                                                                                                "value": "testee"
+                                                                                                              },
+                                                                                                              "name": "Identifier"
+                                                                                                            }
+                                                                                                          ],
+                                                                                                          "name": "MemberAccess"
+                                                                                                        }
+                                                                                                      ],
+                                                                                                      "name": "FunctionCall"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "ExpressionStatement"
+                                                                                                },
+                                                                                                {
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "attributes": {
+                                                                                                        "name": "len"
+                                                                                                      },
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "type": "uint256",
+                                                                                                            "type_conversion": "0"
+                                                                                                          },
+                                                                                                          "children": [
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "member_name": "dynArrayLen",
+                                                                                                                "type": "function () returns (uint256)"
+                                                                                                              },
+                                                                                                              "children": [
+                                                                                                                {
+                                                                                                                  "attributes": {
+                                                                                                                    "type": "contract Array",
+                                                                                                                    "value": "testee"
+                                                                                                                  },
+                                                                                                                  "name": "Identifier"
+                                                                                                                }
+                                                                                                              ],
+                                                                                                              "name": "MemberAccess"
+                                                                                                            }
+                                                                                                          ],
+                                                                                                          "name": "FunctionCall"
+                                                                                                        }
+                                                                                                      ],
+                                                                                                      "name": "VariableDeclaration"
+                                                                                                    },
+                                                                                                    {
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "type": "bool",
+                                                                                                            "type_conversion": "0"
+                                                                                                          },
+                                                                                                          "children": [
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "type": "function (uint256,uint256,bytes32) returns (bool)",
+                                                                                                                "value": "assertUintsEqual"
+                                                                                                              },
+                                                                                                              "name": "Identifier"
+                                                                                                            },
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "type": "uint256",
+                                                                                                                "value": "len"
+                                                                                                              },
+                                                                                                              "name": "Identifier"
+                                                                                                            },
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "string": "null",
+                                                                                                                "type": "int_const 0",
+                                                                                                                "value": "0"
+                                                                                                              },
+                                                                                                              "name": "Literal"
+                                                                                                            },
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "string": "null",
+                                                                                                                "type": "literal_string \"length does not match.\"",
+                                                                                                                "value": "length does not match."
+                                                                                                              },
+                                                                                                              "name": "Literal"
+                                                                                                            }
+                                                                                                          ],
+                                                                                                          "name": "FunctionCall"
+                                                                                                        }
+                                                                                                      ],
+                                                                                                      "name": "ExpressionStatement"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "VariableDefinition"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "Block"
+                                                                                            },
+                                                                                            {
+                                                                                              "attributes": {
+                                                                                                "const": false,
+                                                                                                "name": "testAccessDynArray",
+                                                                                                "public": true
+                                                                                              },
+                                                                                              "children": [
+                                                                                                {
+                                                                                                  "children": [],
+                                                                                                  "name": "ParameterList"
+                                                                                                },
+                                                                                                {
+                                                                                                  "children": [],
+                                                                                                  "name": "ParameterList"
+                                                                                                },
+                                                                                                {
+                                                                                                  "children": [
+                                                                                                    {
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "type": "void",
+                                                                                                            "type_conversion": "0"
+                                                                                                          },
+                                                                                                          "children": [
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "member_name": "resetDynArray",
+                                                                                                                "type": "function () returns ()"
+                                                                                                              },
+                                                                                                              "children": [
+                                                                                                                {
+                                                                                                                  "attributes": {
+                                                                                                                    "type": "contract Array",
+                                                                                                                    "value": "testee"
+                                                                                                                  },
+                                                                                                                  "name": "Identifier"
+                                                                                                                }
+                                                                                                              ],
+                                                                                                              "name": "MemberAccess"
+                                                                                                            }
+                                                                                                          ],
+                                                                                                          "name": "FunctionCall"
+                                                                                                        }
+                                                                                                      ],
+                                                                                                      "name": "ExpressionStatement"
+                                                                                                    },
+                                                                                                    {
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "type": "void",
+                                                                                                            "type_conversion": "0"
+                                                                                                          },
+                                                                                                          "children": [
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "member_name": "push",
+                                                                                                                "type": "function (int256) returns ()"
+                                                                                                              },
+                                                                                                              "children": [
+                                                                                                                {
+                                                                                                                  "attributes": {
+                                                                                                                    "type": "contract Array",
+                                                                                                                    "value": "testee"
+                                                                                                                  },
+                                                                                                                  "name": "Identifier"
+                                                                                                                }
+                                                                                                              ],
+                                                                                                              "name": "MemberAccess"
+                                                                                                            },
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "type": "int256",
+                                                                                                                "value": "PUSH_5"
+                                                                                                              },
+                                                                                                              "name": "Identifier"
+                                                                                                            }
+                                                                                                          ],
+                                                                                                          "name": "FunctionCall"
+                                                                                                        }
+                                                                                                      ],
+                                                                                                      "name": "ExpressionStatement"
+                                                                                                    },
+                                                                                                    {
+                                                                                                      "children": [
+                                                                                                        {
+                                                                                                          "attributes": {
+                                                                                                            "name": "da0"
+                                                                                                          },
+                                                                                                          "children": [
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "type": "int256",
+                                                                                                                "type_conversion": "0"
+                                                                                                              },
+                                                                                                              "children": [
+                                                                                                                {
+                                                                                                                  "attributes": {
+                                                                                                                    "member_name": "dynArray",
+                                                                                                                    "type": "function (uint256) returns (int256)"
+                                                                                                                  },
+                                                                                                                  "children": [
+                                                                                                                    {
+                                                                                                                      "attributes": {
+                                                                                                                        "type": "contract Array",
+                                                                                                                        "value": "testee"
+                                                                                                                      },
+                                                                                                                      "name": "Identifier"
+                                                                                                                    }
+                                                                                                                  ],
+                                                                                                                  "name": "MemberAccess"
+                                                                                                                },
+                                                                                                                {
+                                                                                                                  "attributes": {
+                                                                                                                    "string": "null",
+                                                                                                                    "type": "int_const 0",
+                                                                                                                    "value": "0"
+                                                                                                                  },
+                                                                                                                  "name": "Literal"
+                                                                                                                }
+                                                                                                              ],
+                                                                                                              "name": "FunctionCall"
+                                                                                                            }
+                                                                                                          ],
+                                                                                                          "name": "VariableDeclaration"
+                                                                                                        },
+                                                                                                        {
+                                                                                                          "children": [
+                                                                                                            {
+                                                                                                              "attributes": {
+                                                                                                                "type": "bool",
+                                                                                                                "type_conversion": "0"
+                                                                                                              },
+                                                                                                              "children": [
+                                                                                                                {
+                                                                                                                  "attributes": {
+                                                                                                                    "type": "function (int256,int256,bytes32) returns (bool)",
+                                                                                                                    "value": "assertIntsEqual"
+                                                                                                                  },
+                                                                                                                  "name": "Identifier"
+                                                                                                                },
+                                                                                                                {
+                                                                                                                  "attributes": {
+                                                                                                                    "type": "int256",
+                                                                                                                    "value": "da0"
+                                                                                                                  },
+                                                                                                                  "name": "Identifier"
+                                                                                                                },
+                                                                                                                {
+                                                                                                                  "attributes": {
+                                                                                                                    "type": "int256",
+                                                                                                                    "value": "PUSH_5"
+                                                                                                                  },
+                                                                                                                  "name": "Identifier"
+                                                                                                                },
+                                                                                                                {
+                                                                                                                  "attributes": {
+                                                                                                                    "string": "null",
+                                                                                                                    "type": "literal_string \"value does not match.\"",
+                                                                                                                    "value": "value does not match."
+                                                                                                                  },
+                                                                                                                  "name": "Literal"
+                                                                                                                }
+                                                                                                              ],
+                                                                                                              "name": "FunctionCall"
+                                                                                                            }
+                                                                                                          ],
+                                                                                                          "name": "ExpressionStatement"
+                                                                                                        }
+                                                                                                      ],
+                                                                                                      "name": "VariableDefinition"
+                                                                                                    }
+                                                                                                  ],
+                                                                                                  "name": "Block"
+                                                                                                }
+                                                                                              ],
+                                                                                              "name": "Function"
+                                                                                            }
+                                                                                          ],
+                                                                                          "name": "Function"
+                                                                                        }
+                                                                                      ],
+                                                                                      "name": "Function"
+                                                                                    }
+                                                                                  ],
+                                                                                  "name": "Function"
+                                                                                }
+                                                                              ],
+                                                                              "name": "Function"
+                                                                            }
+                                                                          ],
+                                                                          "name": "VariableDeclaration"
+                                                                        }
+                                                                      ],
+                                                                      "name": "VariableDeclaration"
+                                                                    }
+                                                                  ],
+                                                                  "name": "VariableDeclaration"
+                                                                }
+                                                              ],
+                                                              "name": "VariableDeclaration"
+                                                            }
+                                                          ],
+                                                          "name": "VariableDeclaration"
+                                                        }
+                                                      ],
+                                                      "name": "VariableDeclaration"
+                                                    }
+                                                  ],
+                                                  "name": "VariableDeclaration"
+                                                }
+                                              ],
+                                              "name": "VariableDeclaration"
+                                            }
+                                          ],
+                                          "name": "Contract"
+                                        }
+                                      ],
+                                      "name": "ParameterList"
+                                    }
+                                  ],
+                                  "name": "Function"
+                                }
+                              ],
+                              "name": "ParameterList"
+                            }
+                          ],
+                          "name": "Function"
+                        }
+                      ],
+                      "name": "ParameterList"
+                    }
+                  ],
+                  "name": "Function"
+                }
+              ],
+              "name": "VariableDeclaration"
+            }
+          ],
+          "name": "VariableDeclaration"
+        }
+      ],
+      "name": "Contract"
+    }
+  ],
+  "name": "root"
+}

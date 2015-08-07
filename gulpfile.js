@@ -33,7 +33,7 @@ gulp.task('version-bump', function(){
         .pipe(replace(/"version":\s*"\d+(\.\d+){2}"/, '"version": "'+ version.version + '"'))
         .pipe(gulp.dest('./'));
     gulp.src(['./bin/sunit.js'])
-        .pipe(replace(/CURRENT_VERSION\s*=\s*"\d+(\.\d+){2}"/, "CURRENT_VERSION = '" + version.version + "'"))
+        .pipe(replace(/CURRENT_VERSION\s*=\s*'\d+(\.\d+){2}'/, "CURRENT_VERSION = '" + version.version + "'"))
         .pipe(gulp.dest('./bin/'));
 
 });
