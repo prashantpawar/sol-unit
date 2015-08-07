@@ -122,6 +122,8 @@ function main() {
     sUnit.on('suiteStarted', suiteStarted);
     sUnit.on('contractStarted', contractStarted);
     sUnit.on('methodsStarted', methodsStarted);
+    sUnit.on('methodStarted', methodStarted);
+    sUnit.on('methodDone', methodDone);
     sUnit.on('methodsDone', methodsDone);
     sUnit.on('contractDone', contractDone);
     sUnit.on('suiteDone', suiteDone);
@@ -144,6 +146,14 @@ function methodsStarted(error, methods) {
     presenter.presentMethodsStarted(error, methods);
 }
 
+function methodStarted(methodName) {
+    presenter.presentMethodStarted(methodName);
+}
+
+function methodDone(results) {
+    presenter.presentMethodDone(results);
+}
+
 function methodsDone(error, contractName, stats) {
     presenter.presentMethodsDone(error, contractName, stats);
 }
@@ -152,25 +162,10 @@ function contractDone(error, name) {
 }
 
 function suiteDone(stats) {
-    var successful = 0, total = 0;
 
-    for (var o in stats) {
-        // Shut linter up...
-        if (stats.hasOwnProperty(o)) {
-            var data = stats[o].testResults;
-            for(var i = 0; i < data.length; i++){
-                var tr = data[i].result;
-                if(tr) {
-                    successful += 1;
-                }
-                total += 1;
-            }
-        }
-    }
-    presenter.presentSuiteDone(successful, total);
-    log.debug("Process exiting normally.");
+    presenter.presentSuiteDone(stats);
     // exit code is number of failed tests (0 means no tests failed).
-    process.exit(total - successful);
+    process.exit(stats.total - stats.successful);
 }
 
 function filterSuggestions(names){

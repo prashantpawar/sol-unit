@@ -15,18 +15,38 @@ exports.presentContractStarted = function (error, name) {
     }
     console.log('');
     testLog.header("Starting: " + name);
-    testLog.info("Deploying contract. This normally takes between 10 and 20 seconds.");
+    testLog.info("Deploying contract.");
+    console.log('');
 };
 
 exports.presentMethodsStarted = function (error, methods) {
     if (error) {
         testLog.fail("Failed to start tests. Error: " + error.message);
     }
-    for (var i = 0; i < methods.length; i++) {
-        testLog.info("Running '" + methods[i].name + "' (" + (i + 1).toString() + " of " + methods.length + ")");
+};
+
+exports.presentMethodStarted = function (methodName) {
+    testLog.info("Running '" + methodName + "'");
+};
+
+exports.presentMethodDone = function (results) {
+    var result = results.result;
+    var ti = "'" + results.name + "' - ";
+    if (result) {
+        testLog.success(ti + "PASSED");
+    } else {
+        if (results.errors.length > 0) {
+            testLog.fail(ti + "FAILED:");
+            for(var j = 0; j < results.errors.length; j++){
+                testLog.fail("Error: " + (results.errors[i] || "(no message)"));
+            }
+        } else {
+            testLog.fail(ti + "FAILED:");
+            for(var j = 0; j < results.messages.length; j++){
+                testLog.fail("Error: " + (results.messages[j] || "(no message)"));
+            }
+        }
     }
-    console.log('');
-    testLog.info("Waiting for transactions to be committed...");
 };
 
 exports.presentMethodsDone = function (error, contractName, stats) {
@@ -37,24 +57,6 @@ exports.presentMethodsDone = function (error, contractName, stats) {
     var results = {successful: 0, total: testResults.length};
     for (var i = 0; i < testResults.length; i++) {
         var testResult = testResults[i];
-        var result = testResult.result;
-        var ti = "'" + testResult.name + "' - ";
-        if (result) {
-            results.successful++;
-            testLog.success(ti + "PASSED");
-        } else {
-            if (testResult.errors.length > 0) {
-                testLog.fail(ti + "FAILED:");
-                for(var j = 0; j < testResult.errors.length; j++){
-                    testLog.fail("Error: " + (testResult.errors[i] || "(no message)"));
-                }
-            } else {
-                testLog.fail(ti + "FAILED:");
-                for(var j = 0; j < testResult.messages.length; j++){
-                    testLog.fail("Error: " + (testResult.messages[j] || "(no message)"));
-                }
-            }
-        }
         r = r && testResult.result;
     }
     if (r) {
@@ -73,7 +75,9 @@ exports.presentContractDone = function (error, name) {
     }
 };
 
-exports.presentSuiteDone = function (successful, total) {
+exports.presentSuiteDone = function (stats) {
+    var total = stats.total;
+    var successful = stats.successful;
     var failed = total - successful;
     console.log("");
     if (failed === 0) {

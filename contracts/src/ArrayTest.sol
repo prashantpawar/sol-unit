@@ -52,7 +52,6 @@ contract ArrayTest is Asserter {
         testee.setElement(0, ARR_0);
         var arr0 = testee.array(0);
         assertIntsEqual(arr0, ARR_0, "array[0] does not match.");
-
     }
 
     function testPush(){
@@ -60,6 +59,7 @@ contract ArrayTest is Asserter {
         testee.push(PUSH_2);
         testee.push(PUSH_3);
         var len = testee.dynArrayLen();
+        // Fail intentionally
         assertUintsEqual(len, 65465, "length does not match.");
     }
 

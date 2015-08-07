@@ -14,15 +14,13 @@ The name of this library is solUnit, because sUnit is the Smalltalk unit testing
 
 ## Installing
 
-Only tested on linux (Ubuntu 14.XY).
+Only tested on linux (Ubuntu 14.04, 14.10, 15.04).
 
 `npm install s-unit`
 
 Use the `--global` flag to get the `sunit` command-line version.
 
-You need an `eris-db` server running in order to do tests, and it needs to run a chain that uses the files provided in `./resources/defaultdb`. The easiest way to use this library as of now is by copying that folder somewhere, cd into that directory and run `eris-db .`, then keep that process running while working on the code/tests. That will use the same chain for every test you run, but unit tests really shouldn't depend on the current state of the chain.  
-
-**Note (2015-07-14): As the eris-cli tool improves, it will be easier and easier to use. It will soon have commands for setting up standard (throw-away) test-chains that are compatible with this library. Stay tuned...**  
+You need an `eris-db` server running in order to do tests, and it needs to run a chain that uses the files provided in `./resources/defaultdb`. The easiest way to use this library as of now is by copying that folder somewhere, cd into that directory and run `eris-db .`, then keep that process running while working on the code/tests. That will use the same chain for every test you run, but unit tests really shouldn't depend on the current state of the chain.
 
 ## Usage
 
@@ -70,7 +68,7 @@ sUnit.on('suiteDone', function(){ console.log("Done!"); });
 sUnit.start(tests, baseDir, erisdbURL, doCoverage);
 ```
 
-- The first param of the start method, `tests`, is an array of tests to run.
+- The first param of the start method, `tests`, is the array of tests that are to be run.
 
 - The second param, `baseDir`, is the directory where the compiled solidity files are.
 
@@ -108,17 +106,27 @@ callback params: `error`
 
 ##### Methods started
 
-id: `'methodsStarted'` - The test methods in the current contract are being run.
+id: `'methodsStarted'` - The test methods in the current contract are about to be run.
 
-callback params: `funcs` - A list of all the test functions that was discovered in the current contract, and will be run.
+callback params: `methodNames` - A list of all the test functions that was discovered in the current contract, and will be run.
 
 ##### Methods done
 
-id: `'methodsDone'` - The methods are done and the results (or errors) are in. 
+id: `'methodsDone'` - The methods are done. 
 
-callback params: `error`, `stats` - the test results.
+callback params: `error`, `results` - the combined test-results.
+ 
+##### Method started
 
-**NOTE: The final stats object is still a WIP. It will contain a lot more useful information about each test.** 
+id: `'methodStarted'` - A test method in the current contract are being run.
+
+callback params: `methodName` - The name of the method.
+
+##### Method done
+
+id: `'methodDone'` - The method is done and the results are in. 
+
+callback params: `results` - the test results. 
 
 ![sol_unit_diag.png](https://github.com/androlo/sol-unit/blob/master/resources/docs/sol_unit_diag.png "SolUnit structure")
 
@@ -134,13 +142,13 @@ The constraints for a unit testing contract right now (0.1.x) are these:
 
 - Test function names must start with `test`, e.g. `function testAddTwoInts()`, and they must be public. There is no limit on the number of test-functions that can be in each test-contract.
 
-- The test-contract needs a test event: `event TestEvent(address indexed fId, bool indexed result, uint indexed error, bytes32 message);`. It is used by the framework to validate that a test did indeed pass. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol` (comes with the library). Its assertion methods has a proper test event already set up which will fire automatically when an assertion is made. 
+- The test-contract needs a test event: `event TestEvent(address indexed fId, bool indexed result, uint indexed error, bytes32 message);`. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol` (comes with the library). Its assertion methods has a proper test event already set up which will fire automatically when an assertion is made. You can put as many assertions as you like in a method.
 
 NOTE: If none of the existing assertions fit then it is always possible to extend the Asserter.sol contract or to calculate the result in the test-function and use `assertTrue` or `assertFalse`.
 
 - If you want to do coverage analysis, the target contract field must be named `testee`. See example below.
 
-- Currently, only one assertion/test-event per test method is allowed, and only one `testee` per test contract.
+- Coverage is still new, and very primitive. Only one `testee` per test contract is allowed, and it must be called directly from within test methods (meaning if you create contracts that calls the `testee` and call them, it will not yet be registered).
 
 **Example of a simple storage value test with coverage enabled**
 
@@ -176,7 +184,7 @@ contract DemoTest is Asserter {
 }
 ```
 
-There is plenty more in the `contracts/src` folder. It's actually not that hard once eris-db and a system for compiling Solidity is properly set up. All test contracts looks pretty much the same - a target named 'testee' and a few methods that begin with 'test' and has an assertion in it.
+There is plenty more in the `contracts/src` folder. It's actually not that hard once eris-db is properly set up. All test contracts looks pretty much the same - a target named 'testee' and a few methods that begin with 'test' and has an assertion in it.
 
 ### Build constraints
 
@@ -184,7 +192,7 @@ These are the rules for compiling.
 
 - The `.binary` and `.abi` files for the test contracts must be available in the working directory (it doesn't need the source files).
 
-- For coverage, the `.ast` file of the test contract, and `.abi` file of the "testee" must be in the working directory as well. 
+- For coverage, the `.ast` file of the test contract, and `.abi` file of the `testee` must be in the working directory as well.
 
 The easiest way possible is to just compile everything with `--binary file --json-abi file --ast-json file`. That will give you all the needed files (and a number of non-needed ones as well).
 
@@ -211,7 +219,7 @@ The `message` param is used to log a message. This is normally used if the asser
 If the contract extends `Asserter`, it will inherit `TestEvent`, and can also use the assert methods which will automatically trigger the test event. Otherwise you can just roll your own. 
 
 **Example of a bare-bones test contract**
- 
+
 ```
 contract Something(){
     
