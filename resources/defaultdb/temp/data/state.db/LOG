@@ -1,5 +1,0 @@
-=============== Aug 20, 2015 (BST) ===============
-00:43:16.716283 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-00:43:16.716681 db@open opening
-00:43:16.772154 db@janitor F·2 G·0
-00:43:16.772204 db@open done T·55.511452ms
