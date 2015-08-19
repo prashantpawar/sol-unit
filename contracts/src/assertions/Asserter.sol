@@ -54,17 +54,6 @@ contract Asserter {
         report(result, message);
     }
 
-    // ************************************** string **************************************
-
-    /// @dev Assert that the two strings A and B are equal.
-    /// @param A The first string.
-    /// @param B The second string.
-    /// @param msg The message to display if the assertion fails.
-    function assertBytes32Equal(string A, string B, bytes32 message) internal constant returns (bool result){
-        result = (A == B);
-        report(result, message);
-    }
-
     // ************************************** address **************************************
 
     /// @dev Assert that the two addresses A and B are equal.
