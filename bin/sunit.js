@@ -50,7 +50,7 @@ function main() {
                 file = file.slice(0, -4);
             }
             try {
-                var bin = file + ".binary";
+                var bin = file + ".bin";
                 var binPath = path.join(baseDir, bin);
                 var fStats = fs.lstatSync(binPath);
                 if (!fStats.isFile()) {
@@ -66,7 +66,7 @@ function main() {
                     }
                 }
             } catch (error) {
-                log.error("Could not find .binary or .abi files for '" + file + "' in: " + baseDir);
+                log.error("Could not find .bin or .abi files for '" + file + "' in: " + baseDir);
             }
         }
         if (tests.length === 0){
@@ -95,7 +95,7 @@ function main() {
 
         for (var i = 0; i < filesInDir.length; i++) {
             var file = filesInDir[i];
-            if (file.indexOf('Test.binary') === -1) {
+            if (file.indexOf('Test.bin') === -1) {
                 continue;
             }
             var name = path.parse(file).name;
