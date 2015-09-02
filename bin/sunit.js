@@ -14,7 +14,7 @@ var presenter = require('./log_presenter');
 
 var log;
 
-var CURRENT_VERSION = '0.2.1';
+var CURRENT_VERSION = '0.2.3';
 
 // Run
 main();
@@ -113,7 +113,7 @@ function main() {
 
     log.debug("Tests found: ", tests);
 
-    var url = program.url;
+    var url = "ws://localhost:1337/socketrpc"; //program.url;
     var doCoverage = program.coverage;
 
     // TODO presenter

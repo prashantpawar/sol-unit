@@ -7,5 +7,9 @@
   "sourceDir": "src",
   "buildDir": "build",
   "docsDir": "docs",
-  "compilerFlags": "--optimize 1 --binary file --json-abi file --ast-json file --natspec-dev file"
+  "bin": true,
+  "abi": true,
+  "ast-json": true,
+  "devdoc": true,
+  "compilerFlags": "--optimize 0"
 }

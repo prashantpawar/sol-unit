@@ -1,6 +1,6 @@
 {
   "name": "s-unit",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "namespace": "eris",
   "description": "Unit testing framework for Solidity contracts for eris-db.",
   "main": "./index.js",
@@ -32,7 +32,7 @@
     "gulp-clean": "^0.3.1",
     "gulp-debug": "^2.0.1",
     "gulp-replace": "^0.5.3",
-    "gulp-smake": "^0.1.0",
+    "gulp-smake": "^0.2.0",
     "gulp-util": "^3.0.6",
     "require-dir": "^0.3.0",
     "through2": "^2.0.0"

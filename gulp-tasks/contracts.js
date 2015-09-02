@@ -9,7 +9,7 @@ var os = require('os');
 
 var exports = {};
 
-var options = require('../contracts.json');
+var options = require('../contracts/contracts.json');
 
 var buildDir = path.join(options.root, options.buildDir);
 var docsDir = path.join(options.root, options.docsDir);
@@ -22,6 +22,7 @@ if(debugMode){
 } else {
     dbg = gUtil.noop;
 }
+dbg = gDebug;
 
 // TODO start separating tasks into different files.
 
