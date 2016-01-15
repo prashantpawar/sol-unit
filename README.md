@@ -151,28 +151,31 @@ If the contract extends `Asserter`, it will inherit `TestEvent`, and can also us
 ```
 contract Something(){
     
-    int public something;
+    int _something;
     
-    function setSomething(int _something){
-        something = _something;
+    function setSomething(int something){
+        _something = something;
+    }
+    
+    function something() constant returns (int something){
+        return _something;
     }
 }
 
 contract SomethingTest {
 
-    event TestEvent(address indexed fId, bool indexed result, uint error, bytes32 indexed message);
-    
-    Something testee = new Something();
+    event TestEvent(bool indexed result, string message);
     
     function testSomething(){
+        Something testee = new Something();
         int someValue = 5; 
         testee.setSomething(someValue);
         var intOrSomeSuch = testee.something();
         var result = (intOrSomeSuch == someValue);
         if(result){
-            TestEvent(msg.sig, true, 0, "");
+            TestEvent(true, "");
         } else {
-            TestEvent(msg.sig, false, 0, "Something is wrong.");
+            TestEvent(false, "Something is wrong.");
         }
     }
 
@@ -186,8 +189,6 @@ The contracts folder comes with a number of different examples.
 ## Tests
 
 `mocha` or `npm test`.
-
-I cut out most of the tests with the update to js Ethereum. Will add more tests gradually.
 
 ## Library structure
 
