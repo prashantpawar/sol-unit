@@ -120,7 +120,7 @@ contract DemoTest is Asserter {
 }
 ```
 
-There is plenty more in the `contracts/src` folder. It's actually not that hard once eris-db is properly set up. All test contracts looks pretty much the same - a target named 'testee' and a few methods that begin with 'test' and has an assertion in it.
+There is plenty more in the `contracts/src` folder. All test contracts looks pretty much the same - a target contract and a few methods that begin with 'test' and has assertions in them.
 
 ### Build constraints
 
@@ -136,15 +136,11 @@ To make sure I get all of this, I compile with: `solc --bin --abi -o . BankTest.
 
 `TestEvent` is what the framework listens too. It will run test functions and then listen to `TestEvent` data from the contract in question.
 
-`event TestEvent(address indexed fId, bool indexed result, uint error, bytes32 indexed message);`
+`event TestEvent(bool indexed result, string message);`
 
-The `fId` param is the function id (`msg.sig`) which is passed along to identify the method being called. For technical reasons it uses the `address` type.   
+The `result` param is true if the assertion succeeded, otherwise it's false.
 
-The `result` param is the result of the test. Basically if the assertion succeeded or failed. It's always a boolean.
-
-The `error` param is not used right now, but will be used for error/exception handling by allowing error codes to be sent.
-
-The `message` param is used to log a message. This is normally used if the assertion fails. It must be less then 32 bytes atm.
+The `message` param is used to log a message. This is normally used if the assertion fails.
 
 If the contract extends `Asserter`, it will inherit `TestEvent`, and can also use the assert methods which will automatically trigger the test event. Otherwise you can just roll your own. 
 
@@ -196,7 +192,7 @@ It is also possible to run the executable from the `./contracts/build` folder, e
 
 ## Library structure
 
-The framework uses blockchain-client events to do the tests. It uses the afore-mentioned Solidity `TestEvent` to get confirmation from contract methods.
+The framework uses Solidity events (log events) to do the tests. It uses the afore-mentioned Solidity `TestEvent` to get confirmation from contract test-methods.
 
 The `SUnit` class is where everything is coordinated. It deploys the test contracts and publish the results via events. It implements nodes EventEmitter. It forwards some of these events from dependencies like the `TestRunner`, which is also an emitter.
 
@@ -204,7 +200,7 @@ The `TestRunner` takes a test contract, finds all test methods in it and run tho
 
 ![sol_unit_diag.png](https://github.com/androlo/sol-unit/blob/master/resources/docs/sol_unit_diag.png "SolUnit structure")
 
-In the diagram, the executable would gather tests and set things up, then `SUnit` would deal with the contract execution section.
+In the diagram, the executable gathers the tests and set things up, then `SUnit` deal with the contract execution part.
 
 Presentation of test data is not part of the diagram. The core `SUnit` library does not present - it only passes data through events. The way presentation works in the command-line tool is it listens to all SUnit events and prints the reported data using a special test-logger.
 
