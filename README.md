@@ -8,6 +8,8 @@ solUnit (sUnit) is a unit testing framework for Solidity contracts. It runs unit
 
 The name of this library is solUnit, because sUnit is the Smalltalk unit testing framework; however, given that sunit or sUnit is easier to write, and that there is no chance of confusion since nobody has unit-tested (or used) Smalltalk since the 90s, those aliases are sometimes used instead. The node package is called s-unit.
 
+**NOTE**: Static coverage analysis (parsing syntax trees) has been removed in `0.3` to be replaced by runtime analysis later, along with some other things. 
+
 ## Installing
 
 Only tested on linux (Ubuntu 14.04, 14.10, 15.04).
