@@ -1,5 +1,5 @@
-import "assertions/Asserter.sol";
-import "Bank.sol";
+import "./assertions/Asserter.sol";
+import "./Bank.sol";
 
 contract AccountOwner {
 

@@ -14,7 +14,7 @@ var presenter = require('./log_presenter');
 
 var log;
 
-var CURRENT_VERSION = '0.2.4';
+var CURRENT_VERSION = '0.3.0';
 
 // Run
 main();
@@ -28,9 +28,7 @@ function main() {
     program
         .version(CURRENT_VERSION)
         .usage('[options] <test ...>')
-        .option("-c, --coverage", "Calculate coverage. [default=false]")
         .option("-m, --debugMessages", "Print debugging information. [default=false]")
-        .option("-r, --url <url>", "Url to blockchain client. [default='http://localhost:1337/rpc']", "http://localhost:1337/rpc")
         .option("-d, --dir <dir>", "Directory in which to do the tests. [default=current directory]", process.cwd())
         .parse(process.argv);
 
@@ -113,9 +111,6 @@ function main() {
 
     log.debug("Tests found: ", tests);
 
-    var url = "ws://localhost:1337/socketrpc"; //program.url;
-    var doCoverage = program.coverage;
-
     // TODO presenter
     var sUnit = new SolUnit();
 
@@ -128,7 +123,7 @@ function main() {
     sUnit.on('methodsDone', methodsDone);
     sUnit.on('contractDone', contractDone);
     sUnit.on('suiteDone', suiteDone);
-    sUnit.start(tests, baseDir, url, doCoverage);
+    sUnit.start(tests, baseDir);
 
 }
 
@@ -205,7 +200,7 @@ function renderLogo() {
     console.log("|                |___/ \\___/ |_| |_||_| \\__|                |");
     console.log("|                                                           |");
     console.log("|                    By: Andreas Olofsson                   |");
-    console.log("|            e-mail: andreas@erisindustries.com             |");
+    console.log("|                e-mail: androlo1980@gmail.com             |");
     console.log("|                                                           |");
     console.log("*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*");
 }

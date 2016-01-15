@@ -1,4 +1,4 @@
-import "assertions/Asserter.sol";
+import "./assertions/Asserter.sol";
 
 contract Array {
 
@@ -86,7 +86,7 @@ contract ArrayTest is Asserter {
 
     function testSetArray(){
         Array testee = new Array();
-        int[5] arr;
+        int[5] memory arr;
         arr[0] = 4;
         arr[1] = 5;
         arr[2] = 6;

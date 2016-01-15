@@ -1,6 +1,8 @@
 var assert = require('assert');
 var TestRunner = require('../lib/test_runner');
-var erisC = require('eris-contracts');
+var coder = require('../node_modules/web3/lib/solidity/coder');
+
+var EVENT_SIG = 'd204e27263771793b3472e4c07118500eb1ab892c2b2f0a4b90b33c33d4df42f';
 
 var abi = [
     {
@@ -15,23 +17,13 @@ var abi = [
         "inputs": [
             {
                 "indexed": true,
-                "name": "fId",
-                "type": "address"
-            },
-            {
-                "indexed": true,
                 "name": "result",
                 "type": "bool"
             },
             {
                 "indexed": false,
-                "name": "error",
-                "type": "uint256"
-            },
-            {
-                "indexed": true,
                 "name": "message",
-                "type": "bytes32"
+                "type": "string"
             }
         ],
         "name": "TestEvent",
@@ -52,23 +44,13 @@ var abiEventFail = [
         "inputs": [
             {
                 "indexed": true,
-                "name": "fId",
-                "type": "address"
-            },
-            {
-                "indexed": true,
                 "name": "Brüno",
                 "type": "bool"
             },
             {
                 "indexed": false,
-                "name": "error",
-                "type": "uint256"
-            },
-            {
-                "indexed": true,
                 "name": "message",
-                "type": "bytes32"
+                "type": "string"
             }
         ],
         "name": "TestEvent",
@@ -82,23 +64,13 @@ var abiNoTestFuncs = [
         "inputs": [
             {
                 "indexed": true,
-                "name": "fId",
-                "type": "address"
-            },
-            {
-                "indexed": true,
                 "name": "result",
                 "type": "bool"
             },
             {
                 "indexed": false,
-                "name": "error",
-                "type": "uint256"
-            },
-            {
-                "indexed": true,
                 "name": "message",
-                "type": "bytes32"
+                "type": "string"
             }
         ],
         "name": "TestEvent",
@@ -205,23 +177,13 @@ var megaAbi = [
         "inputs": [
             {
                 "indexed": true,
-                "name": "fId",
-                "type": "address"
-            },
-            {
-                "indexed": true,
                 "name": "result",
                 "type": "bool"
             },
             {
                 "indexed": false,
-                "name": "error",
-                "type": "uint256"
-            },
-            {
-                "indexed": true,
                 "name": "message",
-                "type": "bytes32"
+                "type": "string"
             }
         ],
         "name": "TestEvent",
@@ -229,370 +191,246 @@ var megaAbi = [
     }
 ];
 
-var mockMegaEvents = [
-    {
-        args: {
-            fId: "00000001",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }, {
-        args: {
-            fId: "00000002",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }, {
-        args: {
-            fId: "00000003",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }, {
-        args: {
-            fId: "00000004",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }, {
-        args: {
-            fId: "00000005",
-            result: false,
-            error: 0,
-            message: erisC.utils.padRight(erisC.utils.asciiToHex("ints not equal"), 32)
-        }
-    }, {
-        args: {
-            fId: "00000006",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }, {
-        args: {
-            fId: "00000007",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }, {
-        args: {
-            fId: "00000008",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }, {
-        args: {
-            fId: "00000009",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }, {
-        args: {
-            fId: "0000000a",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }, {
-        args: {
-            fId: "0000000b",
-            result: false,
-            error: 0,
-            message: erisC.utils.padRight(erisC.utils.asciiToHex("stack overflow"), 32)
-        }
-    }, {
-        args: {
-            fId: "0000000c",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }, {
-        args: {
-            fId: "0000000d",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }, {
-        args: {
-            fId: "0000000e",
-            result: false,
-            error: 0,
-            message: erisC.utils.padRight(erisC.utils.asciiToHex("fail"), 32)
-        }
-    }, {
-        args: {
-            fId: "0000000f",
-            result: true,
-            error: 0,
-            message: ""
-        }
-    }
-];
+var MockProg = function(){
 
+    var result = resultsFromEvent(eventFromData(true, ""));
 
-var mockEvent = {
-    args: {
-        fId: "11111111",
-        result: true,
-        error: 0,
-        message: ""
+    this.init = function(bin, abi, cb){
+        this._abi = abi;
+        cb();
+    };
+
+    this.runTx = function(opts, cb){
+        if(opts.data != "0x365c9f74"){
+            cb(new Error("Signature error."));
+        }
+        cb(null, result);
     }
 };
 
-var MockSub = function () {
-    this.stop = function () {
+var MockProgTwoEvent = function(){
+
+    var result = resultsFromEvents([eventFromData(true, ""), eventFromData(true, "")]);
+
+    this.init = function(bin, abi, cb){
+        this._abi = abi;
+        cb();
     };
-    this.poll = function () {
-    };
+
+    this.runTx = function(opts, cb){
+        if(opts.data != "0x365c9f74"){
+            cb(new Error("Signature error."));
+        }
+        cb(null, result);
+    }
 };
 
-var MockContract = function () {
+var MockProgTwoEventFirstFail = function(){
 
-    this.TestEvent = function (startCallback, callback) {
-        startCallback(null, new MockSub);
-        this._callback = callback;
-    };
+    var result = resultsFromEvents([eventFromData(false, "stack overflow"), eventFromData(true, "")]);
 
-    this.testMock = function (cb) {
-        this._callback(null, mockEvent);
+    this.init = function(bin, abi, cb){
+        this._abi = abi;
         cb();
     };
 
-    this.testMock.signature = function () {
-        return "11111111";
-    };
-
-    this.abi = abi;
+    this.runTx = function(opts, cb){
+        if(opts.data != "0x365c9f74"){
+            cb(new Error("Signature error."));
+        }
+        cb(null, result);
+    }
 };
 
-var MockContractEventParseError = function () {
+var MockProgTwoEventSecondFail = function(){
 
-    this.testMock = function (cb) {
+    var result = resultsFromEvents([eventFromData(true, ""), eventFromData(false, "stack overflow")]);
+
+    this.init = function(bin, abi, cb){
+        this._abi = abi;
         cb();
     };
 
-    this.testMock.signature = function () {
-        return "11111111";
-    };
-
-    this.abi = abiEventFail;
+    this.runTx = function(opts, cb){
+        if(opts.data != "0x365c9f74"){
+            cb(new Error("Signature error."));
+        }
+        cb(null, result);
+    }
 };
 
-var MockContractNoTestFuncsError = function () {
+var MockProgTwoEventBothFail = function(){
 
-    this.testMock = function (cb) {
+    var result = resultsFromEvents([eventFromData(false, "stack overflow"), eventFromData(false, "bug overflow")]);
+
+    this.init = function(bin, abi, cb){
+        this._abi = abi;
         cb();
     };
 
-    this.testMock.signature = function () {
-        return "11111111";
-    };
-
-    this.abi = abiNoTestFuncs;
+    this.runTx = function(opts, cb){
+        if(opts.data != "0x365c9f74"){
+            cb(new Error("Signature error."));
+        }
+        cb(null, result);
+    }
 };
 
-var MockContractSolidityError = function () {
 
-    this.TestEvent = function (startCallback, callback) {
-        startCallback(null, new MockSub);
-        this._callback = callback;
-    };
+var MockProgSolidityError = function(){
 
-    this.testMock = function (cb) {
-        this._callback(new Error('Mock error'));
+    this.init = function(bin, abi, cb){
+        this._abi = abi;
         cb();
     };
 
-    this.testMock.signature = function () {
-        return "11111111";
-    };
-    this.abi = abi;
+    this.runTx = function(opts, cb){
+        cb(new Error("Mock Error"));
+    }
 };
 
-var MockMegaContract = function () {
+var MockMegaProg = function(){
 
-    this.TestEvent = function (startCallback, callback) {
-        startCallback(null, new MockSub);
-        this._callback = callback;
-    };
+    // var result = resultsFromEvents(megaEvents);
 
-    this.testA = function (cb) {
-        this._callback(null, mockMegaEvents[0]);
+    this.init = function(bin, abi, cb){
+        this._abi = abi;
         cb();
     };
 
-    this.testB = function (cb) {
-        this._callback(null, mockMegaEvents[1]);
-        cb();
-    };
+    this.runTx = function(opts, cb){
 
-    this.testC = function (cb) {
-        this._callback(null, mockMegaEvents[2]);
-        cb();
-    };
+        if( opts.data == '0x71dd626b' ||
+            opts.data == '0x925ea78d' ||
+            opts.data == '0xeccbd4c2' ||
+            opts.data == '0x83d79940' ||
 
-    this.testD = function (cb) {
-        this._callback(null, mockMegaEvents[3]);
-        cb();
-    };
+            opts.data == '0xf0d061b4' ||
+            opts.data == '0x54e703ef' ||
+            opts.data == '0xfcf95fc3' ||
+            opts.data == '0x60a1eeb2' ||
+            opts.data == '0x3bb9d2e1' ||
 
-    this.testE = function (cb) {
-        this._callback(null, mockMegaEvents[4]);
-        cb();
-    };
+            opts.data == '0x9fd6efa4' ||
+            opts.data == '0xd9bc9e6b' ||
 
-    this.testF = function (cb) {
-        this._callback(null, mockMegaEvents[5]);
-        cb();
-    };
+            opts.data == '0x785294b0'
+        ){
+            cb(null, resultsFromEvent(eventFromData(true, "")));
+        } else if (opts.data == '0x70e83be3') {
+            cb(null, resultsFromEvent(eventFromData(false, "ints not equal")));
+        } else if(opts.data == '0x692dc5a1') {
+            cb(null, resultsFromEvent(eventFromData(false, "stack overflow")));
+        } else if(opts.data == '0xe16e4753') {
+            cb(null, resultsFromEvent(eventFromData(false, "fail")));
+        } else {
+            cb(new Error("Signature error"));
+        }
 
-    this.testG = function (cb) {
-        this._callback(null, mockMegaEvents[6]);
-        cb();
-    };
 
-    this.testH = function (cb) {
-        this._callback(null, mockMegaEvents[7]);
-        cb();
-    };
-
-    this.testI = function (cb) {
-        this._callback(null, mockMegaEvents[8]);
-        cb();
-    };
-
-    this.testJ = function (cb) {
-        this._callback(null, mockMegaEvents[9]);
-        cb();
-    };
-
-    this.testK = function (cb) {
-        this._callback(null, mockMegaEvents[10]);
-        cb();
-    };
-
-    this.testL = function (cb) {
-        this._callback(null, mockMegaEvents[11]);
-        cb();
-    };
-
-    this.testM = function (cb) {
-        this._callback(null, mockMegaEvents[12]);
-        cb();
-    };
-
-    this.testN = function (cb) {
-        this._callback(null, mockMegaEvents[13]);
-        cb();
-    };
-
-    this.testO = function (cb) {
-        this._callback(null, mockMegaEvents[14]);
-        cb();
-    };
-
-    this.testA.signature = function () {
-        return "00000001";
-    };
-
-    this.testB.signature = function () {
-        return "00000002";
-    };
-
-    this.testC.signature = function () {
-        return "00000003";
-    };
-
-    this.testD.signature = function () {
-        return "00000004";
-    };
-
-    this.testE.signature = function () {
-        return "00000005";
-    };
-
-    this.testF.signature = function () {
-        return "00000006";
-    };
-
-    this.testG.signature = function () {
-        return "00000007";
-    };
-
-    this.testH.signature = function () {
-        return "00000008";
-    };
-
-    this.testI.signature = function () {
-        return "00000009";
-    };
-
-    this.testJ.signature = function () {
-        return "0000000a";
-    };
-
-    this.testK.signature = function () {
-        return "0000000b";
-    };
-
-    this.testL.signature = function () {
-        return "0000000c";
-    };
-
-    this.testM.signature = function () {
-        return "0000000d";
-    };
-
-    this.testN.signature = function () {
-        return "0000000e";
-    };
-
-    this.testO.signature = function () {
-        return "0000000f";
-    };
-
-    this.abi = megaAbi;
+    }
 };
 
 describe('test_runner', function () {
 
-    it("Should complete a successful test-run", function (done) {
-        var mockContract = new MockContract();
-        var testRunner = new TestRunner("mockContract", mockContract);
+    it("Should complete a successful test-run with one successful event", function (done) {
+        var testRunner = new TestRunner("mockContract", null, abi, new MockProg());
         testRunner.on('methodsStarted', ms);
         testRunner.on('methodsDone', md);
         testRunner.run();
 
         function ms(error, tests) {
             assert.ifError(error);
-            assert.deepEqual(tests, [{name: 'testMock', sig: '11111111'}], "Data from 'methodsStarted' is wrong.");
+            assert.deepEqual(tests, [{name: 'testMock', sig: '0x365c9f74'}], "Data from 'methodsStarted' is wrong.");
         }
 
         function md(error, testName, result) {
             assert.ifError(error);
             assert.strictEqual(testName, 'mockContract', "Data from 'methodsStarted' is wrong.");
-            assert.deepEqual(result, [{
+            assert.deepEqual(result, {testMock: {
                 name: 'testMock',
                 result: true,
                 messages: [],
                 errors: []
-            }], "Data from 'methodsStarted' is wrong.");
+            }}, "Data from 'methodsStarted' is wrong.");
             done();
         }
     });
 
-    it("Should fail at finding a proper test-event.", function (done) {
-        var mockContract = new MockContractEventParseError();
-        var testRunner = new TestRunner("testEventFail", mockContract);
+    it("Should complete a successful test-run with two successful events", function (done) {
+        var testRunner = new TestRunner("mockContract", null, abi, new MockProgTwoEvent());
+        testRunner.on('methodsDone', md);
+        testRunner.run();
+
+        function md(error, testName, result) {
+            assert.ifError(error);
+            assert.strictEqual(testName, 'mockContract', "Data from 'methodsStarted' is wrong.");
+            assert.deepEqual(result, {testMock: {
+                name: 'testMock',
+                result: true,
+                messages: [],
+                errors: []
+            }}, "Data from 'methodsStarted' is wrong.");
+            done();
+        }
+    });
+
+    it("Should complete a successful test-run with two events and first fails", function (done) {
+        var testRunner = new TestRunner("mockContract", null, abi, new MockProgTwoEventFirstFail());
+        testRunner.on('methodsDone', md);
+        testRunner.run();
+
+        function md(error, testName, result) {
+            assert.ifError(error);
+            assert.strictEqual(testName, 'mockContract', "Data from 'methodsStarted' is wrong.");
+            assert.deepEqual(result, {testMock: {
+                name: 'testMock',
+                result: false,
+                messages: ["stack overflow"],
+                errors: []
+            }}, "Data from 'methodsStarted' is wrong.");
+            done();
+        }
+    });
+
+    it("Should complete a successful test-run with two test events and second fails", function (done) {
+        var testRunner = new TestRunner("mockContract", null, abi, new MockProgTwoEventSecondFail());
+        testRunner.on('methodsDone', md);
+        testRunner.run();
+
+        function md(error, testName, result) {
+            assert.ifError(error);
+            assert.strictEqual(testName, 'mockContract', "Data from 'methodsStarted' is wrong.");
+            assert.deepEqual(result, {testMock: {
+                name: 'testMock',
+                result: false,
+                messages: ["stack overflow"],
+                errors: []
+            }}, "Data from 'methodsStarted' is wrong.");
+            done();
+        }
+    });
+
+    it("Should complete a successful test-run with two test events and both fails", function (done) {
+        var testRunner = new TestRunner("mockContract", null, abi, new MockProgTwoEventBothFail());
+        testRunner.on('methodsDone', md);
+        testRunner.run();
+
+        function md(error, testName, result) {
+            assert.ifError(error);
+            assert.strictEqual(testName, 'mockContract', "Data from 'methodsStarted' is wrong.");
+            assert.deepEqual(result, {testMock: {
+                name: 'testMock',
+                result: false,
+                messages: ["stack overflow", "bug overflow"],
+                errors: []
+            }}, "Data from 'methodsStarted' is wrong.");
+            done();
+        }
+    });
+
+    it("Should fail at finding a proper test-event", function (done) {
+        var testRunner = new TestRunner("mockContract", null, abiEventFail, null);
         testRunner.on('methodsStarted', ms);
         testRunner.run();
 
@@ -603,9 +441,9 @@ describe('test_runner', function () {
         }
     });
 
-    it("Should fail at finding any test functions.", function (done) {
-        var mockContract = new MockContractNoTestFuncsError();
-        var testRunner = new TestRunner("testNoTestFuncs", mockContract);
+
+    it("Should fail at finding any test functions", function (done) {
+        var testRunner = new TestRunner("mockContract", null, abiNoTestFuncs, null);
         testRunner.on('methodsStarted', ms);
         testRunner.run();
 
@@ -616,73 +454,57 @@ describe('test_runner', function () {
         }
     });
 
-    it("Should fail due to a solidity error", function (done) {
-        var mockContract = new MockContractSolidityError();
-        var testRunner = new TestRunner("mockContractSolidityError", mockContract);
-        testRunner.on('methodsStarted', ms);
+    it("Should fail due to a solidity/VM error", function (done) {
+        var testRunner = new TestRunner("mockContractSolidityError", null, abi, new MockProgSolidityError());
         testRunner.on('methodsDone', md);
         testRunner.run();
 
-        function ms(error, tests) {
-            assert.ifError(error);
-            assert.deepEqual(tests, [{name: 'testMock', sig: '11111111'}], "Data from 'methodsStarted' is wrong.");
-        }
-
         function md(error, testName, result) {
-            assert.equal(result[0].errors[0], "Solidity TestEvent returned an error: Mock error");
+            assert.equal(result.testMock.errors[0], "VM error: Mock Error");
             done();
         }
+
     });
 
-    it("Should complete a successful larger test", function (done) {
+    it("Should complete a test with 15 different test functions", function (done) {
         this.timeout(10000);
 
         var expectedTests = [
-            {name: 'testA', sig: '00000001'},
-            {name: 'testB', sig: '00000002'},
-            {name: 'testC', sig: '00000003'},
-            {name: 'testD', sig: '00000004'},
-            {name: 'testE', sig: '00000005'},
-            {name: 'testF', sig: '00000006'},
-            {name: 'testG', sig: '00000007'},
-            {name: 'testH', sig: '00000008'},
-            {name: 'testI', sig: '00000009'},
-            {name: 'testJ', sig: '0000000a'},
-            {name: 'testK', sig: '0000000b'},
-            {name: 'testL', sig: '0000000c'},
-            {name: 'testM', sig: '0000000d'},
-            {name: 'testN', sig: '0000000e'},
-            {name: 'testO', sig: '0000000f'}];
+            {name: 'testA', sig: '0x71dd626b'},
+            {name: 'testB', sig: '0x925ea78d'},
+            {name: 'testC', sig: '0xeccbd4c2'},
+            {name: 'testD', sig: '0x83d79940'},
+            {name: 'testE', sig: '0x70e83be3'},
+            {name: 'testF', sig: '0xf0d061b4'},
+            {name: 'testG', sig: '0x54e703ef'},
+            {name: 'testH', sig: '0xfcf95fc3'},
+            {name: 'testI', sig: '0x60a1eeb2'},
+            {name: 'testJ', sig: '0x3bb9d2e1'},
+            {name: 'testK', sig: '0x692dc5a1'},
+            {name: 'testL', sig: '0x9fd6efa4'},
+            {name: 'testM', sig: '0xd9bc9e6b'},
+            {name: 'testN', sig: '0xe16e4753'},
+            {name: 'testO', sig: '0x785294b0'}];
 
-        var expectedResult = [
-            {name: 'testA', result: true, messages: [], errors: []},
-            {name: 'testB', result: true, messages: [], errors: []},
-            {name: 'testC', result: true, messages: [], errors: []},
-            {name: 'testD', result: true, messages: [], errors: []},
-            {
-                name: 'testE',
-                result: false,
-                messages: ['ints not equal'],
-                errors: []
-            },
-            {name: 'testF', result: true, messages: [], errors: []},
-            {name: 'testG', result: true, messages: [], errors: []},
-            {name: 'testH', result: true, messages: [], errors: []},
-            {name: 'testI', result: true, messages: [], errors: []},
-            {name: 'testJ', result: true, messages: [], errors: []},
-            {
-                name: 'testK',
-                result: false,
-                messages: ['stack overflow'],
-                errors: []
-            },
-            {name: 'testL', result: true, messages: [], errors: []},
-            {name: 'testM', result: true, messages: [], errors: []},
-            {name: 'testN', result: false, messages: ['fail'], errors: []},
-            {name: 'testO', result: true, messages: [], errors: []}];
+        var expectedResult = {
+            testA: {name: 'testA', result: true, messages: [], errors: []},
+            testB: {name: 'testB', result: true, messages: [], errors: []},
+            testC: {name: 'testC', result: true, messages: [], errors: []},
+            testD: {name: 'testD', result: true, messages: [], errors: []},
+            testE: {name: 'testE', result: false, messages: ['ints not equal'], errors: []},
+            testF: {name: 'testF', result: true, messages: [], errors: []},
+            testG: {name: 'testG', result: true, messages: [], errors: []},
+            testH: {name: 'testH', result: true, messages: [], errors: []},
+            testI: {name: 'testI', result: true, messages: [], errors: []},
+            testJ: {name: 'testJ', result: true, messages: [], errors: []},
+            testK: {name: 'testK', result: false, messages: ['stack overflow'], errors: []},
+            testL: {name: 'testL', result: true, messages: [], errors: []},
+            testM: {name: 'testM', result: true, messages: [], errors: []},
+            testN: {name: 'testN', result: false, messages: ['fail'], errors: []},
+            testO: {name: 'testO', result: true, messages: [], errors: []}
+        };
 
-        var mockContract = new MockMegaContract();
-        var testRunner = new TestRunner("mockMegaContract", mockContract);
+        var testRunner = new TestRunner("mockMegaContract", null, megaAbi, new MockMegaProg());
         testRunner.on('methodsStarted', ms);
         testRunner.on('methodsDone', md);
         testRunner.run();
@@ -694,11 +516,39 @@ describe('test_runner', function () {
 
         function md(error, testName, result) {
             assert.ifError(error);
-            assert.strictEqual(testName, 'mockMegaContract', "Data from 'methodsStarted' is wrong.");
-            assert.deepEqual(result, expectedResult, "Results does not match.");
+            assert.strictEqual(testName, 'mockMegaContract', "Data from methods done is wrong.");
+            for (var o in expectedResult) {
+                if (expectedResult.hasOwnProperty(o)) {
+                    assert.deepEqual(expectedResult[o], result[o], "Results does not match.");
+                }
+            }
             done();
         }
 
     });
 
 });
+
+function eventFromData(result, message){
+    return [null,
+        [new Buffer(EVENT_SIG, 'hex'), new Buffer(formatBoolIp(result), 'hex')],
+        new Buffer(formatStringIp(message), 'hex')
+    ];
+}
+
+function resultsFromEvents(events){
+    return {vm: {logs: events}};
+}
+
+function resultsFromEvent(event){
+    return resultsFromEvents([event]);
+}
+
+function formatStringIp(rawHex){
+    return coder.encodeParam("string", rawHex);
+}
+
+function formatBoolIp(rawHex){
+    return coder.encodeParam("bool", rawHex);
+}
+

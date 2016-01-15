@@ -1,4 +1,4 @@
-import "assertions/Asserter.sol";
+import "./assertions/Asserter.sol";
 
 contract Coin {
 

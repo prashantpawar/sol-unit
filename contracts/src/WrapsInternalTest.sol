@@ -1,4 +1,4 @@
-import "assertions/Asserter.sol";
+import "./assertions/Asserter.sol";
 
 // Wraps an internal multiplication function.
 contract WrapsInternal {

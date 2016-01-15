@@ -1,4 +1,4 @@
-import "assertions/Asserter.sol";
+import "./assertions/Asserter.sol";
 
 contract BasicTypes {
 
@@ -37,39 +37,46 @@ contract BasicTypesTest is Asserter {
     uint constant uintOut = 1234;
     bool constant boolOut = true;
 
-    BasicTypes testee;
-
     function BasicTypesTest(){
-        testee = new BasicTypes();
+
     }
 
     function testOwner() {
+        var testee = new BasicTypes();
         var owner = testee.ownerF();
-        assertAddressesEqual(owner, address(this), "Owner is not caller");
+        assertAddressesEqual(owner, 0, "Owner is not caller");
     }
 
     function testBytes32() {
+        var testee = new BasicTypes();
         testee.setBytes32F(bytes32Out);
         var bytes32In = testee.bytes32F();
         assertBytes32Equal(bytes32Out, bytes32In, "Bytes32 did not match.");
     }
 
     function testInt() {
+        var testee = new BasicTypes();
         testee.setIntF(intOut);
         var intIn = testee.intF();
         assertIntsEqual(intOut, intIn, "Ints did not match.");
     }
 
     function testUint() {
+        var testee = new BasicTypes();
         testee.setUintF(uintOut);
         var uintIn = testee.uintF();
         assertUintsEqual(uintOut, uintIn, "Uints did not match.");
     }
 
     function testBool() {
+        var testee = new BasicTypes();
         testee.setBoolF(boolOut);
         var boolIn = testee.boolF();
         assertBoolsEqual(boolOut, boolIn, "Bools did not match.");
+    }
+
+    function(){
+
     }
 
 }

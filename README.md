@@ -4,11 +4,9 @@
 
 ## Introduction
 
-solUnit (sUnit) is a unit testing framework for Solidity contracts. It runs unit tests and does coverage analysis. It uses the eris-db javascript libraries to run the test against an eris-db (Tendermint) server. 
+solUnit (sUnit) is a unit testing framework for Solidity contracts. It runs unit tests against [javascript Ethereum](https://github.com/ethereumjs).
 
-It used to be based on Ethereum, but switching to our client broke Ethereum compatibility. This will likely be fixed. Whether or not I will maintain compatibility depends largely on how stable their client and javascript API will be going forward (technically there's nothing standing in the way).
-
-The name of this library is solUnit, because sUnit is the Smalltalk unit testing framework; however, given that sunit or sUnit is easier to write, and that there is no chance of confusion since nobody has used (or unit-tested) Smalltalk code since the 90s, those aliases are sometimes used instead. The node package is called s-unit.
+The name of this library is solUnit, because sUnit is the Smalltalk unit testing framework; however, given that sunit or sUnit is easier to write, and that there is no chance of confusion since nobody has unit-tested (or used) Smalltalk since the 90s, those aliases are sometimes used instead. The node package is called s-unit.
 
 ## Installing
 
@@ -16,15 +14,9 @@ Only tested on linux (Ubuntu 14.04, 14.10, 15.04).
 
 `npm install s-unit`
 
-Use the `--global` flag to get the `sunit` command-line version onto your path.
-
-You need an `eris-db` server running in order to do tests, and it needs to run a chain that uses the files provided in `./resources/defaultdb`. The easiest way to use this library now is by copying that folder somewhere, cd into that directory and run `eris-db .`, then keep that process running while working on the code/tests. This will become simpler.
+Use the `--global` flag to get the `sunit` command-line version into PATH.
 
 ## Usage
-
-You either run it from the terminal or from javascript.
-
-### Terminal
 
 The executable name is `sunit`. If you install it globally you should get it on your path. Try `$ sunit -V` and it should print out the version.
 
@@ -39,99 +31,37 @@ $ sunit --help
 
     -h, --help           output usage information
     -V, --version        output the version number
-    -c, --coverage       Calculate coverage. [default=false]
     -m, --debugMessages  Print debugging information. [default=false]
-    -r, --url <url>      Url to blockchain client. [default='http://localhost:1337/rpc']
     -d, --dir <dir>      Directory in which to do the tests. [default=current directory]
-
-
 ```
 
-Example: `$ sunit -c ArrayTest CoinTest `
+Example: `$ sunit -c ArrayTest CoinTest` will look for those tests in the current directory.
 
 Test names are the test contract names. They should always end in `Test` (no extension). 
 
-### Running from javascript
-
-The base class is `SUnit`.
+The library can be run from javascript as well:
 
 ```
 var SUnit = require('s-unit');
 
-var tests = ['CoinTest', 'BallotTest', ... ];
-var baseDir = './tests';
-var erisdbURL = 'http://localhost:1337/rpc';
-var doCoverage = true;
+var tests = new SUnit();
 
-sUnit.on('suiteStarted', function(){ console.log("Starting tests!"); });
-sUnit.on('suiteDone', function(){ console.log("Done!"); });
+// Need to set event listeners up manually. 
+  
+sUnit.on('suiteStarted', function(error, tests){console.log(tests)});
+sUnit.on('contractStarted', someFunc);
+// ...
 
-sUnit.start(tests, baseDir, erisdbURL, doCoverage);
+tests.start(['ArrayTest', 'CoinTest'], 'rootdir');
 ```
 
-- The first param of the start method, `tests`, is the array of tests that are to be run.
+Event-listeners are documented in the library structure section near the bottom of this document.
 
-- The second param, `baseDir`, is the directory where the compiled solidity files are.
+## Motivation
 
-- The third param, `erisdbURL`, is the URL to the eris-db rpc
+Unit testing Solidity using Solidity has the same benefits as unit testing anything else. It is perfect for doing input validation and other things, to complement formal analysis etc. 
 
-- The fourth param, `doCoverage`, is whether or not coverage analysis should be done.
-
-#### Events
-
-`SUnit` uses events. It extends Node.js' `EventEmitter`. 
-
-The events you may listen to are these:
-
-##### Suite started
-
-id: `'suiteStarted'` - The suite has started. 
- 
-callback params: `error`, `tests` - array of test names. Keep in mind these may not be the same as you entered, because some may not have existed or you could have skipped the names so that it found all tests in the directory. This is the list of tests (test contracts) that was actually found.
-
-##### Suite done
- 
-id: `'suiteDone'` - The suite is done. 
- 
-callback params: `stats` - collection of stats for all test contracts.
- 
-##### Contracts started
- 
-id: `'contractStarted'` - A new test contract is starting. 
-
-callback params: `error`, `testName` - the test name.
- 
-##### Contracts done
-
-id: `'contractDone'` - A contract is done. 
-
-callback params: `error`
-
-##### Methods started
-
-id: `'methodsStarted'` - The test methods in the current contract are about to be run.
-
-callback params: `methodNames` - A list of all the test functions that was discovered in the current contract, and will be run.
-
-##### Methods done
-
-id: `'methodsDone'` - The methods are done. 
-
-callback params: `error`, `results` - the combined test-results.
- 
-##### Method started
-
-id: `'methodStarted'` - A test method in the current contract are being run.
-
-callback params: `methodName` - The name of the method.
-
-##### Method done
-
-id: `'methodDone'` - The method is done and the results are in. 
-
-callback params: `results` - the test results. 
-
-![sol_unit_diag.png](https://github.com/androlo/sol-unit/blob/master/resources/docs/sol_unit_diag.png "SolUnit structure")
+Calling contracts from javascript (web3.js in a web-page or alethzero) is integration testing, not unit testing. A good project should in my opinion have both.
 
 ## Writing tests
 
@@ -139,29 +69,34 @@ The easiest way to start writing unit-testing contracts is to look at the exampl
 
 ### Test format
 
-The rules for a unit testing contract right now (0.2.x) are these:
+The rules for a unit testing contract right now (0.3.x) are these:
 
 1. Test-contracts must use the same name as the test target but end with `Test`. If you want to test a contract named `Arrays`, name the test-contract `ArraysTest`. If you want to test a contract named `Coin`, name the test-contract `CoinTest`, and so on.
 
 2. Test function names must start with `test`, e.g. `function testAddTwoInts()`, and they must be public. There is no limit on the number of test-functions that can be in each test-contract.
 
-3. The test-contract may use a test event: `event TestEvent(address indexed fId, bool indexed result, uint error, bytes32 indexed message);`. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol` (comes with the library). Its assertion methods has a proper test event already set up which will fire automatically when an assertion is made. There is no limit on the number of assertions in a test method.
+3. The test-contract may use a test event: `event TestEvent(bool indexed result, string message);`. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol` (comes with the library). Its assertion methods has a proper test event already set up which will fire automatically when an assertion is made. There is no limit on the number of assertions in a test method.
 
-NOTE: If none of the existing assertions would fit, then it is always possible to extend the Asserter.sol contract or to calculate the result in the test-function and use `assertTrue` or `assertFalse`.
+NOTE: If none of the existing assertions would fit, extend the Asserter.sol contract or calculate the result in the test-function and use `assertTrue` or `assertFalse`.
 
 - A test **passes** if no assertion fails (i.e. `result` is `true` in every test event). If no assertions are made, the test will pass automatically. If at least one assertion fails, the test will **not pass**.
 
 **Example of a simple storage value test**
 
+
 ```
-import "assertions/Asserter.sol";
+import "./assertions/Asserter.sol";
 
 contract Demo {
     
-    uint public x = 0;
+    uint _x = 0;
     
-    function setX(uint _x){
-        x = _x;
+    function setX(uint x){
+        _x = x;
+    }
+    
+    function getX() constant returns (uint x){
+        return _x;
     }
 }
 
@@ -169,15 +104,13 @@ contract Demo {
 contract DemoTest is Asserter {
 
     uint constant TEST_VAL = 55;
-
-    // create the contract directly or do it via the constructor.
-    Demo demo = new Demo();
     
-    // Test method starts with 'test' and will thus be recognized by solUnit (2).
+    // Test method starts with 'test' and will thus be recognized (2).
     function testSetX(){
-        testee.setX(TEST_VAL);
-        // Public accessor for 'x'.
-        var x = testee.x();
+        Demo demo = new Demo();
+        assertAddressNotZero(address(demo), "Failed to deploy demo contract");
+        demo.setX(TEST_VAL);
+        var x = demo.getX();
         // Use assert method from Asserter contract (3). It will automatically fire off a test event.
         assertUintsEqual(x, TEST_VAL, "Values are not equal");
     }
@@ -189,25 +122,13 @@ There is plenty more in the `contracts/src` folder. It's actually not that hard 
 
 ### Build constraints
 
-This library uses compiled files. It will probably be changed later when accessing the compiler becomes easier. These are the files you will need to test:
-
-- The `.binary` and `.abi` files for the test contracts must be available in the working directory.
-
-- For coverage, the `.ast` file of the test contract, and `.abi` file of the `testee` must be in the working directory as well.
-
-The easiest way possible is to just compile everything with `--binary file --json-abi file --ast-json file`. That will give you all the needed files (and more).
+The `.bin` and `.abi` files for the test contracts must be available in the working directory.
 
 *Example*
 
-I want to unit test a contract named `Bank`. I create `BankTest`, compile the sources, and make sure the following files are created: `BankTest.binary`, `BankTest.abi`. If i intend to check coverage I also make sure to include: `BankTest.ast` and `Bank.abi`.
+I want to unit test a contract named `Bank`. I create `BankTest`, compile the sources, and make sure the following files are created: `BankTest.bin`, `BankTest.abi`.
 
-To make sure I get all of this, I compile with: `solc --binary file --json-abi file --ast-json file BankTest.sol`
-
-#### Tips on building solidity projects
-
-There's a contract build automation script in the gulpfile that uses my [gulp-smake](https://github.com/androlo/gulp-smake) tool. What it does is it copies all the sources into a temporary folder, compiles them, moves the compiled files into a build folder and then finishes up by removing the temp. The reason it uses temp is because later it might want to pull in source files from other projects to use when building, and those should not be persisted in the base source folder. Also, their sources will be added to a folder inside the temporary root folder with the same name/id as the project, so if I pull in the s-unit `assertions` library, and its source folder only contains the file `Asserter.sol`, it would end up in the temporary source folder as `temp_sources/assertions/Asserter.sol`. This will make dependency management a lot easier.  
-
-The `gulp-smake` tool will improve over time. The goal is to eventually have a good solidity contract build task that can be chained with a unit testing task so that all the building and testing of contracts can be integrated with the rest of the code.
+To make sure I get all of this, I compile with: `solc --bin --abi -o . BankTest.sol`. They will end up in the same folder as the sources in this case.
 
 ### TestEvent and assertions
 
@@ -266,7 +187,7 @@ The contracts folder comes with a number of different examples.
 
 `mocha` or `npm test`.
 
-I cut out most of the tests with the update, as they were centered around Ethereum. Will add more tests gradually.
+I cut out most of the tests with the update to js Ethereum. Will add more tests gradually.
 
 ## Library structure
 
@@ -276,9 +197,62 @@ The `SUnit` class is where everything is coordinated. It deploys the test contra
 
 The `TestRunner` takes a test contract, finds all test methods in it and run those. It also sets up a listener for solidity events and uses those events to determine if a test was successful or not. It is normally instantiated and managed by a `SUnit` object.
 
-`coverage.analyze` uses a test contract AST and its targets ABI to determine which of the targets (public) methods are called during the test.
+![sol_unit_diag.png](https://github.com/androlo/sol-unit/blob/master/resources/docs/sol_unit_diag.png "SolUnit structure")
 
-In the diagram, the executable would gather tests and set things up, then `SUnit` would deal with the contract execution section. Coverage analysis is not part of this diagram because it has no effect on the general program structure (it's just a synchronous post-processing step).
+In the diagram, the executable would gather tests and set things up, then `SUnit` would deal with the contract execution section.
 
-Presentation of test data is not part of the diagram either. `SUnit` does no presentation of its own - it only passes the data back through the events. The way reporting works with the command-line tool is it listens to all  SUnit events and prints the reported data using a special test-logger.
+Presentation of test data is not part of the diagram. The core `SUnit` library does not present - it only passes data through events. The way presentation works in the command-line tool is it listens to all SUnit events and prints the reported data using a special test-logger.
 
+#### Events
+
+`SUnit` extends Node.js' `EventEmitter`. 
+
+The events you may listen to are these:
+
+##### Suite started
+
+id: `'suiteStarted'` - The suite has started. 
+ 
+callback params: `error`, `tests` - array of test names. Keep in mind these may not be the same as you entered, because some may not have existed or you could have skipped the names so that it found all tests in the directory. This is the list of tests (test contracts) that was actually found.
+
+##### Suite done
+ 
+id: `'suiteDone'` - The suite is done. 
+ 
+callback params: `stats` - collection of stats for all test contracts.
+ 
+##### Contracts started
+ 
+id: `'contractStarted'` - A new test contract is starting. 
+
+callback params: `error`, `testName` - the test name.
+ 
+##### Contracts done
+
+id: `'contractDone'` - A contract is done. 
+
+callback params: `error`
+
+##### Methods started
+
+id: `'methodsStarted'` - The test methods in the current contract are about to be run.
+
+callback params: `methodNames` - A list of all the test functions that was discovered in the current contract, and will be run.
+
+##### Methods done
+
+id: `'methodsDone'` - The methods are done. 
+
+callback params: `error`, `results` - the combined test-results.
+ 
+##### Method started
+
+id: `'methodStarted'` - A test method in the current contract are being run.
+
+callback params: `methodName` - The name of the method.
+
+##### Method done
+
+id: `'methodDone'` - The method is done and the results are in. 
+
+callback params: `results` - the test results. 

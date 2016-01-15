@@ -2,7 +2,7 @@ var logger = require('../lib/logger');
 var testLog = logger.testLogger();
 
 exports.presentSuiteStarted = function (error, tests) {
-    if(error){
+    if (error) {
         console.log("Eris-db error, aborting: " + error.message);
         return;
     }
@@ -37,12 +37,12 @@ exports.presentMethodDone = function (results) {
     } else {
         if (results.errors.length > 0) {
             testLog.fail(ti + "FAILED:");
-            for(var j = 0; j < results.errors.length; j++){
-                testLog.fail("Error: " + (results.errors[i] || "(no message)"));
+            for (var j = 0; j < results.errors.length; j++) {
+                testLog.fail("Error: " + (results.errors[j] || "(no message)"));
             }
         } else {
             testLog.fail(ti + "FAILED:");
-            for(var j = 0; j < results.messages.length; j++){
+            for (var j = 0; j < results.messages.length; j++) {
                 testLog.fail("Error: " + (results.messages[j] || "(no message)"));
             }
         }
@@ -53,19 +53,17 @@ exports.presentMethodsDone = function (error, contractName, stats) {
     var r = true;
     console.log("");
     testLog.info("Test results:");
-    var testResults = stats.testResults;
-    var results = {successful: 0, total: testResults.length};
-    for (var i = 0; i < testResults.length; i++) {
-        var testResult = testResults[i];
-        r = r && testResult.result;
+    for (var o in stats) {
+        // Shut linter up...
+        if (stats.hasOwnProperty(o)) {
+            var data = stats[o];
+            r = r && data.result;
+        }
     }
     if (r) {
         testLog.success("*** All tests PASSED ***\n")
     } else {
         testLog.fail("!!! Some tests FAILED !!!\n")
-    }
-    if (stats.coverageResults) {
-        presentCoverage(stats.coverageResults);
     }
 };
 
@@ -93,7 +91,7 @@ function presentCoverage(coverage) {
         covered += coverage[i].covered ? 1 : 0;
     }
     // Percentage.
-    var p = (covered / coverage.length)*100;
+    var p = (covered / coverage.length) * 100;
 
     testLog.info("Coverage report:");
     if (p < 55) {
