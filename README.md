@@ -149,7 +149,7 @@ If the contract extends `Asserter`, it will inherit `TestEvent`, and can also us
 **Example of a bare-bones test contract**
 
 ```
-contract Something(){
+contract Something {
     
     int _something;
     
