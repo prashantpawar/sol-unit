@@ -37,9 +37,9 @@ $ sunit --help
     -d, --dir <dir>      Directory in which to do the tests. [default=current directory]
 ```
 
-Example: `$ sunit -c ArrayTest CoinTest` will look for those tests in the current directory.
+Example: `$ sunit ArrayTest CoinTest` will look for those tests in the current directory, or simply typing `sunit` in a folder with tests in it will run all tests in the folder.
 
-Test names are the test contract names. They should always end in `Test` (no extension). 
+Test names are the test contract names. They should always end in `Test` (no extension).
 
 The library can be run from javascript as well:
 
