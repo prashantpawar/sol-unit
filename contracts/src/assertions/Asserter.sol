@@ -1,5 +1,5 @@
 /// @title Asserter
-/// @author Andreas Olofsson (andreas@erisindustries.com)
+/// @author Andreas Olofsson (androlo1980@gmail.com)
 contract Asserter {
 
     /// @dev The test event is used to read the test results.

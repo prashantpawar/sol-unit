@@ -61,9 +61,9 @@ Event-listeners are documented in the library structure section near the bottom 
 
 ## Motivation
 
-Unit testing Solidity using Solidity has the same benefits as unit testing anything else. It is perfect for doing input validation and other things, to complement formal analysis etc. 
+Unit testing Solidity using Solidity has the same benefits as unit testing anything else. It is perfect for testing input validation and other things, to complement formal analysis etc. 
 
-Calling contracts from javascript (web3.js in a web-page or alethzero) is integration testing, not unit testing. A good project should in my opinion have both.
+Calling contracts from javascript (web3.js in a web-page or alethzero) is integration testing, not unit testing. A good project should in my opinion have both kinds of tests.
 
 ## Writing tests
 
@@ -192,7 +192,7 @@ The contracts folder comes with a number of different examples.
 
 `mocha` or `npm test`.
 
-It is also possible to run the executable from the `./contracts/build` folder, either `sunit` if it is installed globally, or `../../bin/sunit.js`. 
+It is also possible to run the executable from the `./contracts/build` folder, either `sunit` if it is installed globally, or `../../bin/sunit.js`. One test always fails, just to show how it looks. 
 
 ## Library structure
 

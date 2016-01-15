@@ -1,7 +1,7 @@
 {
   "name": "s-unit",
   "version": "0.3.2",
-  "description": "Unit testing framework for Solidity contracts for eris-db.",
+  "description": "Unit testing framework for Solidity contracts.",
   "main": "./index.js",
   "directories": {
     "lib": "./lib"
@@ -63,12 +63,11 @@
     "contracts",
     "testing"
   ],
-  "author": "AndreasEris",
+  "author": "Andreas Olofsson",
   "authors": [
     {
       "name": "Andreas Olofsson",
-      "email": "andreas@erisindustries.com",
-      "url": "http://erisindustries.com"
+      "email": "androlo1980@gmail.com"
     }
   ],
   "preferGlobal": true,
