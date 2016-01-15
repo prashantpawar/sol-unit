@@ -1,0 +1,1 @@
+[{"constant":false,"inputs":[],"name":"testLevelOne","outputs":[{"name":"val","type":"int256"}],"type":"function"},{"constant":false,"inputs":[],"name":"idPub","outputs":[{"name":"val","type":"int256"}],"type":"function"}]

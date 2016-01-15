@@ -1,14 +1,14 @@
-# solUnit
+# sUnit
 
-**Disclaimer: Running and using this libary is difficult. It is alpha software, and it uses an alpha client to test code written in a language (Solidity) that is still under development.**
+**Disclaimer: Running and using this library is difficult. It is alpha software, and it uses an alpha client to test code written in a language (Solidity) that is still under development.**
 
 ## Introduction
 
-solUnit (sUnit) is a unit testing framework for Solidity contracts. It runs unit tests against [javascript Ethereum](https://github.com/ethereumjs).
+sUnit (solUnit) is a unit testing framework for Solidity contracts. It runs unit tests against [javascript Ethereum](https://github.com/ethereumjs).
 
-The name of this library is solUnit, because sUnit is the Smalltalk unit testing framework; however, given that sunit or sUnit is easier to write, and that there is no chance of confusion since nobody has unit-tested (or used) Smalltalk since the 90s, those aliases are sometimes used instead. The node package is called s-unit.
+The name of this library is solUnit, because sUnit is the Smalltalk unit testing framework, but because there is no chance of confusion (nobody has unit-tested Smalltalk since the 90s) those aliases are sometimes used instead. The node package is called s-unit, but the github repo is sol-unit.
 
-**NOTE**: Static coverage analysis (parsing syntax trees) has been removed in `0.3` to be replaced by runtime analysis later, along with some other things. 
+**NOTE**: Static coverage analysis (parsing syntax trees) has been removed in `0.3` to be replaced by runtime analysis later. I plan on adding other analytics tools as well, with the new VM and all... 
 
 ## Installing
 
@@ -191,6 +191,8 @@ The contracts folder comes with a number of different examples.
 ## Tests
 
 `mocha` or `npm test`.
+
+It is also possible to run the executable from the `./contracts/build` folder, either `sunit` if it is installed globally, or `../../bin/sunit.js`. 
 
 ## Library structure
 

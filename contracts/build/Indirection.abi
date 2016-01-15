@@ -1,0 +1,1 @@
+[{"constant":true,"inputs":[],"name":"actuallyDoesSomething","outputs":[{"name":"val","type":"int256"}],"type":"function"},{"constant":true,"inputs":[],"name":"testMethod","outputs":[{"name":"val","type":"int256"}],"type":"function"}]

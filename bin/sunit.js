@@ -14,7 +14,7 @@ var presenter = require('./log_presenter');
 
 var log;
 
-var CURRENT_VERSION = '0.3.1';
+var CURRENT_VERSION = '0.3.2';
 
 // Run
 main();
