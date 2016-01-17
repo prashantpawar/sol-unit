@@ -1,6 +1,6 @@
 {
   "name": "s-unit",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Unit testing framework for Solidity contracts.",
   "main": "./index.js",
   "directories": {

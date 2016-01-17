@@ -1,5 +1,5 @@
 CONTRACTS=$(addprefix ./src/, Asserter.sol)
-TEST_CONTRACTS=$(addprefix ./test/, ArrayTest.sol Bank.sol BankTest.sol BasicTypesTest.sol DemoTest.sol CoinTest.sol IndirectionTest.sol StructsTest.sol WrapsInternalTest.sol)
+TEST_CONTRACTS=$(addprefix ./test/, ArrayTest.sol Bank.sol BankTest.sol BasicTypesTest.sol CoinTest.sol DemoTest.sol GlobalsTest.sol IndirectionTest.sol StructsTest.sol WrapsInternalTest.sol)
 
 
 all: release tests docs
