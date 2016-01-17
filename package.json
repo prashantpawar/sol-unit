@@ -1,6 +1,6 @@
 {
   "name": "sol-unit",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "description": "Unit testing framework for Solidity contracts.",
   "main": "./index.js",
   "directories": {
@@ -10,7 +10,7 @@
     "test": "mocha"
   },
   "bin": {
-    "sunit": "bin/solunit.js"
+    "solunit": "bin/solunit.js"
   },
   "dependencies": {
     "async": "^1.3.0",
