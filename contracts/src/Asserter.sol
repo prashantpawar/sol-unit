@@ -76,7 +76,7 @@ contract Asserter {
     /// @dev Assert that the bytes32 'bts' is zero.
     /// @param bts the bytes(32).
     /// @param message The message to display if the assertion fails.
-    function assertBytes32IsZero(bytes32 bts, string message) internal constant returns (bool result){
+    function assertBytes32Zero(bytes32 bts, string message) internal constant returns (bool result){
         result = (bts == 0);
         report(result, message);
     }
