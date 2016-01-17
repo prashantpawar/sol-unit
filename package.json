@@ -1,6 +1,6 @@
 {
   "name": "sol-unit",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "description": "Unit testing framework for Solidity contracts.",
   "main": "./index.js",
   "directories": {
@@ -48,11 +48,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/androlo/sol-unit"
+    "url": "https://github.com/smartcontractproduction/sol-unit"
   },
-  "homepage": "https://github.com/androlo/sol-unit",
+  "homepage": "https://github.com/smartcontractproduction/sol-unit",
   "bugs": {
-    "url": "https://github.com/androlo/sol-unit/issues"
+    "url": "https://github.com/smartcontractproduction/sol-unit/issues"
   },
   "keywords": [
     "javascript",
