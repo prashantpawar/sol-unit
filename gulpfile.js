@@ -18,8 +18,12 @@
 var gulp = require('gulp');
 var replace = require('gulp-replace');
 var process = require('child_process');
-
+var solUnit = require('./index');
+var path = require('path');
 var version = require('./lib/version.json');
+
+var tests = ['ArrayTest', 'BankTest', 'BasicTypesTest', 'CoinTest', 'DemoTest', 'GlobalsTest', 'IndirectionTest', 'StructsTest', 'WrapsInternalTest'];
+var testFolder = path.join(__dirname, 'contracts', 'build', 'test');
 
 // ********************** version **********************
 
@@ -47,6 +51,12 @@ gulp.task('build-contracts', function(cb) {
         process.exec('make', {cwd: './contracts'}, function (error) {
             cb(error);
         });
+    });
+});
+
+gulp.task('test-contracts', function(cb) {
+    solUnit.runTests(tests, testFolder, true, function(stats){
+        cb();
     });
 });
 

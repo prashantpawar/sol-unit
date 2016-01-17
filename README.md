@@ -1,22 +1,33 @@
 # sol-unit
 
+Unit tests for Solidity contracts.
+
 **Disclaimer: Running and using this library is difficult. It is alpha software, and it uses an alpha client to test code written in a language (Solidity) that is still under development. The library should be considered experimental.**
+
+## Table of Content
+
+1. [Introduction](#introduction)
+2. [Installation and Usage](#installation-and-usage)
+3. [Writing tests](#writing-tests)
+4. [Examples](#examples)
+5. [Testing](#testing)
+6. [Program structure](#program-structure)
 
 ## Introduction
 
 solUnit is a unit testing framework for Solidity contracts. It runs unit tests against [javascript Ethereum](https://github.com/ethereumjs).
 
-**NOTE**: Static coverage analysis (parsing syntax trees) has been removed in `0.3` to be replaced by runtime analysis later. I plan on adding other analytics tools as well, with the new VM and all... 
+The tests are run in a controlled environment, using extremely high gas-limit and a standard account with an extreme amount of Ether. More blockchain/VM settings will become available with time, along with extra analysis tools.
 
-## Installing
+**NOTE**: Static coverage analysis (parsing syntax trees) was been removed in `0.3` to be replaced with runtime analysis at some later date.
 
-Only tested on linux (Ubuntu 14.04, 14.10, 15.04).
+## Installation and Usage
+
+Officially supported on 64 bit Ubuntu (14.04, 14.10, 15.04).
 
 `npm install sol-unit`
 
-Use the `--global` flag to get the `solunit` command-line version into PATH.
-
-## Usage
+Use the `--global` flag to install the `solunit` command-line version.
 
 The executable name is `solunit`. If you install it globally you should get it on your path. Try `$ solunit -V` and it should print out the version.
 
@@ -85,12 +96,6 @@ TestResults = {
 ```
 
 Event-listeners are documented in the library structure section near the bottom of this document.
-
-## Motivation
-
-Unit testing Solidity using Solidity has the same benefits as unit testing anything else. It is perfect for testing input validation and other things, to complement formal analysis etc. 
-
-Calling contracts from javascript (web3.js in a web-page or alethzero) is integration testing, not unit testing. A good project should in my opinion have both kinds of tests.
 
 ## Writing tests
 
@@ -211,13 +216,13 @@ contract SomethingTest {
 
 The contracts folder comes with a number of different examples.
 
-## Tests
+## Testing
 
 `mocha` or `npm test`.
 
 It is also possible to run the executable from the `./contracts/build` folder, either `solunit` if it is installed globally, or `../../../bin/solunit.js`. NOTE: One test always fails, just to show how it looks.
 
-## Library structure
+## Program structure
 
 The framework uses Solidity events (log events) to do the tests. It uses the afore-mentioned Solidity `TestEvent` to get confirmation from contract test-methods.
 
