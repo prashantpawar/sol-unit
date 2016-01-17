@@ -1,5 +1,6 @@
 /// @title Asserter
 /// @author Andreas Olofsson (androlo1980@gmail.com)
+/// @notice Assertions for unit testing contracts.
 contract Asserter {
 
     /// @dev The test event is used to read the test results.

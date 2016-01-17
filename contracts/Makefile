@@ -1,7 +1,17 @@
-CONTRACTS:=$(addprefix ./src/, assertions/Asserter.sol ArrayTest.sol Bank.sol BankTest.sol BasicTypesTest.sol DemoTest.sol CoinTest.sol IndirectionTest.sol StructsTest.sol WrapsInternalTest.sol)
+CONTRACTS=$(addprefix ./src/, Asserter.sol)
+TEST_CONTRACTS=$(addprefix ./test/, ArrayTest.sol Bank.sol BankTest.sol BasicTypesTest.sol DemoTest.sol CoinTest.sol IndirectionTest.sol StructsTest.sol WrapsInternalTest.sol)
 
-all:
-	solc --bin --abi -o ./build $(CONTRACTS)
+
+all: release tests docs
+
+release:
+	solc --bin --abi -o ./build/release $(CONTRACTS)
+
+tests:
+	solc --bin --abi -o ./build/tests $(CONTRACTS) $(TEST_CONTRACTS)
+
+docs:
+	solc --devdocs -o ./build/docs $(CONTRACTS)
 
 clean:
 	rm -rf ./build

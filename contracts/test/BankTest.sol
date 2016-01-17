@@ -1,4 +1,4 @@
-import "./assertions/Asserter.sol";
+import "../src/Asserter.sol";
 import "./Bank.sol";
 
 contract AccountOwner {

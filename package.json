@@ -1,6 +1,6 @@
 {
   "name": "s-unit",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Unit testing framework for Solidity contracts.",
   "main": "./index.js",
   "directories": {
@@ -19,6 +19,7 @@
     "crypto-js": "^3.1.4",
     "deep-equal": "^1.0.0",
     "ethereumjs-account": "^2.0.0",
+    "ethereumjs-block": "^1.2.1",
     "ethereumjs-tx": "^0.7.1",
     "ethereumjs-util": "^2.6.0",
     "ethereumjs-vm": "^1.1.0",

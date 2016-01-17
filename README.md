@@ -1,6 +1,6 @@
 # sUnit
 
-**Disclaimer: Running and using this library is difficult. It is alpha software, and it uses an alpha client to test code written in a language (Solidity) that is still under development.**
+**Disclaimer: Running and using this library is difficult. It is alpha software, and it uses an alpha client to test code written in a language (Solidity) that is still under development. The library should be considered experimental.**
 
 ## Introduction
 
@@ -188,7 +188,7 @@ The contracts folder comes with a number of different examples.
 
 `mocha` or `npm test`.
 
-It is also possible to run the executable from the `./contracts/build` folder, either `sunit` if it is installed globally, or `../../bin/sunit.js`. One test always fails, just to show how it looks. 
+It is also possible to run the executable from the `./contracts/build` folder, either `sunit` if it is installed globally, or `../../../bin/sunit.js`. NOTE: One test always fails, just to show how it looks.
 
 ## Library structure
 
