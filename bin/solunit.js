@@ -9,8 +9,8 @@ var fuzzy = require('fuzzy');
 var path = require('path');
 var test = require('./../lib/test_runner');
 var logger = require('../lib/logger');
-var SolUnit = require('../lib/s_unit');
-var presenter = require('./log_presenter');
+var SolUnit = require('../lib/sol_unit');
+var presenter = require('./../lib/log_presenter');
 
 var log;
 
@@ -200,7 +200,7 @@ function renderLogo() {
     console.log("|                |___/ \\___/ |_| |_||_| \\__|                |");
     console.log("|                                                           |");
     console.log("|                    By: Andreas Olofsson                   |");
-    console.log("|                e-mail: androlo1980@gmail.com             |");
+    console.log("|                e-mail: androlo1980@gmail.com              |");
     console.log("|                                                           |");
     console.log("*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*");
 }

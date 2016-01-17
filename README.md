@@ -1,12 +1,10 @@
-# sUnit
+# sol-unit
 
 **Disclaimer: Running and using this library is difficult. It is alpha software, and it uses an alpha client to test code written in a language (Solidity) that is still under development. The library should be considered experimental.**
 
 ## Introduction
 
-sUnit (solUnit) is a unit testing framework for Solidity contracts. It runs unit tests against [javascript Ethereum](https://github.com/ethereumjs).
-
-The name of this library is solUnit, because sUnit is the Smalltalk unit testing framework, but because there is no chance of confusion (nobody has unit-tested Smalltalk since the 90s) those aliases are sometimes used instead. The node package is called s-unit, but the github repo is sol-unit.
+solUnit is a unit testing framework for Solidity contracts. It runs unit tests against [javascript Ethereum](https://github.com/ethereumjs).
 
 **NOTE**: Static coverage analysis (parsing syntax trees) has been removed in `0.3` to be replaced by runtime analysis later. I plan on adding other analytics tools as well, with the new VM and all... 
 
@@ -14,20 +12,20 @@ The name of this library is solUnit, because sUnit is the Smalltalk unit testing
 
 Only tested on linux (Ubuntu 14.04, 14.10, 15.04).
 
-`npm install s-unit`
+`npm install sol-unit`
 
-Use the `--global` flag to get the `sunit` command-line version into PATH.
+Use the `--global` flag to get the `solunit` command-line version into PATH.
 
 ## Usage
 
-The executable name is `sunit`. If you install it globally you should get it on your path. Try `$ sunit -V` and it should print out the version.
+The executable name is `solunit`. If you install it globally you should get it on your path. Try `$ solunit -V` and it should print out the version.
 
 To see all the options:
 
 ```
-$ sunit --help
+$ solunit --help
 
-  Usage: sunit [options] <test ...>
+  Usage: solunit [options] <test ...>
 
   Options:
 
@@ -37,24 +35,53 @@ $ sunit --help
     -d, --dir <dir>      Directory in which to do the tests. [default=current directory]
 ```
 
-Example: `$ sunit ArrayTest CoinTest` will look for those tests in the current directory, or simply typing `sunit` in a folder with tests in it will run all tests in the folder.
-
-Test names are the test contract names. They should always end in `Test` (no extension).
+Example: `$ solunit ArrayTest BasicTypesTest` will look for `.bin` and `.abi` files for those test-contracts in the current directory. Simply typing `solunit` will run all tests found in the current directory. Test contracts must always end in `Test`.
 
 The library can be run from javascript as well:
 
 ```
-var SUnit = require('s-unit');
+var sUnit = require('sol-unit');
 
-var tests = new SUnit();
-
-// Need to set event listeners up manually. 
-  
-sUnit.on('suiteStarted', function(error, tests){console.log(tests)});
-sUnit.on('contractStarted', someFunc);
 // ...
 
-tests.start(['ArrayTest', 'CoinTest'], 'rootdir');
+sUnit.runTests(['ArrayTest', 'BasicTypesTest'], 'dirWithTestsInThem', true, function(error, stats){
+    console.log(error);
+    console.log(stats);
+});
+```
+
+* First param is an array of strings of the test names.
+* Second param is the directory in which the tests `.bin` and `.abi` files can be found.
+* Third is whether or not to print test data (looks similar to mocha).
+* Fourth is an error first callback that returns test statistics.
+
+The stats object contains a `testUnits` field which has data of all the test units in them, along with a `total` and `successful` field which is the total number of tests and the number of tests that succeeded, respectively. Note that each unit is a contract with a number of different tests in them (the test-functions).
+
+```
+{
+    testUnits: {
+        ArrayTest: TestResults,
+        BasicTypesTest: TestResults,
+        ...
+    }
+    successful: 5,
+    total: 7
+}
+```
+
+`TestResults` is an object with all the test functions of the test contract in it, mapped to a simple struct containing:
+
+1. The name of the test.
+2. The result (true if all assertions in the function were true, otherwise false).
+3. The messages of any failed assertions.
+4. Error messages (currently not used).
+
+```
+TestResults = {
+    testPop: { name: 'testPop', result: false, messages: ["Array length not 1"], errors: [] },
+    testPush: { name: 'testPush', result: true, messages: [], errors: [] },
+    ...
+}
 ```
 
 Event-listeners are documented in the library structure section near the bottom of this document.
@@ -188,7 +215,7 @@ The contracts folder comes with a number of different examples.
 
 `mocha` or `npm test`.
 
-It is also possible to run the executable from the `./contracts/build` folder, either `sunit` if it is installed globally, or `../../../bin/sunit.js`. NOTE: One test always fails, just to show how it looks.
+It is also possible to run the executable from the `./contracts/build` folder, either `solunit` if it is installed globally, or `../../../bin/solunit.js`. NOTE: One test always fails, just to show how it looks.
 
 ## Library structure
 

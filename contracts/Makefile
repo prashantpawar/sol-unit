@@ -8,7 +8,7 @@ release:
 	solc --bin --abi -o ./build/release $(CONTRACTS)
 
 tests:
-	solc --bin --abi -o ./build/tests $(CONTRACTS) $(TEST_CONTRACTS)
+	solc --bin --abi -o ./build/test $(CONTRACTS) $(TEST_CONTRACTS)
 
 docs:
 	solc --devdocs -o ./build/docs $(CONTRACTS)
