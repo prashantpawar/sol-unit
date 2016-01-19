@@ -40,17 +40,14 @@ gulp.task('version-bump', function(){
 // ********************** contracts **********************
 
 gulp.task('clean-contracts', function(cb) {
-    process.exec('make clean', {cwd: './contracts'}, function (error) {
+    process.exec('rm -rf build', {cwd: './contracts'}, function (error) {
         cb(error);
     });
 });
 
 gulp.task('build-contracts', function(cb) {
-    process.exec('make clean', {cwd: './contracts'}, function (error) {
+    process.exec('./build_contracts.sh', function (error) {
         if(error) return cb(error);
-        process.exec('make', {cwd: './contracts'}, function (error) {
-            cb(error);
-        });
     });
 });
 

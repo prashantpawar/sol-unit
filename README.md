@@ -315,7 +315,7 @@ callback params: `results` - the test results.
 
 ---
 
-**Q**: If all sol-unit does is run the contract code, why not just compile the runtime part and pass it to ethvm?
+**Q**: If all sol-unit does is run the contract code, why not just compile the contracts and pass them to ethvm myself?
 
 **A**: sol-unit lets you write tests as you would any other contracts, write assertions, and test it like you would any other code. Everything that's needed to run a test contract is contained within the contract itself. This makes it easier to write tests, and also makes it easier for others to see what the tests actually do.
 

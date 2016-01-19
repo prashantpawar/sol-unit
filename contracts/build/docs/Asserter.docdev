@@ -1,0 +1,10 @@
+{
+   "author" : "Andreas Olofsson (androlo1980@gmail.com)",
+   "methods" : {
+      "_compareStrings(string,string)" : {
+         "details" : "Does a byte-by-byte lexicographical comparison of two strings.",
+         "return" : "a negative number if `_a` is smaller, zero if they are equal and a positive numbe if `_b` is smaller."
+      }
+   },
+   "title" : "Asserter"
+}
