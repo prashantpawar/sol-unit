@@ -30,6 +30,8 @@ Officially supported on 64 bit Ubuntu (14.04, 14.10, 15.04).
 
 Use the `--global` flag to install the `solunit` command-line version.
 
+#### Command-line
+
 The executable name is `solunit`. If you install it globally you should get it on your path. Try `$ solunit -V` and it should print out the version.
 
 To see all the options:
@@ -48,6 +50,8 @@ $ solunit --help
 ```
 
 Example: `$ solunit ArrayTest BasicTypesTest` will look for `.bin` and `.abi` files for those test-contracts in the current directory. Simply typing `solunit` will run all tests found in the current directory. Test contracts must always end in `Test`.
+
+#### Library
 
 The library can be run from javascript as well:
 
@@ -217,11 +221,13 @@ contract SomethingTest {
 
 The contracts folder comes with a number of different examples.
 
-## Testing
+## Testing and Developing
 
-`mocha` or `npm test`.
+`mocha` or `npm test` to run library tests.
 
-It is also possible to run the executable from the `./contracts/build` folder, either `solunit` if it is installed globally, or `../../../bin/solunit.js`. NOTE: One test always fails, just to show how it looks.
+The library comes with a set of test-contracts as well. You can test them by running the solunit executable from the `./contracts/build` folder, either `solunit` if it is installed globally, or `../../../bin/solunit.js` to use the local version. NOTE: One test always fails just to show how it looks.
+
+You can compile contracts if you have `solc` on your path, either by running `build_contracts.sh` or `gulp build-contracts`.
 
 ## Program structure
 
