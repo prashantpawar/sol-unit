@@ -12,6 +12,7 @@ Unit tests for Solidity contracts.
 4. [Examples](#examples)
 5. [Testing](#testing)
 6. [Program structure](#program-structure)
+7. [FAQ](#faq)
 
 ## Introduction
 
@@ -288,4 +289,50 @@ callback params: `methodName` - The name of the method.
 
 id: `'methodDone'` - The method is done and the results are in. 
 
-callback params: `results` - the test results. 
+callback params: `results` - the test results.
+ 
+## FAQ
+
+"frequently" asked questions.
+
+---
+
+**Q**: Why bother with sol-unit tests?
+
+**A**: They are a clean and easy way of verifying that contract code is working.
+
+---
+
+**Q**: I can test contracts by deploying them and doing a series of calls and transactions from web3/embark/truffles/eris/etc. Isn't that the same as using sol-unit?
+
+**A**: No. sol-unit tests are unit tests. Unit tests are normally written in the same language as the tested code, compiled together with that code, and run in the same process. The tests you do with those frameworks are integration tests and they introduce many external factors that can affect the test results. 
+
+---
+
+**Q**: Are sol-unit tests better then integration tests? 
+
+**A**: No, they are a complement.
+
+---
+
+**Q**: If all sol-unit does is run the contract code, why not just compile the runtime part and pass it to ethvm?
+
+**A**: sol-unit lets you write tests as you would any other contracts, write assertions, and test it like you would any other code. Everything that's needed to run a test contract is contained within the contract itself. This makes it easier to write tests, and also makes it easier for others to see what the tests actually do.
+
+---
+
+**Q**: What if I want to get gas cost, and other such data?
+
+**A**: The goal is to support that as well. It's not very hard to add, and is already done by other tools (browser-solidity for example).
+
+---
+
+**Q**: What about parametrized tests?
+
+**A**: I have played around with annotations and other things, but decided to only support basic, no-argument test functions for now.
+
+---
+
+**Q**: Is sol-unit made by Ethereum?
+
+**A**: No. sol-unit is a weird, third party library.
