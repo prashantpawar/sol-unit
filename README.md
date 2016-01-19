@@ -10,7 +10,7 @@ Unit tests for Solidity contracts.
 2. [Installation and Usage](#installation-and-usage)
 3. [Writing tests](#writing-tests)
 4. [Examples](#examples)
-5. [Testing](#testing)
+5. [Testing and Developing](#testing-and-developing)
 6. [Program structure](#program-structure)
 7. [FAQ](#faq)
 
@@ -20,7 +20,7 @@ solUnit is a unit testing framework for Solidity contracts. It runs unit tests a
 
 The tests are run in a controlled environment, using extremely high gas-limit and a standard account with an extreme amount of Ether. More blockchain/VM settings will become available with time, along with extra analysis tools.
 
-**NOTE**: Static coverage analysis (parsing syntax trees) was been removed in `0.3` to be replaced with runtime analysis at some later date.
+**NOTE**: Static coverage analysis (parsing syntax trees) was removed in `0.3` to be replaced with runtime analysis at some later date.
 
 ## Installation and Usage
 
