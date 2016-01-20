@@ -339,6 +339,12 @@ callback params: `results` - the test results.
 
 ---
 
+**Q**: Why does it not build in Windows?
+
+**A**: The library uses the Ethereum javascript VM, which uses native extensions. I might look into this.
+
+---
+
 **Q**: Is sol-unit made by Ethereum?
 
 **A**: No. sol-unit is a weird, third party library.
