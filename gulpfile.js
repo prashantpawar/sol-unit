@@ -52,7 +52,7 @@ gulp.task('build-contracts', function(cb) {
 });
 
 gulp.task('test-contracts', function(cb) {
-    solUnit.runTests(tests, testFolder, true, function(stats){
+    solUnit.runTests(tests, testFolder, true, function(){
         cb();
     });
 });

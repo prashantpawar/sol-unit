@@ -43,10 +43,11 @@ $ solunit --help
 
   Options:
 
-    -h, --help           output usage information
-    -V, --version        output the version number
-    -m, --debugMessages  Print debugging information. [default=false]
-    -d, --dir <dir>      Directory in which to do the tests. [default=current directory]
+    -h, --help              output usage information
+    -V, --version           output the version number
+    -m, --debugMessages     Print debugging information. [default=false]
+    -d, --dir <dir>         Directory in which to do the tests. [default=current directory]
+    -f, --logfile <logfile> Write test output to a file. [default=null]
 ```
 
 Example: `$ solunit ArrayTest BasicTypesTest` will look for `.bin` and `.abi` files for those test-contracts in the current directory. Simply typing `solunit` will run all tests found in the current directory. Test contracts must always end in `Test`.
@@ -168,6 +169,8 @@ The `.bin` and `.abi` files for the test contracts must be available in the work
 I want to unit test a contract named `Bank`. I create `BankTest`, compile the sources, and make sure the following files are created: `BankTest.bin`, `BankTest.abi`.
 
 To make sure I get all of this, I compile with: `solc --bin --abi -o . BankTest.sol`. They will end up in the same folder as the sources in this case.
+
+If library contracts are involved, their `.bin` files must be included in the test directory. sol-unit does automatic linking.
 
 ### TestEvent and assertions
 

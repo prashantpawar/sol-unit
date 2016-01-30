@@ -14,7 +14,7 @@ var presenter = require('./../lib/log_presenter');
 
 var log;
 
-var CURRENT_VERSION = '0.5.0';
+var CURRENT_VERSION = '0.5.1';
 
 // Run
 main();
@@ -30,6 +30,7 @@ function main() {
         .usage('[options] <test ...>')
         .option("-m, --debugMessages", "Print debugging information. [default=false]")
         .option("-d, --dir <dir>", "Directory in which to do the tests. [default=current directory]", process.cwd())
+        .option("-f, --logfile <logfile>", "Write test output to a file. [default=null]")
         .parse(process.argv);
 
     if(program.debugMessages) {
@@ -37,6 +38,10 @@ function main() {
     }
 
     log = logger.globalLogger();
+
+    if(program.logfile){
+        logger.addFileLogger(program.logfile);
+    }
 
     var baseDir = program.dir;
 
