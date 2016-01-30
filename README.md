@@ -109,7 +109,7 @@ The easiest way to start writing unit-testing contracts is to look at the exampl
 
 ### Test format
 
-The rules for a unit testing contract right now (0.3.x) are these:
+The rules for a unit testing contract right now (0.5.x) are these:
 
 1. Test-contracts must use the same name as the test target but end with `Test`. If you want to test a contract named `Arrays`, name the test-contract `ArraysTest`. If you want to test a contract named `Coin`, name the test-contract `CoinTest`, and so on.
 
