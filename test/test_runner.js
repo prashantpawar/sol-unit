@@ -429,19 +429,6 @@ describe('test_runner', function () {
         }
     });
 
-    it("Should fail at finding a proper test-event", function (done) {
-        var testRunner = new TestRunner("mockContract", null, abiEventFail, null);
-        testRunner.on('methodsStarted', ms);
-        testRunner.run();
-
-        function ms(error) {
-            assert(error, "Did not get an error from 'methodsStarted' listener");
-            assert.equal(error.message, "TestEvent is not an event.", "Wrong error message");
-            done();
-        }
-    });
-
-
     it("Should fail at finding any test functions", function (done) {
         var testRunner = new TestRunner("mockContract", null, abiNoTestFuncs, null);
         testRunner.on('methodsStarted', ms);

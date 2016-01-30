@@ -1,0 +1,13 @@
+{
+  "contract": {
+    "name": "Bank",
+    "constructor_params": []
+  },
+  "calls": [
+    {
+      "function": "registerNewAccount",
+      "params": ["0xdeadbea7"],
+      "pre_calls": []
+    }
+  ]
+}
