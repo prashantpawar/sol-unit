@@ -11,7 +11,7 @@ BUILD_TEST_DIR=${BUILD_DIR}/test
 BUILD_DOCS_DIR=${BUILD_DIR}/docs
 
 declare -a SrcContracts=('Asserter.sol')
-declare -a TestContracts=('ArrayTest.sol' 'Bank.sol' 'BankTest.sol' 'BasicTypesTest.sol' 'CoinTest.sol' 'DemoTest.sol' 'GlobalsTest.sol' 'IndirectionTest.sol' 'StructsTest.sol' 'WrapsInternalTest.sol')
+declare -a TestContracts=('ArrayTest.sol' 'Bank.sol' 'BankTest.sol' 'BasicTypesTest.sol' 'CoinTest.sol' 'DemoTest.sol' 'LibTest.sol' 'GlobalsTest.sol' 'IndirectionTest.sol' 'StructsTest.sol' 'WrapsInternalTest.sol')
 
 rm -rf ${BUILD_DIR}
 mkdir -p ${BUILD_DIR}
@@ -24,4 +24,3 @@ TEST_CONTRACTS="${TestContracts[@]/#/${TEST_DIR}/}"
 
 solc --bin --abi -o ${BUILD_RELEASE_DIR} ${CONTRACTS}
 solc --bin --abi -o ${BUILD_TEST_DIR} ${CONTRACTS} ${TEST_CONTRACTS}
-solc --devdoc -o ${BUILD_DOCS_DIR} ${CONTRACTS}
