@@ -1,4 +1,4 @@
-import "../src/Asserter.sol";
+import "../src/Test.sol";
 
 contract Indirection {
 
@@ -48,13 +48,13 @@ contract IndirectorThree {
 
 }
 
-contract IndirectionTest is Asserter {
+contract IndirectionTest is Test {
 
     IndirectorThree idt = new IndirectorThree();
 
     function testIndirection() {
         var val = idt.testLevelThree();
-        assertIntsEqual(val, 55, "Ints did not match.");
+        val.assertEqual(55, "Ints did not match.");
     }
 
 }

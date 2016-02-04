@@ -7,7 +7,14 @@ describe('sol_unit', function () {
         var sUnit = new SUnit();
 
         sUnit.on('suiteDone', function (stats) {
-            assert.deepEqual(stats, {testUnits: {}, skippedUnits: {}, successful: 0, total: 0, numTestUnits: 0, numSkippedUnits: 0}, "Stats are wrong.");
+            assert.deepEqual(stats, {
+                testUnits: {},
+                skippedUnits: {},
+                successful: 0,
+                total: 0,
+                numTestUnits: 0,
+                numSkippedUnits: 0
+            }, "Stats are wrong.");
             done();
         });
 
@@ -23,12 +30,14 @@ describe('sol_unit', function () {
         });
 
         sUnit.on('suiteDone', function (stats) {
-            assert.deepEqual(stats, { testUnits: {},
-                    skippedUnits: { xxx: 'ENOENT: no such file or directory, open \'xxx.bin\'' },
+            assert.deepEqual(stats, {
+                    testUnits: {},
+                    skippedUnits: {xxx: 'ENOENT: no such file or directory, open \'xxx.bin\''},
                     successful: 0,
                     total: 0,
                     numTestUnits: 1,
-                    numSkippedUnits: 1 }
+                    numSkippedUnits: 1
+                }
                 , "Wrong stats returned.");
             done();
         });

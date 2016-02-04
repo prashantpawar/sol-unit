@@ -1,4 +1,4 @@
-import "../src/Asserter.sol";
+import "../src/Test.sol";
 
 contract Array {
 
@@ -41,7 +41,7 @@ contract Array {
 
 }
 
-contract ArrayTest is Asserter {
+contract ArrayTest is Test {
 
     int constant ARR_0 = 1;
 
@@ -57,7 +57,7 @@ contract ArrayTest is Asserter {
         Array testee = new Array();
         testee.setElement(0, ARR_0);
         var arr0 = testee.array(0);
-        assertIntsEqual(arr0, ARR_0, "array[0] does not match.");
+        arr0.assertEqual(ARR_0, "array[0] does not match.");
     }
 
     function testPush(){
@@ -66,22 +66,21 @@ contract ArrayTest is Asserter {
         testee.push(PUSH_2);
         testee.push(PUSH_3);
         var len = testee.dynArrayLen();
-        // Fail intentionally
-        assertUintsEqual(len, 3, "length does not match.");
+        len.assertEqual(3, "length does not match.");
     }
 
     function testPop(){
         Array testee = new Array();
         testee.push(PUSH_4);
         var pop = testee.pop();
-        assertIntsEqual(pop, PUSH_4, "pop does not match.");
+        pop.assertEqual(PUSH_4, "pop does not match.");
     }
 
     function testResetDynArray(){
         Array testee = new Array();
         testee.resetDynArray();
         var len = testee.dynArrayLen();
-        assertUintsEqual(len, 0, "length does not match.");
+        len.assertZero("length does not match.");
     }
 
     function testSetArray(){
@@ -92,7 +91,7 @@ contract ArrayTest is Asserter {
         arr[2] = 6;
         testee.setArray(arr);
         var len = testee.arrayLen();
-        assertUintsEqual(len, 5, "length does not match.");
+        len.assertEqual(5, "length does not match.");
 
     }
 
@@ -101,6 +100,6 @@ contract ArrayTest is Asserter {
         testee.resetDynArray();
         testee.push(PUSH_5);
         var da0 = testee.dynArray(0);
-        assertIntsEqual(da0, PUSH_5, "value does not match.");
+        da0.assertEqual(PUSH_5, "value does not match.");
     }
 }

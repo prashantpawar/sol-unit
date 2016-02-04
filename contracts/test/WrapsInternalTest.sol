@@ -1,4 +1,4 @@
-import "../src/Asserter.sol";
+import "../src/Test.sol";
 
 // Wraps an internal multiplication function.
 contract WrapsInternal {
@@ -13,7 +13,7 @@ contract WrapsInternal {
 
 }
 
-contract WrapsInternalTest is Asserter {
+contract WrapsInternalTest is Test {
 
     int constant A = 10;
     int constant B = 20;
@@ -27,7 +27,7 @@ contract WrapsInternalTest is Asserter {
 
     function testMult() {
         var prod = testee.mult(A, B);
-        assertIntsEqual(prod, PROD, "Did not multiply correctly.");
+        prod.assertEqual(PROD, "Did not multiply correctly.");
     }
 
 }

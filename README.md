@@ -2,7 +2,7 @@
 
 Unit tests for Solidity contracts.
 
-News (2016-01-30) - There is now a library version of the `Asserter` contract called `Assertions`. It will become the standard, but the old syntax will continue to be supported. 
+News (2016-01-30) - There is now a library version of the `Asserter` contract called `Assertions`. It will become the standard, but the old syntax will continue to be supported.
 
 **Disclaimer: Running and using this library is difficult. It is alpha software, and it uses an alpha client to test code written in a language (Solidity) that is still under development. The library should be considered experimental.**
 
@@ -74,17 +74,21 @@ sUnit.runTests(['ArrayTest', 'BasicTypesTest'], 'dirWithTestsInThem', true, func
 * Third is whether or not to print test data (looks similar to mocha).
 * Fourth is an error first callback that returns test statistics.
 
-The stats object contains a `testUnits` field which has data of all the test units in them, along with a `total` and `successful` field which is the total number of tests and the number of tests that succeeded, respectively. Note that each unit is a contract with a number of different tests in them (the test-functions).
+The stats object contains a `testUnits` field which has data of all the test units in them, along with a `total` and `successful` field which is the total number of tests and the number of tests that succeeded, respectively. There is also a `skippedUnits` field where contracts that did not load properly end up (they are mapped to their error messages). Finally there's the total number of test units (contracts), and the number that was skipped.
 
 ```
 {
     testUnits: {
         ArrayTest: TestResults,
-        BasicTypesTest: TestResults,
-        ...
+        BasicTypesTest: TestResults
     }
-    successful: 5,
-    total: 7
+    skippedUnits: {
+        IAmNotHereTest: <string>
+    }
+    successful: 15,
+    total: 16,
+    numTestUnits: 3,
+    numSkippedUnits: 1
 }
 ```
 
@@ -117,16 +121,16 @@ The rules for a unit testing contract right now (0.5.x) are these:
 
 2. Test function names must start with `test`, e.g. `function testAddTwoInts()`, and they must be public. There is no limit on the number of test-functions that can be in each test-contract.
 
-3. The test-contract may use a test event: `event TestEvent(bool indexed result, string message);`. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol`, or by extending `Test` in `Test.sol` (these contracts comes with the library). Their assertion methods has a proper test event already set up which will fire automatically when an assertion is made. There is no limit on the number of assertions that can be made in a test method.
+3. The test-contract may use a test event: `event TestEvent(bool indexed result, string message);`. The recommended way of doing unit tests is to have the test-contract extend `Test`, by importing `Test.sol` (this contract comes with the library). Extending `Test` will connect your test contract with the `Assertions` library, and its assertion methods has a proper test event already set up. There is no limit on the number of assertions that can be made in a test method.
 
-NOTE: If none of the existing assertions would fit, you could for example extend the `Asserter.sol` contract and add new assertions, or calculate the result in the test-function and use `assertTrue` or `assertFalse`.
+NOTE: If none of the existing assertions would fit you could modify `Test.sol` and `Assertions.sol` for your project, or just calculate the result in the test-function and use `assertTrue` (or simply `assert`), or `assertFalse`.
 
-- A test **passes** if no assertion fails (i.e. `result` is `true` in every test event). If no assertions are made, the test will pass automatically. If at least one assertion fails, the test will **not pass**.
+- A test **passes** if no assertion fails (i.e. `result` is `true` in every test event). If no assertions are made, the test will automatically **pass**. If at least one assertion fails, the test will **not pass**.
 
-**Example of a simple storage value test using the Assertions library and extending Test**
+**Example of a simple storage value test**
 
 ```
-import "./assertions/Test.sol";
+import "Test.sol";
 
 contract Demo {
     
@@ -158,11 +162,10 @@ contract DemoTest is Test {
 }
 ```
 
-**Example of a simple storage value test extending Asserter**
-
+**Example of a simple storage value test using the deprecated Asserter**
 
 ```
-import "./assertions/Asserter.sol";
+import "Asserter.sol";
 
 contract Demo {
     
@@ -206,7 +209,7 @@ I want to unit test a contract named `Bank`. I create `BankTest`, compile the so
 
 To make sure I get all of this, I compile with: `solc --bin --abi -o . BankTest.sol`. They will end up in the same folder as the sources in this case.
 
-If library contracts are involved, their `.bin` files must be included in the test directory. sol-unit does automatic linking.
+If library contracts are involved, their `.bin` files must be included in the test directory. `sol-unit` does automatic linking.
 
 ### TestEvent and assertions
 
@@ -218,43 +221,7 @@ The `result` param is true if the assertion succeeded, otherwise it's false.
 
 The `message` param is used to log a message. This is normally used if the assertion fails.
 
-If the contract extends `Asserter`, it will inherit `TestEvent`, and can also use the assert methods which will automatically trigger the test event. Otherwise you can just roll your own. 
-
-**Example of a bare-bones test contract**
-
-```
-contract Something {
-    
-    int _something;
-    
-    function setSomething(int something){
-        _something = something;
-    }
-    
-    function something() constant returns (int something){
-        return _something;
-    }
-}
-
-contract SomethingTest {
-
-    event TestEvent(bool indexed result, string message);
-    
-    function testSomething(){
-        Something testee = new Something();
-        int someValue = 5; 
-        testee.setSomething(someValue);
-        var intOrSomeSuch = testee.something();
-        var result = (intOrSomeSuch == someValue);
-        if(result){
-            TestEvent(true, "");
-        } else {
-            TestEvent(false, "Something is wrong.");
-        }
-    }
-
-}
-```
+Assertions will automatically trigger the test event. Otherwise you can just roll your own. 
 
 ## Examples
 

@@ -1,4 +1,4 @@
-import "../src/Asserter.sol";
+import "../src/Test.sol";
 
 contract Coin {
 
@@ -44,7 +44,7 @@ contract CoinAgent {
 	}
 }
 
-contract CoinTest is Asserter {
+contract CoinTest is Test {
 
     // Create a new instance of the 'Coin' contract.
     Coin coin = new Coin();
@@ -63,22 +63,16 @@ contract CoinTest is Asserter {
     function testIsMinter() {
         // We created the coin contract, and should therefore be the minter.
         // Use the public accessor for 'minter' to check.
-        var minter = coin.minter();
-
-        assertAddressesEqual(minter, address(this), "TestContract is not minter");
+        coin.minter().assertEqual(address(this), "TestContract is not minter");
     }
 
     // Test 2 - Can we mint?
 	function testMinting() {
 		var myAddr = address(this);
 
-		assertAddressesEqual(coin.minter(), address(this), "TestContract is not minter");
-
 		// Mint some coins and send them to ourselves.
 		coin.mint(myAddr, COINS);
-		var myBalance = coin.balances(myAddr);
-
-		assertUintsEqual(myBalance, COINS, "minter balance is wrong");
+		coin.balances(myAddr).assertEqual(COINS, "minter balance is wrong");
 	}
 
 	// Test 3 - Can non-minters mint?
@@ -86,9 +80,7 @@ contract CoinTest is Asserter {
 		// Use 'minterAgent' which has a different address.
 		var minterAddr = address(minterAgent);
 		minterAgent.mint(minterAddr, COINS);
-		var minterBalance = coin.balances(minterAddr);
-
-		assertUintsEqual(minterBalance, 0, "minter balance is not 0");
+		coin.balances(minterAddr).assertZero("minter balance is not 0");
 	}
 
 	// Test 4 - Can coins be sent?
@@ -98,14 +90,12 @@ contract CoinTest is Asserter {
 		// Mint and pass to sender.
 		coin.mint(senderAddr, COINS);
 
-		assertUintsEqual(coin.balances(senderAddr), COINS, "minting failed");
+		coin.balances(senderAddr).assertEqual(COINS, "minting failed");
 
 		// Transfer from sender to receiver.
 		senderAgent.send(receiverAddr, COINS);
 		// Check the receivers balance.
-		var receiverBalance = coin.balances(receiverAddr);
-
-		assertUintsEqual(receiverBalance, COINS, "receiver balance is wrong");
+		coin.balances(receiverAddr).assertEqual(COINS, "receiver balance is wrong");
 	}
 
 	// Test 5 - Can coins be sent even if balance is too low?
@@ -114,9 +104,7 @@ contract CoinTest is Asserter {
 		var receiveFailerAddr = address(receiveFailerAgent);
 		sendFailerAgent.send(receiveFailerAddr, COINS);
 		// Check the receiveFailers balance.
-		var receiveFailerBalance = coin.balances(receiveFailerAddr);
-
-		assertUintsEqual(receiveFailerBalance, 0, "receiver was sent coins");
+		coin.balances(receiveFailerAddr).assertEqual(0, "receiver was sent coins");
 	}
 
 }

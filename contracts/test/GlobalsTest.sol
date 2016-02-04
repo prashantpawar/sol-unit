@@ -1,11 +1,9 @@
-import "../src/Asserter.sol";
+import "../src/Test.sol";
 
-contract GlobalsTest is Asserter {
+contract GlobalsTest is Test {
 
     function testTimestamp(){
-        assertUintNotZero(block.timestamp, "timestamp is zero");
+        block.timestamp.assertNotZero("timestamp is zero");
     }
-
-
 
 }

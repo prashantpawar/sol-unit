@@ -4,6 +4,6 @@ var path = require('path');
 var tests = ['LibTest'];
 var rootDir = path.join(__dirname, "../../contracts/build/test");
 
-solUnit.runTests(tests, rootDir, true, function(stats){
+solUnit.runTests(tests, rootDir, true, function (stats) {
     console.log("total number of failed tests: " + (stats.total - stats.successful).toString());
 });

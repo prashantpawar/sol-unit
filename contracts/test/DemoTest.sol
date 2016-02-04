@@ -1,4 +1,4 @@
-import "../src/Asserter.sol";
+import "../src/Test.sol";
 
 contract Demo {
 
@@ -10,19 +10,18 @@ contract Demo {
 }
 
 // Test contract named DemoTest as per (1).
-contract DemoTest is Asserter {
+contract DemoTest is Test {
 
     uint constant TEST_VAL = 55;
 
     // Test method starts with 'test' and will thus be recognized (2).
     function testSetX(){
         Demo demo = new Demo();
-        assertAddressNotZero(address(demo), "Failed to deploy demo contract");
         demo.setX(TEST_VAL);
         // Public accessor for 'x'.
         var x = demo.x();
-        // Use assert method from Asserter contract (3). It will automatically fire off a test event.
-        assertUintsEqual(x, TEST_VAL, "Values are not equal");
+        // Use assert method from Assertions library (3). It will automatically fire off a test event.
+        x.assertEqual(TEST_VAL, "Values are not equal");
     }
 
 }

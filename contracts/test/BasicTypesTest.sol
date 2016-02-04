@@ -1,4 +1,4 @@
-import "../src/Asserter.sol";
+import "../src/Test.sol";
 
 contract BasicTypes {
 
@@ -30,7 +30,7 @@ contract BasicTypes {
 
 }
 
-contract BasicTypesTest is Asserter {
+contract BasicTypesTest is Test {
 
     bytes32 constant bytes32Out = 0x111111;
     int constant intOut = -1234;
@@ -44,39 +44,36 @@ contract BasicTypesTest is Asserter {
     function testOwner() {
         var testee = new BasicTypes();
         var owner = testee.ownerF();
-        assertAddressesEqual(owner, 0, "Owner is not caller");
+        // Fail deliberately.
+        owner.assertZero("Owner is not caller");
     }
 
     function testBytes32() {
         var testee = new BasicTypes();
         testee.setBytes32F(bytes32Out);
         var bytes32In = testee.bytes32F();
-        assertBytes32Equal(bytes32Out, bytes32In, "Bytes32 did not match.");
+        bytes32Out.assertEqual(bytes32In, "Bytes32 did not match.");
     }
 
     function testInt() {
         var testee = new BasicTypes();
         testee.setIntF(intOut);
         var intIn = testee.intF();
-        assertIntsEqual(intOut, intIn, "Ints did not match.");
+        intOut.assertEqual(intIn, "Ints did not match.");
     }
 
     function testUint() {
         var testee = new BasicTypes();
         testee.setUintF(uintOut);
         var uintIn = testee.uintF();
-        assertUintsEqual(uintOut, uintIn, "Uints did not match.");
+        uintOut.assertEqual(uintIn, "Uints did not match.");
     }
 
     function testBool() {
         var testee = new BasicTypes();
         testee.setBoolF(boolOut);
         var boolIn = testee.boolF();
-        assertBoolsEqual(boolOut, boolIn, "Bools did not match.");
-    }
-
-    function(){
-
+        boolOut.assertEqual(boolIn, "Bools did not match.");
     }
 
 }

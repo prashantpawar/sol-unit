@@ -1,4 +1,4 @@
-import "../src/Asserter.sol";
+import "../src/Test.sol";
 import "./Bank.sol";
 
 contract AccountOwner {
@@ -31,7 +31,7 @@ contract AccountOwner {
 /// @author Andreas Olofsson (andreas@erisindustries.com)
 // Note most of these tests does not count as towards coverage, since the transfer method
 // is called via another account. Should add support for this in s-unit.
-contract BankTest is Asserter {
+contract BankTest is Test {
 
     // Error codes from Bank.
 
@@ -65,69 +65,69 @@ contract BankTest is Asserter {
 
     function BankTest(){
         testee = new Bank();
-        testReg = new AccountOwner(address(testee));
-        testRegFail = new AccountOwner(address(testee));
-        testDelete = new AccountOwner(address(testee));
-        testEndow = new AccountOwner(address(testee));
-        testEndowFailer = new AccountOwner(address(testee));
-        testTransferer = new AccountOwner(address(testee));
-        testTransferee = new AccountOwner(address(testee));
-        testTransfererBalanceCheck = new AccountOwner(address(testee));
-        testTransfereeBalanceCheck = new AccountOwner(address(testee));
-        testTransfererNoAccount = new AccountOwner(address(testee));
-        testTransfererNoAmount = new AccountOwner(address(testee));
-        testTransfererInsufficientBalance = new AccountOwner(address(testee));
-        testTransfererNoTarget = new AccountOwner(address(testee));
+        testReg = new AccountOwner(testee);
+        testRegFail = new AccountOwner(testee);
+        testDelete = new AccountOwner(testee);
+        testEndow = new AccountOwner(testee);
+        testEndowFailer = new AccountOwner(testee);
+        testTransferer = new AccountOwner(testee);
+        testTransferee = new AccountOwner(testee);
+        testTransfererBalanceCheck = new AccountOwner(testee);
+        testTransfereeBalanceCheck = new AccountOwner(testee);
+        testTransfererNoAccount = new AccountOwner(testee);
+        testTransfererNoAmount = new AccountOwner(testee);
+        testTransfererInsufficientBalance = new AccountOwner(testee);
+        testTransfererNoTarget = new AccountOwner(testee);
     }
 
     function testOwnerSucceeding(){
         var owner = testee.owner();
-        assertAddressesEqual(owner, address(this), "owner address does not match.");
+        owner.assertEqual(address(this), "owner address does not match.");
     }
 
     function testGetMyAddress(){
         var myAddrs = testee.getMyAddress();
-        assertAddressesEqual(myAddrs, address(this), "owner address does not match.");
+        myAddrs.assertEqual(address(this), "owner address does not match.");
     }
 
     function testRegisterAccount(){
         var ret = testReg.registerNewAccount("testReg");
-        assertUintsEqual(ret, SUCCESS, "registration failed");
+        uint(ret).assertEqual(SUCCESS, "registration failed");
     }
 
     function testRegisterAccountFailAlreadyExists(){
         var ret = testRegFail.registerNewAccount("testReg");
         var ret2 = testRegFail.registerNewAccount("testReg");
-        assertUintsEqual(uint(ret2), ACCOUNT_EXISTS, "registration succeeded");
+        uint(ret2).assertEqual(ACCOUNT_EXISTS, "registration succeeded");
     }
 
     function testRegDeleteOwner(){
         testee.registerNewAccount("testOwnerAcc");
         var ret = testee.deleteAccount("testOwnerAcc");
-        assertUintsEqual(ret, SUCCESS, "registrating owner failed");
+        uint(ret).assertEqual(SUCCESS, "registrating owner failed");
     }
 
     function testDeleteAccount(){
         testDelete.registerNewAccount("testDelete");
         var ret = testDelete.deleteAccount("testDelete");
-        assertUintsEqual(ret, SUCCESS, "registration failed");
+        uint(ret).assertEqual(SUCCESS, "registration failed");
     }
 
     function testEndowSucceeding(){
         testEndow.registerNewAccount("testEndow");
         var result = testee.endow("testEndow", TEST_BALANCE, "testmessage");
-        assertUintsEqual(uint(result), SUCCESS, "endow failed");
+        uint(result).assertEqual(SUCCESS, "endow failed");
     }
 
     function testEndowFailNotOwner(){
         testEndowFailer.registerNewAccount("testEndowFailer");
         var result = testEndowFailer.endow("testEndowFailer", TEST_BALANCE);
-        assertUintsEqual(uint(result), NOT_OWNER, "endow succeeded");
+        uint(result).assertEqual(NOT_OWNER, "endow succeeded");
     }
 
     function testEndowFailNoTarget(){
         var result = testee.endow("noAcc", TEST_BALANCE, "testmessage");
-        assertUintsEqual(uint(result), NO_TARGET, "endow succeeded");
+        uint(result).assertEqual(NO_TARGET, "endow succeeded");
     }
 
     function testTransferSuccess(){
@@ -136,7 +136,7 @@ contract BankTest is Asserter {
         testee.endow("testTransferer", TEST_BALANCE, "testmessage");
         testTransferer.transfer("testTransferee", TEST_BALANCE);
         var balanceIn = testee.getBalance("testTransferee");
-        assertUintsEqual(balanceIn, TEST_BALANCE, "balances does not match");
+        balanceIn.assertEqual(TEST_BALANCE, "balances does not match");
     }
 
     function testTransferSenderBalanceCheck(){
@@ -145,31 +145,31 @@ contract BankTest is Asserter {
         testee.endow("testTransfererBalanceCheck", TEST_BALANCE, "testmessage");
         testTransfererBalanceCheck.transfer("testTransfereeBalanceCheck", TEST_BALANCE / 2);
         var balanceIn = testee.getBalance("testTransfererBalanceCheck");
-        assertUintsEqual(balanceIn, TEST_BALANCE / 2, "balances does not match");
+        balanceIn.assertEqual(TEST_BALANCE / 2, "balances does not match");
     }
 
     function testTransferFailedNoAccount(){
         var result = testTransfererNoAccount.transfer("noAcc", 1);
-        assertUintsEqual(uint(result), NO_ACCOUNT, "no account fail");
+        uint(result).assertEqual(NO_ACCOUNT, "no account fail");
     }
 
     function testTransferFailedNoAmount(){
         testTransfererNoAmount.registerNewAccount("testTfrNoAmt");
         var result = testTransferer.transfer("noAcc", 0);
-        assertUintsEqual(uint(result), NO_AMOUNT, "no amount fail");
+        uint(result).assertEqual(NO_AMOUNT, "no amount fail");
     }
 
     function testTransferFailedInsufficientBalance(){
         testTransfererInsufficientBalance.registerNewAccount("testTfrIsfBlnc");
         var result = testTransfererInsufficientBalance.transfer("noAcc", 1);
-        assertUintsEqual(uint(result), INSUFFICIENT_BALANCE, "insufficient balance fail");
+        uint(result).assertEqual(INSUFFICIENT_BALANCE, "insufficient balance fail");
     }
 
     function testTransferFailedNoTarget(){
         testTransfererNoTarget.registerNewAccount("tstTrsfrrNTrgt");
         testee.endow("tstTrsfrrNTrgt", TEST_BALANCE, "testmessage");
         var result = testTransfererNoTarget.transfer("noAcc", 1);
-        assertUintsEqual(uint(result), NO_TARGET, "no target fail");
+        uint(result).assertEqual(NO_TARGET, "no target fail");
     }
 
 }

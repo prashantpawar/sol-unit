@@ -30,6 +30,7 @@ contract Bank {
 
     // The owner of the contract.
     address public owner;
+
     // The accounts.
     mapping(bytes32 => Account) accounts;
     mapping(address => bytes32) public names;
@@ -42,13 +43,11 @@ contract Bank {
     /// @dev Registers if not already registered.
     /// @param name - the user name.
     /// @return Error code. INVALID_NAME || ACCOUNT_EXISTS || ADDRESS_EXISTS || SUCCESS
-    function registerNewAccount(bytes32 name) external returns (uint16 result){
-        if(name == ""){
+    function registerNewAccount(bytes32 name) external returns (uint16 result) {
+        if (name == "")
             return INVALID_NAME;
-        }
-        if(names[msg.sender] != ""){
+        if (names[msg.sender] != "")
             return ACCOUNT_EXISTS;
-        }
         accounts[name] = Account(msg.sender, 0);
         names[msg.sender] = name;
         return SUCCESS;
@@ -57,20 +56,18 @@ contract Bank {
     /// @dev Deletes an existing account. This can be done only by the bank owner or the owner of the account.
     /// @param name - the user name.
     /// @return Error code. NO_ACCOUNT || NOT_ACCOUNT_OWNER || SUCCESS
-    function deleteAccount(bytes32 name) external returns (uint16 results){
+    function deleteAccount(bytes32 name) external returns (uint16 results) {
         var acc = accounts[name];
         var accOwner = acc.owner;
 
-        if(accOwner == ADDRESS_NULL){
+        if (accOwner == ADDRESS_NULL)
             return NO_ACCOUNT;
-        }
-        if(accOwner != msg.sender && msg.sender != owner){
+        if (accOwner != msg.sender && msg.sender != owner)
             return NOT_ACCOUNT_OWNER;
-        }
 
         delete accounts[name];
 
-        if(msg.sender != owner || (msg.sender == owner && acc.owner == owner)){
+        if (msg.sender != owner || (msg.sender == owner && acc.owner == owner)) {
             delete names[msg.sender];
         }
         return SUCCESS;
@@ -82,17 +79,14 @@ contract Bank {
     /// @param message The message.
     /// @return Error code. NO_AMOUNT || NOT_OWNER || NO_TARGET || SUCCESS
     function endow(bytes32 user, uint amount, bytes32 message) external returns (uint16 result) {
-        if(amount == 0){
+        if (amount == 0)
             return NO_AMOUNT;
-        }
-        if(msg.sender != owner){
+        if (msg.sender != owner)
             return NOT_OWNER;
-        }
         var account = accounts[user];
 
-        if(account.owner == ADDRESS_NULL){
+        if (account.owner == ADDRESS_NULL)
             return NO_TARGET;
-        }
         accounts[user].balance += amount;
         return SUCCESS;
     }
@@ -104,31 +98,27 @@ contract Bank {
     /// @return Error code. NO_AMOUNT || INSUFFICIENT_BALANCE || NO_ACCOUNT || NO_TARGET || SUCCESS
     function transfer(bytes32 to, uint amount, bytes32 message) external returns (uint16 result) {
 
-        if(amount == 0){
+        if (amount == 0)
             return NO_AMOUNT;
-        }
 
         var sndr = names[msg.sender];
 
-        if(sndr == ""){
+        if (sndr == "")
             return NO_ACCOUNT;
-        }
 
         var account = accounts[sndr];
 
-        if(account.owner == ADDRESS_NULL){
+        if (account.owner == ADDRESS_NULL)
             return NO_ACCOUNT;
-        }
         // TODO should be a check that user isn't transferring to himself, and an error to go with it.
 
-        if(account.balance < amount){
+        if (account.balance < amount)
             return INSUFFICIENT_BALANCE;
-        }
 
         var target = accounts[to];
-        if(target.owner == ADDRESS_NULL){
+        if (target.owner == ADDRESS_NULL)
             return NO_TARGET;
-        } else {
+        else {
             target.balance += amount;
             account.balance -= amount;
         }
@@ -142,22 +132,21 @@ contract Bank {
     }
 
     // Convenience method.
-    function getMyAddress() external returns (address myAddress){
+    function getMyAddress() external returns (address myAddress) {
         myAddress = msg.sender;
         return;
     }
 
     // Convenience method.
-    function getMyName() external returns (bytes32 myName){
+    function getMyName() external returns (bytes32 myName) {
         myName = names[msg.sender];
         return;
     }
 
     /// @dev Used by the owner to remove (suicide) the contract.
     function remove() external {
-        if(msg.sender == owner){
+        if(msg.sender == owner)
             suicide(owner);
-        }
     }
 
 }

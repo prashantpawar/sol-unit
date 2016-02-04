@@ -1,4 +1,4 @@
-import "../src/Asserter.sol";
+import "../src/Test.sol";
 
 contract Structs {
 
@@ -54,7 +54,7 @@ contract Structs {
     }
 }
 
-contract StructsTest is Asserter {
+contract StructsTest is Test {
 
     uint constant A = 1;
     uint constant B = 2;
@@ -70,25 +70,25 @@ contract StructsTest is Asserter {
     function testSetStructA() {
         testee.setStructA(A);
         var a = testee.getStructA();
-        assertUintsEqual(a, A, "Did not get correct 'a'.");
+        a.assertEqual(A, "Did not get correct 'a'.");
     }
 
     function testSetStructB() {
         testee.setStructB(B);
         var b = testee.getStructB();
-        assertUintsEqual(b, B, "Did not get correct 'b'.");
+        b.assertEqual(B, "Did not get correct 'b'.");
     }
 
     function testSetStructX() {
         testee.setStructX(X);
         var x = testee.getStructX();
-        assertUintsEqual(x, X, "Did not get correct 'x'.");
+        x.assertEqual(X, "Did not get correct 'x'.");
     }
 
     function testSetStructY() {
         testee.setStructY(Y);
         var y = testee.getStructY();
-        assertUintsEqual(y, Y, "Did not get correct 'y'.");
+        y.assertEqual(Y, "Did not get correct 'y'.");
     }
 
 }

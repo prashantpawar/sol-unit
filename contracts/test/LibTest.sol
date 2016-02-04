@@ -1,4 +1,4 @@
-import "../src/Asserter.sol";
+import "../src/Test.sol";
 
 library TestLibAddDep {
 
@@ -36,17 +36,17 @@ contract LibUser {
 
 }
 
-contract LibTest is Asserter {
+contract LibTest is Test {
 
     function testAdd(){
         var lu = new LibUser();
         var sum = lu.add(5, 6);
-        assertIntsEqual(sum, 11, "sum is not right.");
+        sum.assertEqual(11, "sum is not right.");
     }
 
     function testMult(){
         var lu = new LibUser();
         var sum = lu.mult(5, 6);
-        assertIntsEqual(sum, 30, "product is not right.");
+        sum.assertEqual(30, "product is not right.");
     }
 }

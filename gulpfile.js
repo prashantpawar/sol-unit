@@ -22,7 +22,7 @@ var solUnit = require('./index');
 var path = require('path');
 var version = require('./lib/version.json');
 
-var tests = ['ArrayTest', 'BankTest', 'BasicTypesTest', 'CoinTest', 'DemoTest', 'GlobalsTest', 'IndirectionTest', 'StructsTest', 'WrapsInternalTest', 'LibTest', 'ThrowerTest'];
+var tests = ['ArrayTest', 'BankTest', 'BasicTypesTest', 'CoinTest', 'DemoTest', 'GlobalsTest', 'ImNotHereTest', 'IndirectionTest', 'StructsTest', 'WrapsInternalTest', 'LibTest', 'ThrowerTest'];
 var testFolder = path.join(__dirname, 'contracts', 'build', 'test');
 
 // ********************** version **********************
@@ -53,6 +53,11 @@ gulp.task('build-contracts', function(cb) {
 
 gulp.task('test-contracts', function(cb) {
     solUnit.runTests(tests, testFolder, true, function(){
+        console.log("");
+        console.log("*******************************************************************");
+        console.log("NOTE: Some of these tests fails deliberately, to show how it looks.");
+        console.log("*******************************************************************");
+        console.log("");
         cb();
     });
 });
