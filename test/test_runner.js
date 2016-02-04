@@ -31,33 +31,6 @@ var abi = [
     }
 ];
 
-var abiEventFail = [
-    {
-        "constant": false,
-        "inputs": [],
-        "name": "testMock",
-        "outputs": [],
-        "type": "function"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "name": "Brüno",
-                "type": "bool"
-            },
-            {
-                "indexed": false,
-                "name": "message",
-                "type": "string"
-            }
-        ],
-        "name": "TestEvent",
-        "type": "event"
-    }
-];
-
 var abiNoTestFuncs = [
     {
         "anonymous": false,
@@ -195,8 +168,24 @@ var MockProg = function(){
 
     var result = resultsFromEvent(eventFromData(true, ""));
 
-    this.init = function(bin, abi, cb){
-        this._abi = abi;
+    this.init = function(bin, cb){
+        cb();
+    };
+
+    this.runTx = function(opts, cb){
+        if(opts.data != "0x365c9f74"){
+            cb(new Error("Signature error."));
+        }
+        cb(null, result);
+    }
+};
+
+var MockProgExceptionError = function(){
+
+    var result = {vm: {}};
+    result.vm.exceptionError = 'mock exception';
+
+    this.init = function(bin, cb){
         cb();
     };
 
@@ -212,8 +201,7 @@ var MockProgTwoEvent = function(){
 
     var result = resultsFromEvents([eventFromData(true, ""), eventFromData(true, "")]);
 
-    this.init = function(bin, abi, cb){
-        this._abi = abi;
+    this.init = function(bin, cb){
         cb();
     };
 
@@ -229,8 +217,7 @@ var MockProgTwoEventFirstFail = function(){
 
     var result = resultsFromEvents([eventFromData(false, "stack overflow"), eventFromData(true, "")]);
 
-    this.init = function(bin, abi, cb){
-        this._abi = abi;
+    this.init = function(bin, cb){
         cb();
     };
 
@@ -246,8 +233,7 @@ var MockProgTwoEventSecondFail = function(){
 
     var result = resultsFromEvents([eventFromData(true, ""), eventFromData(false, "stack overflow")]);
 
-    this.init = function(bin, abi, cb){
-        this._abi = abi;
+    this.init = function(bin, cb){
         cb();
     };
 
@@ -263,8 +249,7 @@ var MockProgTwoEventBothFail = function(){
 
     var result = resultsFromEvents([eventFromData(false, "stack overflow"), eventFromData(false, "bug overflow")]);
 
-    this.init = function(bin, abi, cb){
-        this._abi = abi;
+    this.init = function(bin, cb){
         cb();
     };
 
@@ -279,8 +264,7 @@ var MockProgTwoEventBothFail = function(){
 
 var MockProgSolidityError = function(){
 
-    this.init = function(bin, abi, cb){
-        this._abi = abi;
+    this.init = function(bin, cb){
         cb();
     };
 
@@ -291,10 +275,7 @@ var MockProgSolidityError = function(){
 
 var MockMegaProg = function(){
 
-    // var result = resultsFromEvents(megaEvents);
-
-    this.init = function(bin, abi, cb){
-        this._abi = abi;
+    this.init = function(bin, cb){
         cb();
     };
 
@@ -326,7 +307,6 @@ var MockMegaProg = function(){
         } else {
             cb(new Error("Signature error"));
         }
-
 
     }
 };
@@ -441,7 +421,19 @@ describe('test_runner', function () {
         }
     });
 
-    it("Should fail due to a solidity/VM error", function (done) {
+    it("Should fail due to an exception", function (done) {
+        var testRunner = new TestRunner("mockContract", null, abi, new MockProgExceptionError());
+        testRunner.on('methodsDone', md);
+        testRunner.run();
+
+        function md(error, testName, result) {
+            assert.equal(result.testMock.errors[0], "Exception: mock exception");
+            done();
+        }
+
+    });
+
+    it("Should fail due to a VM error", function (done) {
         var testRunner = new TestRunner("mockContractSolidityError", null, abi, new MockProgSolidityError());
         testRunner.on('methodsDone', md);
         testRunner.run();

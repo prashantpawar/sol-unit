@@ -1,6 +1,6 @@
 {
   "name": "sol-unit",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Unit testing framework for Solidity contracts.",
   "main": "./index.js",
   "directories": {

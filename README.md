@@ -2,6 +2,8 @@
 
 Unit tests for Solidity contracts.
 
+News (2016-01-30) - There is now a library version of the `Asserter` contract called `Assertions`. It will become the standard, but the old syntax will continue to be supported. 
+
 **Disclaimer: Running and using this library is difficult. It is alpha software, and it uses an alpha client to test code written in a language (Solidity) that is still under development. The library should be considered experimental.**
 
 ## Table of Content
@@ -115,13 +117,48 @@ The rules for a unit testing contract right now (0.5.x) are these:
 
 2. Test function names must start with `test`, e.g. `function testAddTwoInts()`, and they must be public. There is no limit on the number of test-functions that can be in each test-contract.
 
-3. The test-contract may use a test event: `event TestEvent(bool indexed result, string message);`. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol` (comes with the library). Its assertion methods has a proper test event already set up which will fire automatically when an assertion is made. There is no limit on the number of assertions in a test method.
+3. The test-contract may use a test event: `event TestEvent(bool indexed result, string message);`. The recommended way of doing unit tests is to have the test-contract extend `Asserter`, by importing `Asserter.sol`, or by extending `Test` in `Test.sol` (these contracts comes with the library). Their assertion methods has a proper test event already set up which will fire automatically when an assertion is made. There is no limit on the number of assertions that can be made in a test method.
 
-NOTE: If none of the existing assertions would fit, extend the Asserter.sol contract or calculate the result in the test-function and use `assertTrue` or `assertFalse`.
+NOTE: If none of the existing assertions would fit, you could for example extend the `Asserter.sol` contract and add new assertions, or calculate the result in the test-function and use `assertTrue` or `assertFalse`.
 
 - A test **passes** if no assertion fails (i.e. `result` is `true` in every test event). If no assertions are made, the test will pass automatically. If at least one assertion fails, the test will **not pass**.
 
-**Example of a simple storage value test**
+**Example of a simple storage value test using the Assertions library and extending Test**
+
+```
+import "./assertions/Test.sol";
+
+contract Demo {
+    
+    uint _x = 0;
+    
+    function setX(uint x){
+        _x = x;
+    }
+    
+    function getX() constant returns (uint x){
+        return _x;
+    }
+}
+
+// Test contract named DemoTest as per (1).
+contract DemoTest is Test {
+
+    uint constant TEST_VAL = 55;
+    
+    // Test method starts with 'test' and will thus be recognized (2).
+    function testSetX(){
+        Demo demo = new Demo();
+        demo.setX(TEST_VAL);
+        
+        // Assert methods bound to type. Assertions will automatically fire off a test event (3).
+        demo.getX().assertEqual(TEST_VAL, "Values are not equal");
+    }
+    
+}
+```
+
+**Example of a simple storage value test extending Asserter**
 
 
 ```
@@ -148,7 +185,6 @@ contract DemoTest is Asserter {
     // Test method starts with 'test' and will thus be recognized (2).
     function testSetX(){
         Demo demo = new Demo();
-        assertAddressNotZero(address(demo), "Failed to deploy demo contract");
         demo.setX(TEST_VAL);
         var x = demo.getX();
         // Use assert method from Asserter contract (3). It will automatically fire off a test event.

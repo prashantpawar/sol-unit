@@ -994,8 +994,8 @@ contract Asserter {
         : A == B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first int.
+            B (uint) - The second int.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1014,8 +1014,8 @@ contract Asserter {
         : A != B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first uint.
+            B (uint) - The second uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1029,13 +1029,13 @@ contract Asserter {
     /*
         Function: assertUintGT
 
-        Assert that the int 'A' is greater than the int 'B'.
+        Assert that the uint 'A' is greater than the uint 'B'.
 
         : A > B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first uint.
+            B (uint) - The second uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1049,13 +1049,13 @@ contract Asserter {
     /*
         Function: assertUintGTOE
 
-        Assert that the int 'A' is greater than or equal to the int 'B'.
+        Assert that the uint 'A' is greater than or equal to the uint 'B'.
 
         : A >= B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first uint.
+            B (uint) - The second uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1069,13 +1069,13 @@ contract Asserter {
     /*
         Function: assertUintLT
 
-        Assert that the int 'A' is lesser than the int 'B'.
+        Assert that the uint 'A' is lesser than the uint 'B'.
 
         : A < B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first uint.
+            B (uint) - The second uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1089,13 +1089,13 @@ contract Asserter {
     /*
         Function: assertUintLTOE
 
-        Assert that the int 'A' is lesser than or equal to the int 'B'.
+        Assert that the uint 'A' is lesser than or equal to the uint 'B'.
 
         : A <= B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first uint.
+            B (uint) - The second uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1114,7 +1114,7 @@ contract Asserter {
         : number == 0
 
         Params:
-            number (int) - The int.
+            number (uint) - The uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1133,7 +1133,7 @@ contract Asserter {
         : number != 0
 
         Params:
-            number (int) - The int.
+            number (uint) - The uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1143,7 +1143,7 @@ contract Asserter {
         result = (number != 0);
         _report(result, message);
     }
-    
+
     /*
         Function: assertEqual(int)
 
@@ -1152,8 +1152,8 @@ contract Asserter {
         : A == B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first uint.
+            B (uint) - The second uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1172,8 +1172,8 @@ contract Asserter {
         : A != B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first uint.
+            B (uint) - The second uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1192,8 +1192,8 @@ contract Asserter {
         : A > B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first uint.
+            B (uint) - The second uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1212,8 +1212,8 @@ contract Asserter {
         : A >= B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first uint.
+            B (uint) - The second uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1232,8 +1232,8 @@ contract Asserter {
         : A < B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first uint.
+            B (uint) - The second uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1252,8 +1252,8 @@ contract Asserter {
         : A <= B
 
         Params:
-            A (int) - The first int.
-            B (int) - The second int.
+            A (uint) - The first uint.
+            B (uint) - The second uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1272,7 +1272,7 @@ contract Asserter {
         : number == 0
 
         Params:
-            number (int) - The int.
+            number (uint) - The uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1291,7 +1291,7 @@ contract Asserter {
         : number != 0
 
         Params:
-            number (int) - The int.
+            number (uint) - The uint.
             message (string) - A message that is sent if the assertion fails.
 
         Returns:
@@ -1299,6 +1299,126 @@ contract Asserter {
     */
     function assertNotZero(int number, string message) internal constant returns (bool result) {
         result = (number != 0);
+        _report(result, message);
+    }
+
+    /******************************** errors ********************************/
+
+    /*
+        Function: assertErrorsEqual
+
+        Assert that two error codes (uint16) are equal.
+
+        : errorCode1 == errorCode2
+
+        Params:
+            errorCode1 (uint16) - the first error code.
+            errorCode2 (uint16) - the second error code.
+            message (string) - A message to display if the assertion does not hold.
+
+        Returns:
+            result (bool) - The result.
+    */
+    function assertErrorsEqual(uint16 errorCode1, uint16 errorCode2, string message) internal constant returns (bool result) {
+        result = (errorCode1 == errorCode2);
+        _report(result, message);
+    }
+
+    /*
+        Function: assertErrorsNotEqual
+
+        Assert that two error codes (uint16) are not equal.
+
+        : errorCode1 != errorCode2
+
+        Params:
+            errorCode1 (uint16) - the first error code.
+            errorCode2 (uint16) - the second error code.
+            message (string) - A message to display if the assertion does not hold.
+
+        Returns:
+            result (bool) - The result.
+    */
+    function assertErrorsNotEqual(uint16 errorCode1, uint16 errorCode2, string message) internal constant returns (bool result) {
+        result = (errorCode1 != errorCode2);
+        _report(result, message);
+    }
+
+    /*
+        Function: assertEqual(uint16)
+
+        Assert that two error codes (uint16) are equal.
+
+        : errorCode1 == errorCode2
+
+        Params:
+            errorCode1 (uint16) - the first error code.
+            errorCode2 (uint16) - the second error code.
+            message (string) - A message to display if the assertion does not hold.
+
+        Returns:
+            result (bool) - The result.
+    */
+    function assertEqual(uint16 errorCode1, uint16 errorCode2, string message) internal constant returns (bool result) {
+        result = (errorCode1 == errorCode2);
+        _report(result, message);
+    }
+
+    /*
+        Function: assertNotEqual(uint16)
+
+        Assert that two error codes (uint16) are not equal.
+
+        : errorCode1 != errorCode2
+
+        Params:
+            errorCode1 (uint16) - the first error code.
+            errorCode2 (uint16) - the second error code.
+            message (string) - A message to display if the assertion does not hold.
+
+        Returns:
+            result (bool) - The result.
+    */
+    function assertNotEqual(uint16 errorCode1, uint16 errorCode2, string message) internal constant returns (bool result) {
+        result = (errorCode1 != errorCode2);
+        _report(result, message);
+    }
+
+    /*
+        Function: assertError
+
+        Assert that the code (uint16) is not the null error.
+
+        : errorCode != 0
+
+        Params:
+            errorCode (uint16) - the error code.
+            message (string) - A message to display if the assertion does not hold.
+
+        Returns:
+            result (bool) - The result.
+    */
+    function assertError(uint16 errorCode, string message) internal constant returns (bool result) {
+        result = (errorCode != 0);
+        _report(result, message);
+    }
+
+    /*
+        Function: assertError
+
+        Assert that the code (uint16) is the null error.
+
+        : errorCode == 0
+
+        Params:
+            errorCode (uint16) - the error code.
+            message (string) - A message to display if the assertion does not hold.
+
+        Returns:
+            result (bool) - The result.
+    */
+    function assertNoError(uint16 errorCode, string message) internal constant returns (bool result) {
+        result = (errorCode == 0);
         _report(result, message);
     }
 
