@@ -31,6 +31,7 @@ function main() {
         .option("-m, --debugMessages", "Print debugging information. [default=false]")
         .option("-d, --dir <dir>", "Directory in which to do the tests. [default=current directory]", process.cwd())
         .option("-f, --logfile <logfile>", "Write test output to a file. [default=null]")
+        .option("-b --balance <balance>", "The balance of the test contract as a quoted hex-string, \"0x12345\". Limited to uint240 (30 bytes). [default=uint240.maxvalue]")
         .parse(process.argv);
 
     if(program.debugMessages) {
@@ -128,7 +129,7 @@ function main() {
     sUnit.on('methodsDone', methodsDone);
     sUnit.on('contractDone', contractDone);
     sUnit.on('suiteDone', suiteDone);
-    sUnit.start(tests, baseDir);
+    sUnit.start(tests, baseDir, program.balance);
 
 }
 
