@@ -15,4 +15,8 @@ contract Test {
     using Assertions for int;
     using Assertions for uint;
     using Assertions for uint16;
+    using Assertions for address[];
+    using Assertions for bytes32[];
+    using Assertions for uint[];
+    using Assertions for int[];
 }

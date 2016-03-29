@@ -12,9 +12,10 @@ News (2016-01-30) - There is now a library version of the `Asserter` contract ca
 2. [Installation and Usage](#installation-and-usage)
 3. [Writing tests](#writing-tests)
 4. [Examples](#examples)
-5. [Testing and Developing](#testing-and-developing)
-6. [Program structure](#program-structure)
-7. [FAQ](#faq)
+5. [Assertions](#assertions)
+6. [Testing and Developing](#testing-and-developing)
+7. [Program structure](#program-structure)
+8. [FAQ](#faq)
 
 ## Introduction
 
@@ -36,23 +37,9 @@ Use the `--global` flag to install the `solunit` command-line version.
 
 The executable name is `solunit`. If you install it globally you should get it on your path. Try `$ solunit -V` and it should print out the version.
 
-To see all the options:
+To see all the options run `solunit -h`.
 
-```
-$ solunit --help
-
-  Usage: solunit [options] <test ...>
-
-  Options:
-
-    -h, --help              output usage information
-    -V, --version           output the version number
-    -m, --debugMessages     Print debugging information. [default=false]
-    -d, --dir <dir>         Directory in which to do the tests. [default=current directory]
-    -f, --logfile <logfile> Write test output to a file. [default=null]
-```
-
-Example: `$ solunit ArrayTest BasicTypesTest` will look for `.bin` and `.abi` files for those test-contracts in the current directory. Simply typing `solunit` will run all tests found in the current directory. Test contracts must always end in `Test`.
+Example: `$ solunit ArrayTest BasicTypesTest` will look for `.bin` and `.abi` files for those test-contracts in the current directory. Simply typing `solunit` will run all tests found in the current directory. Test-contracts must always end in `Test`.
 
 #### Library
 
@@ -162,41 +149,6 @@ contract DemoTest is Test {
 }
 ```
 
-**Example of a simple storage value test using the deprecated Asserter**
-
-```
-import "Asserter.sol";
-
-contract Demo {
-    
-    uint _x = 0;
-    
-    function setX(uint x){
-        _x = x;
-    }
-    
-    function getX() constant returns (uint x){
-        return _x;
-    }
-}
-
-// Test contract named DemoTest as per (1).
-contract DemoTest is Asserter {
-
-    uint constant TEST_VAL = 55;
-    
-    // Test method starts with 'test' and will thus be recognized (2).
-    function testSetX(){
-        Demo demo = new Demo();
-        demo.setX(TEST_VAL);
-        var x = demo.getX();
-        // Use assert method from Asserter contract (3). It will automatically fire off a test event.
-        assertUintsEqual(x, TEST_VAL, "Values are not equal");
-    }
-    
-}
-```
-
 There is plenty more in the `contracts/src` folder. All test contracts looks pretty much the same - a target contract and a few methods that begin with 'test' and has assertions in them.
 
 ### Build constraints
@@ -211,21 +163,113 @@ To make sure I get all of this, I compile with: `solc --bin --abi -o . BankTest.
 
 If library contracts are involved, their `.bin` files must be included in the test directory. `sol-unit` does automatic linking.
 
-### TestEvent and assertions
-
-`TestEvent` is what the framework listens too. It will run test functions and then listen to `TestEvent` data from the contract in question.
-
-`event TestEvent(bool indexed result, string message);`
-
-The `result` param is true if the assertion succeeded, otherwise it's false.
-
-The `message` param is used to log a message. This is normally used if the assertion fails.
-
-Assertions will automatically trigger the test event. Otherwise you can just roll your own. 
-
 ## Examples
 
 The contracts folder comes with a number of different examples.
+
+## Assertions
+
+The assertions can be found in the assertions library (`./contracts/src/Assertions.sol`). It is very well documented.
+
+All assertions are called as function on the values/references in question. The last param of an assert function is always a message to display if the assertion fails.
+
+Some common assertions on arrays and other reference types are not supported, but will continuously be added as Solidity evolves. Templates really is the bottleneck here.
+
+### List of assertions
+
+#### string
+
+`assertEqual`, `assertNotEqual`, `assertEmpty`, `assertNotEmpty`
+
+#### bytes32 / address
+
+`assertEqual`, `assertNotEqual`, `assertZero`, `assertNotZero`
+
+Examples:
+
+```
+bytes32 b = "hello";
+b.assertNotZero("something is seriously wrong");
+```
+
+```
+address a = "0x12345";
+address b = "0xABCDE"
+a.assertNotEqual(b, "Something is seriously wrong");`
+```
+
+#### int / uint
+
+`assertEqual`, `assertNotEqual`, `assertGT`, `assertGTOE`, `assertLT`, `assertLTOE`, `assertZero`, `assertNotZero`
+
+GT = Greater Than
+ 
+GTOE = Greater Than Or Equal 
+
+LT = Less Than, 
+
+LTOE = Less Than Or Equal
+
+Examples:
+
+```
+uint x = 7;
+uint y = 15;
+uint z = 15;
+
+x.assertNotEqual(y, "something is wrong");
+y.assertNotEqual(x, "something is wrong");
+y.assertEqual(z, "something is wrong");
+
+x.assertLT(y, "something is wrong");
+y.assertGT(x, "something is wrong");
+y.assertLTOE(z, "something is wrong");
+```
+
+#### bool
+
+`assertTrue (assert)`, `assertFalse`, `assertEqual`, `assertNotEqual`
+
+Both `assertTrue` and `assert` can be used to assert that a value is true.
+
+Examples:
+
+```
+true.assertTrue("something is wrong");
+true.assert("something is wrong");
+
+uint x = 5;
+uint y = 3;
+
+(x + y == 8).assert("addition isn't working");
+
+(x + y == 8).assertEqual((y + x == 8), "math isn't working.");
+
+false.assertFalse("something is wrong");
+```
+
+#### Account balance
+
+`assertBalanceEqual`, `assertBalanceNotEqual`, `assertBalanceZero`, `assertBalanceNotZero`
+
+Can be used to check ether balance.
+
+Examples:
+
+```
+msg.sender.assertBalanceNotZero("Caller is broke. Error code: 0xDEADBEA7");
+
+```
+
+#### error (uint16)
+
+`assertError`, `assertNoError`, `assertErrorsEqual`, `assertErrorsNotEqual`
+
+Utility for when error codes are returned as 16 bit unsigned integers, and 0 = no error.
+
+`funcThatReturnsErrorCode(someParam).assertNoError("Function returned an error");`
+
+TODO test and add in the array assertions.
 
 ## Testing and Developing
 

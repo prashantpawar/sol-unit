@@ -22,7 +22,7 @@ var solUnit = require('./index');
 var path = require('path');
 var version = require('./lib/version.json');
 
-var tests = ['ArrayTest', 'BankTest', 'BasicTypesTest', 'CoinTest', 'DemoTest', 'GlobalsTest', 'ImNotHereTest', 'IndirectionTest', 'StructsTest', 'WrapsInternalTest', 'LibTest', 'ThrowerTest'];
+var tests = ['ArrayTest', 'BankTest', 'BasicTypesTest', 'CoinTest', 'DemoTest', 'EthTest', 'GlobalsTest', 'ImNotHereTest', 'IndirectionTest', 'StructsTest', 'WrapsInternalTest', 'LibTest', 'ThrowerTest'];
 var testFolder = path.join(__dirname, 'contracts', 'build', 'test');
 
 // ********************** version **********************
